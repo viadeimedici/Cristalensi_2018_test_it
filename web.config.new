@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+<system.webServer>
+	<staticContent>
+		<clientCache cacheControlMode="UseMaxAge" cacheControlMaxAge="7.00:00:00" />
+	</staticContent>
+	<rewrite>
+		<rules>
+			<clear />
+			<rule name="Redirect to https" stopProcessing="true">
+				<match url="(.*)" />
+				<conditions>
+					<add input="{HTTPS}" pattern="off" ignoreCase="true" />
+				</conditions>
+				<action type="Redirect" url="https://{HTTP_HOST}{REQUEST_URI}" redirectType="Permanent" appendQueryString="false" />
+			</rule>
+		</rules>
+	</rewrite>
+	<httpErrors existingResponse="Replace" errorMode="Custom">
+      <remove statusCode="404" subStatusCode="-1" />
+      <error statusCode="404" prefixLanguageFilePath="" path="https://www.cristalensi.it/404.asp" responseMode="Redirect" />
+    </httpErrors>
+<defaultDocument>
+            <files>
+                <add value="index.asp" />
+            </files>
+        </defaultDocument>
+</system.webServer>
+</configuration>

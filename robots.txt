@@ -1,0 +1,26 @@
+User-agent: *
+Disallow: /_prvate/
+Disallow: /_vti_log/
+Disallow: /admin/
+Disallow: /app_data/
+Disallow: /aspnet_client/
+Disallow: /cgi-bin/
+Disallow: /mdb-database/
+Disallow: /m/
+Disallow: /mobile/
+Disallow: /public/haber.asp
+Disallow: /prodotti.asp?cat=53
+Disallow: /prodotti.asp?cat=68
+Disallow: index_old.asp
+Disallow: scheda_prodotto.asp
+Disallow: /public/cinture-louis-vuitton.html
+Disallow: /noindex.html
+Disallow: /pagamento_paypal_ko.asp
+Disallow: /pagamento_paypal_ok.asp
+Disallow: /carrello2.asp
+Disallow: /carrello2extra.asp
+Disallow: /calcolospedizione.asp
+Disallow: /carrello3.asp
+Disallow: /ordine.asp
+Disallow: /ordini_elenco.asp
+
