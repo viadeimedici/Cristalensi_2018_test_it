@@ -226,9 +226,13 @@ az_rs.close
                       'file_img=img_rs("file")
                     end if
                     img_rs.close
+
+                    spedizionegratis=0
+                    if prezzoarticolo>250 then spedizionegratis=1
                 %>
                 <div class="col-xs-12 col-sm-4 col-md-4">
                   <article class="col-item">
+                      <%if spedizionegratis=1 then%><div class="options">SPEDIZIONE<br />GRATUITA</div><%end if%>
                       <div class="photo">
                           <a href="/<%=NomePagina%>" class="prod-img-replace" style="background-image: url(/public/<%=file_img%>)" title="<%=titolo_prodotto%>"><img alt="<%=titolo_prodotto%>" src="/images/blank.png"></a>
                       </div>
@@ -253,7 +257,7 @@ az_rs.close
                                   </div>
                               </div>
                           </div>
-                          <div class="separator clear-left">
+                          <div class="separator clear-left clearfix">
                               <p class="btn-add">
                                   <a href="/preferiti.asp?id=<%=id%>" rel="nofollow" class="hidden-lg" data-toggle="tooltip" data-placement="top" title="Aggiungi ai preferiti"><i class="fa fa-heart"></i></a>
                               </p>
@@ -261,7 +265,7 @@ az_rs.close
                                   <a href="/<%=NomePagina%>" class="hidden-lg" data-toggle="tooltip" data-placement="top" title="vedi ed aggiungi al carrello">vedi scheda <i class="fa fa-chevron-right"></i></a>
                               </p>
                           </div>
-                          <div class="clearfix"></div>
+                          <div class=""></div>
                       </div>
                   </article>
                 </div>

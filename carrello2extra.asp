@@ -30,13 +30,14 @@
 	os1.Open sql, conn, 3, 3
 
 	TotaleCarrello=os1("TotaleCarrello")
+	Sconto=os1("Sconto")
 	CostoSpedizione=os1("CostoSpedizione")
 
 	'os1("TipoTrasporto")="Shipping in OTHERS COUNTRIES"
 	os1("CostoSpedizione")=CostoSpedizione
 	'os1("FkSpedizione")=TipoTrasportoScelto
 	'TotaleGnerale_AG=TotaleCarrello+CostoSpedizione
-	os1("TotaleGenerale")=TotaleCarrello+CostoSpedizione
+	os1("TotaleGenerale")=TotaleCarrello-Sconto+CostoSpedizione
 	os1("FkCliente")=idsession
 	stato_ordine=os1("stato")
 	if stato_ordine="" then stato_ordine=0
@@ -143,7 +144,7 @@
 				alert("It has not been filled in the field \"Phone\".");
 				return false;
 			}
-			if (indirizzo_sp==""){
+			if (indirizzo_sp.length<4){
 				alert("It has not been filled in the field \"Address\".");
 				return false;
 			}
@@ -185,7 +186,7 @@
 				alert("It has not been filled in the field \"Phone\".");
 				return false;
 			}
-			if (indirizzo_sp==""){
+			if (indirizzo_sp.length<4){
 				alert("It has not been filled in the field \"Address\".");
 				return false;
 			}
@@ -229,6 +230,7 @@
 		TotaleCarrello=ss("TotaleCarrello")
 		CostoSpedizioneTotale=ss("CostoSpedizione")
 		if CostoSpedizioneTotale="" or isnull(CostoSpedizioneTotale) then CostoSpedizioneTotale=0
+		Sconto=ss("Sconto")
 		TotaleGenerale=ss("TotaleGenerale")
 		NoteCliente=ss("NoteCliente")
 
@@ -249,7 +251,7 @@
             <div class="col-md-12 parentOverflowContainer">
             </div>
         </div>
-        <div class="col-sm-12">
+        <div class="col-sm-12 hidden-xs">
             <div class="row bs-wizard">
                 <div class="col-sm-5 bs-wizard-step complete">
                     <div class="text-center bs-wizard-stepnum">1</div>
@@ -295,20 +297,20 @@
         </div>
 				<form name="modulocarrello" id="modulocarrello" class="form-horizontal">
         <div class="col-md-12">
-            <div class="title">
-                <h4>Modalit&agrave; di spedizione/ritiro prodotti</h4>
+						<div class="title">
+                <h4><span class="visible-xs" style="padding-top: 20px;">Dati di spedizione - Passo 3 di 5</span></h4>
             </div>
             <div class="col-md-12">
                 <div class="top-buffer">
                     <table id="cart" class="table table-hover table-condensed table-cart">
-                        <thead>
-                            <tr>
-                                <th style="width:45%">Prodotto</th>
-                                <th style="width:10%" class="text-center">Quantit&agrave;</th>
-                                <th style="width:10%" class="text-center">Prezzo unitario</th>
-                                <th style="width:20%" class="text-center">Subtotale</th>
-                            </tr>
-                        </thead>
+												<thead>
+														<tr>
+																<th style="width:60%">Prodotto</th>
+																<th style="width:10%" class="text-center">Quantit&agrave;</th>
+																<th style="width:15%" class="text-right">Prezzo</th>
+																<th style="width:15%" class="text-right hidden-xs">Totale Prodotto</th>
+														</tr>
+												</thead>
 												<%if rs.recordcount>0 then%>
 												<tbody>
 														<%
@@ -341,11 +343,9 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td data-th="Quantity" class="text-center">
-                                    <%=quantita%>
-                                </td>
-                                <td data-th="Price" class="hidden-xs text-center"><%=FormatNumber(rs("PrezzoProdotto"),2)%>&euro;</td>
-                                <td data-th="Subtotal" class="text-center"><%=FormatNumber(rs("TotaleRiga"),2)%>&euro;</td>
+																<td data-th="Quantity" class="text-center"><%=quantita%></td>
+                                <td data-th="Price" class="text-right"><%=FormatNumber(rs("PrezzoProdotto"),2)%>&nbsp&euro;</td>
+                                <td data-th="Subtotal" class="text-right hidden-xs"><%=FormatNumber(rs("TotaleRiga"),2)%>&nbsp&euro;</td>
                             </tr>
 														<%
 														rs.movenext
@@ -355,17 +355,18 @@
 												<%end if%>
 												<%if ss.recordcount>0 then%>
 												<tfoot>
-                            <tr class="visible-xs">
-                                <td class="text-center"><strong>Totale <%if ss("TotaleGenerale")<>0 then%>
-								<%=FormatNumber(ss("TotaleGenerale"),2)%>&euro;<%else%>0&euro;<%end if%></strong></td>
-                            </tr>
-                            <tr>
-                                <td class="hidden-xs"></td>
-                                <td class="hidden-xs"></td>
-                                <td class="hidden-xs"></td>
-                                <td class="hidden-xs text-center"><strong>Totale <%if ss("TotaleGenerale")<>0 then%>
-								<%=FormatNumber(ss("TotaleGenerale"),2)%>&euro;<%else%>0&euro;<%end if%></strong></td>
-                            </tr>
+													<tr>
+															<td class="hidden-xs"></td>
+															<td class="text-right" colspan="2">Totale Carrello</td>
+															<td class="text-right"><%if ss("TotaleCarrello")<>0 then%>
+															<%=FormatNumber(ss("TotaleCarrello"),2)%><%else%>0<%end if%>&nbsp&euro;</td>
+													</tr>
+													<tr>
+															<td class="hidden-xs"></td>
+															<td class="text-right" colspan="2"><strong>Sconto Extra</strong></td>
+															<td class="text-right"><strong><%if ss("Sconto")<>0 then%>
+															-<%=FormatNumber(ss("Sconto"),2)%><%else%>0,00<%end if%>&nbsp&euro;</strong></td>
+													</tr>
                         </tfoot>
 												<%end if%>
                     </table>
@@ -387,8 +388,8 @@
 														<thead>
                                 <tr>
                                     <th style="width:70%">Modalit&agrave; di spedizione</th>
-                                    <th style="width:15%">Tariffa</th>
-                                    <th style="width:15%">Totale</th>
+                                    <th style="width:15%">Costo</th>
+                                    <th style="width:15%" class="hidden-xs">Totale</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -484,27 +485,27 @@
                             <div class="form-group clearfix">
 																<label for="provincia_sp" class="col-sm-4 control-label">Provincia</label>
 																<div class="col-sm-8">
-									<%
-									Set prov_rs = Server.CreateObject("ADODB.Recordset")
-									sql = "SELECT * FROM Province order by Provincia ASC"
-									prov_rs.Open sql, conn, 1, 1
-									if prov_rs.recordcount>0 then
-									%>
-									<select class="selectpicker show-menu-arrow  show-tick" data-size="4" title="Provincia" name="provincia_sp" id="provincia_sp">
-										<option title="" value="">Selezionare una provincia (solo per l'ITALIA)</option>
-										<%
-										Do While Not prov_rs.EOF
-										%>
-										<option title="<%=prov_rs("codice")%>" value=<%=prov_rs("codice")%> <%if provincia_sp=prov_rs("codice") then%> selected<%end if%>><%=prov_rs("Provincia")%></option>
-										<%
-										prov_rs.movenext
-										loop
-										%>
-									</select>
-									<%
-									end if
-									prov_rs.close
-									%>
+																<%
+																Set prov_rs = Server.CreateObject("ADODB.Recordset")
+																sql = "SELECT * FROM Province order by Provincia ASC"
+																prov_rs.Open sql, conn, 1, 1
+																if prov_rs.recordcount>0 then
+																%>
+																<select class="selectpicker show-menu-arrow  show-tick" data-size="4" title="Provincia" name="provincia_sp" id="provincia_sp">
+																	<option title="" value="">Selezionare una provincia (solo per l'ITALIA)</option>
+																	<%
+																	Do While Not prov_rs.EOF
+																	%>
+																	<option title="<%=prov_rs("codice")%>" value=<%=prov_rs("codice")%> <%if provincia_sp=prov_rs("codice") then%> selected<%end if%>><%=prov_rs("Provincia")%></option>
+																	<%
+																	prov_rs.movenext
+																	loop
+																	%>
+																</select>
+																<%
+																end if
+																prov_rs.close
+																%>
                                 </div>
                             </div>
 														<div class="form-group clearfix">

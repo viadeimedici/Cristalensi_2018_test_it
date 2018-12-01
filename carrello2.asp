@@ -35,6 +35,12 @@
 	os1.Open sql, conn, 3, 3
 
 	TotaleCarrello=os1("TotaleCarrello")
+	Sconto=os1("Sconto")
+	TipoTrasportoScelto_Esistente=os1("FkSpedizione")
+	if TipoTrasportoScelto_Esistente="" then TipoTrasportoScelto_Esistente=0
+	if TipoTrasportoScelto=0 and TipoTrasportoScelto_Esistente>0 then
+		TipoTrasportoScelto=TipoTrasportoScelto_Esistente
+	end if
 
 	os1("FkCliente")=idsession
 
@@ -59,16 +65,16 @@
 			CostoSpedizione=CostoTrasportoScelto
 		end if
 		if TipoCostoTrasportoScelto=2 then
-			CostoSpedizione=(TotaleCarrello*CostoTrasportoScelto)/100
+			CostoSpedizione=((TotaleCarrello-Sconto)*CostoTrasportoScelto)/100
 		end if
-		if TipoCostoTrasportoScelto=3 or TipoCostoTrasportoScelto=10 or TotaleCarrello>=250 then
+		if TipoCostoTrasportoScelto=3 or TipoCostoTrasportoScelto=10 or (TotaleCarrello-Sconto)>=250 then
 			CostoSpedizione=0
 		end if
 
 		os1("TipoTrasporto")=NomeTrasportoScelto
 		os1("FkSpedizione")=TipoTrasportoScelto
 		os1("CostoSpedizione")=CostoSpedizione
-		os1("TotaleGenerale")=TotaleCarrello+CostoSpedizione
+		os1("TotaleGenerale")=(TotaleCarrello-Sconto)+CostoSpedizione
 	end if
 
 	if mode=0 then
@@ -148,6 +154,7 @@
 
 		 nominativo_sp=document.modulocarrello.nominativo_sp.value;
 		 telefono_sp=document.modulocarrello.telefono_sp.value;
+		 //indirizzo_sp=document.modulocarrello.indirizzo_sp.value;
 		 indirizzo_sp=document.modulocarrello.indirizzo_sp.value;
 		 cap_sp=document.modulocarrello.cap_sp.value;
 		 citta_sp=document.modulocarrello.citta_sp.value;
@@ -161,7 +168,7 @@
 			 alert("Non  e\' stato compilato il campo \"Telefono\".");
 			 return false;
 		 }
-		 if (indirizzo_sp==""){
+		 if (indirizzo_sp.length<4){
 			 alert("Non  e\' stato compilato il campo \"Indirizzo\".");
 			 return false;
 		 }
@@ -170,7 +177,7 @@
 			 return false;
 		 }
 		 if (citta_sp==""){
-			 alert("Non  e\' stato compilato il campo \"Citt�\".");
+			 alert("Non  e\' stato compilato il campo \"Città\".");
 			 return false;
 		 }
 		 if (nazione_sp==""){
@@ -211,7 +218,7 @@
 			 alert("Non  e\' stato compilato il campo \"Telefono\".");
 			 return false;
 		 }
-		 if (indirizzo_sp==""){
+		 if (indirizzo_sp.length<4){
 			 alert("Non  e\' stato compilato il campo \"Indirizzo\".");
 			 return false;
 		 }
@@ -220,7 +227,7 @@
 			 return false;
 		 }
 		 if (citta_sp==""){
-			 alert("Non  e\' stato compilato il campo \"Citt�\".");
+			 alert("Non  e\' stato compilato il campo \"Città\".");
 			 return false;
 		 }
 		 if (nazione_sp==""){
@@ -254,6 +261,7 @@
 
 	if ss.recordcount>0 then
 		TotaleCarrello=ss("TotaleCarrello")
+		Sconto=ss("Sconto")
 		CostoSpedizioneTotale=ss("CostoSpedizione")
 		if CostoSpedizioneTotale="" or IsNull(CostoSpedizioneTotale) then CostoSpedizioneTotale=0
 		TotaleGenerale=ss("TotaleGenerale")
@@ -276,7 +284,7 @@
             <div class="col-md-12 parentOverflowContainer">
             </div>
         </div>
-        <div class="col-sm-12">
+        <div class="col-sm-12 hidden-xs">
             <div class="row bs-wizard">
                 <div class="col-sm-5 bs-wizard-step complete">
                     <div class="text-center bs-wizard-stepnum">1</div>
@@ -308,7 +316,7 @@
                         <div class="progress-bar"></div>
                     </div>
                     <a href="#" class="bs-wizard-dot"></a>
-                    <div class="bs-wizard-info text-center">Pagamento &amp; fatturazione</div>
+                    <div class="bs-wizard-info text-center">Pagamento &amp; Fatturazione</div>
                 </div>
                 <div class="col-sm-5 bs-wizard-step disabled">
                     <div class="text-center bs-wizard-stepnum">5</div>
@@ -323,17 +331,17 @@
 				<form name="modulocarrello" id="modulocarrello" class="form-horizontal">
         <div class="col-md-12">
             <div class="title">
-                <h4>Modalit&agrave; di spedizione/ritiro prodotti</h4>
+                <h4><span class="visible-xs" style="padding-top: 20px;">Dati di spedizione - Passo 3 di 5</span></h4>
             </div>
             <div class="col-md-12">
                 <div class="top-buffer">
                     <table id="cart" class="table table-hover table-condensed table-cart">
                         <thead>
                             <tr>
-                                <th style="width:45%">Prodotto</th>
-                                <th style="width:10%" class="text-center">Quantit&agrave;</th>
-                                <th style="width:10%" class="text-center">Prezzo unitario</th>
-                                <th style="width:20%" class="text-center">Totale Prodotto</th>
+                                <th style="width:60%">Prodotto</th>
+																<th style="width:10%" class="text-center">Quantit&agrave;</th>
+																<th style="width:15%" class="text-right">Prezzo</th>
+                                <th style="width:15%" class="text-right hidden-xs">Totale Prodotto</th>
                             </tr>
                         </thead>
 												<%if rs.recordcount>0 then%>
@@ -368,11 +376,9 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td data-th="Quantity" class="text-center">
-                                    <%=quantita%>
-                                </td>
-                                <td data-th="Price" class="hidden-xs text-center"><%=FormatNumber(rs("PrezzoProdotto"),2)%>&euro;</td>
-                                <td data-th="Subtotal" class="text-center"><%=FormatNumber(rs("TotaleRiga"),2)%>&euro;</td>
+																<td data-th="Quantity" class="text-center"><%=quantita%></td>
+                                <td data-th="Price" class="text-right"><%=FormatNumber(rs("PrezzoProdotto"),2)%>&nbsp&euro;</td>
+                                <td data-th="Subtotal" class="text-right hidden-xs"><%=FormatNumber(rs("TotaleRiga"),2)%>&nbsp&euro;</td>
                             </tr>
 														<%
 														rs.movenext
@@ -382,22 +388,23 @@
 												<%end if%>
 												<%if ss.recordcount>0 then%>
 												<tfoot>
-                            <tr class="visible-xs">
-                                <td class="text-center"><strong>Totale <%if ss("TotaleCarrello")<>0 then%>
-								<%=FormatNumber(ss("TotaleCarrello"),2)%>&euro;<%else%>0&euro;<%end if%></strong></td>
-                            </tr>
-                            <tr>
-                                <td class="hidden-xs"></td>
-                                <td class="hidden-xs"></td>
-                                <td class="hidden-xs"></td>
-                                <td class="hidden-xs text-center"><strong>Totale <%if ss("TotaleCarrello")<>0 then%>
-								<%=FormatNumber(ss("TotaleCarrello"),2)%>&euro;<%else%>0&euro;<%end if%></strong></td>
-                            </tr>
+														<tr>
+																<td class="hidden-xs"></td>
+																<td class="text-right" colspan="2">Totale Carrello</td>
+																<td class="text-right"><%if ss("TotaleCarrello")<>0 then%>
+																<%=FormatNumber(ss("TotaleCarrello"),2)%><%else%>0<%end if%>&nbsp&euro;</td>
+														</tr>
+														<tr>
+																<td class="hidden-xs"></td>
+																<td class="text-right" colspan="2"><strong>Sconto Extra</strong></td>
+																<td class="text-right"><strong><%if ss("Sconto")<>0 then%>
+																-<%=FormatNumber(ss("Sconto"),2)%><%else%>0,00<%end if%>&nbsp&euro;</strong></td>
+														</tr>
                         </tfoot>
 												<%end if%>
                     </table>
                     <h5>Eventuali annotazioni</h5>
-                    <p>Potete usare questo spazio per inserire eventuali annotazioni o comunicazioni in relazione ai prodotti in acquisto</p>
+                    <p>Potete usare questo spazio per inserire eventuali annotazioni o comunicazioni in relazione ai prodotti</p>
                     <textarea class="form-control" rows="2" name="NoteCliente" id="NoteCliente"><%=NoteCliente%></textarea>
 										<p>&nbsp;</p>
                 </div>
@@ -411,31 +418,31 @@
                     </div>
                     <div class="col-md-12 top-buffer">
                         <table id="cart" class="table table-hover table-condensed table-cart">
-							<%
-							Set trasp_rs = Server.CreateObject("ADODB.Recordset")
-							sql = "SELECT * FROM CostiTrasporto"
-							trasp_rs.Open sql, conn, 1, 1
-							%>
-							<thead>
+														<%
+														Set trasp_rs = Server.CreateObject("ADODB.Recordset")
+														sql = "SELECT * FROM CostiTrasporto"
+														trasp_rs.Open sql, conn, 1, 1
+														%>
+														<thead>
                                 <tr>
                                     <th style="width:70%">Modalit&agrave; di spedizione</th>
-                                    <th style="width:15%">Tariffa</th>
-                                    <th style="width:15%">Totale</th>
+                                    <th style="width:15%">Costo</th>
+                                    <th style="width:15%" class="hidden-xs">Totale</th>
                                 </tr>
                             </thead>
                             <tbody>
-								<%
-								if trasp_rs.recordcount>0 then
-									Do while not trasp_rs.EOF
-									PkIdSpedizione=trasp_rs("pkid")
-									NomeSpedizione=trasp_rs("nome")
-									DescrizioneSpedizione=NoLettAccDescrizioni(trasp_rs("descrizione"))
-									CostoSpedizione=trasp_rs("costo")
+														<%
+														if trasp_rs.recordcount>0 then
+															Do while not trasp_rs.EOF
+															PkIdSpedizione=trasp_rs("pkid")
+															NomeSpedizione=trasp_rs("nome")
+															DescrizioneSpedizione=NoLettAccDescrizioni(trasp_rs("descrizione"))
+															CostoSpedizione=trasp_rs("costo")
 
-									TipoCosto=trasp_rs("TipoCosto")
-									if TipoCosto="" then TipoCosto=3
-								%>
-								<tr>
+															TipoCosto=trasp_rs("TipoCosto")
+															if TipoCosto="" then TipoCosto=3
+														%>
+																<tr>
                                     <td data-th="Product" class="cart-product">
                                         <div class="row">
                                             <div class="col-sm-12">
@@ -447,25 +454,25 @@
                                         </div>
                                     </td>
                                     <td data-th="Price">
-										<%if TipoCosto=10 then%>
+																		<%if TipoCosto=10 then%>
                                       	DA DEFINIRE
                                     <%else%>
-										<%=FormatNumber(CostoSpedizione,2)%><%if TipoCosto=1 then%>&#8364;<%end if%><%if TipoCosto=2 then%>%<%end if%>
+																				<%=FormatNumber(CostoSpedizione,2)%><%if TipoCosto=1 then%>&#8364;<%end if%><%if TipoCosto=2 then%>%<%end if%>
                                     <%end if%>
-										</td>
+																		</td>
                                     <td data-th="Subtotal" class="hidden-xs"><%if PkIdSpedizione=TipoTrasportoScelto then%><%=FormatNumber(CostoSpedizioneTotale,2)%>&#8364;<%else%>-<%end if%></td>
                                 </tr>
 
-								<%
-									trasp_rs.movenext
-									loop
-								%>
-								<tr>
+														<%
+															trasp_rs.movenext
+															loop
+														%>
+																<tr>
                                     <td data-th="Product"><h5>Costo spedizione:</h5></td>
                                     <td data-th="Price" class="hidden-xs"></td>
                                     <td data-th="Subtotal"><h5><%if TipoTrasportoScelto=4 and CostoSpedizioneTotale=0 then%>DA DEFINIRE<%else%><%=FormatNumber(CostoSpedizioneTotale,2)%>&#8364;<%end if%></h5></td>
                                 </tr>
-																<%end if%>
+														<%end if%>
                             </tbody>
 														<%trasp_rs.close%>
                         </table>
@@ -473,7 +480,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="title">
-                        <h4>Recapito</h4>
+                        <h4>Indirizzo di spedizione</h4>
                     </div>
                     <div class="col-md-12">
 						<%if TipoTrasportoScelto>0 and TipoTrasportoScelto<>2 then%>
@@ -584,7 +591,7 @@
             <div class="col-md-12">
                 <div class="bg-primary">
 
-                    <p style="font-size: 1.2em; text-align: right; padding: 10px 15px; color: #000;">Totale carrello: <b>
+                    <p style="font-size: 1.2em; text-align: right; padding: 10px 15px; color: #000;">Totale Generale: <b>
 										<%if ss("TotaleGenerale")<>0 then%>
 									  	<%=FormatNumber(ss("TotaleGenerale"),2)%>
                     <%else%>

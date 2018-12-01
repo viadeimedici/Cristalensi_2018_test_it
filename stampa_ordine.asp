@@ -12,6 +12,7 @@
 
 	if ss.recordcount>0 then
 		TotaleCarrello=ss("TotaleCarrello")
+		Sconto=ss("Sconto")
 		CostoSpedizioneTotale=ss("CostoSpedizione")
 		if CostoSpedizioneTotale="" or isnull(CostoSpedizioneTotale)  then CostoSpedizioneTotale=0
 		TipoTrasporto=ss("TipoTrasporto")
@@ -58,6 +59,16 @@
 				telefono_cliente=cs("Telefono")
 			end if
 			cs.close
+		end if
+
+		if FkPagamento>0 then
+			Set trasp_rs = Server.CreateObject("ADODB.Recordset")
+			sql = "SELECT * FROM CostiPagamento where PkId="&FkPagamento
+			trasp_rs.Open sql, conn, 1, 1
+			if trasp_rs.recordcount>0 then
+				TipoCosto=trasp_rs("TipoCosto")
+			end if
+			trasp_rs.close
 		end if
 	end if
 
@@ -132,15 +143,15 @@
                 <div class="title">
                     <h4>Ordine n. <%=idordine%> - Data <%=Left(DataAggiornamento, 10)%></h4>
                 </div>
-                <div class="col-md-12" style="padding: 0px 10px 0px 45px;">
+                <div class="col-md-12" style="padding: 0px 15px 0px 30px;">
                     <div class="top-buffer">
                         <table id="cart" class="table table-hover table-condensed table-cart">
                             <thead>
                                 <tr>
                                     <th style="width:60%">Prodotto</th>
-                                    <th style="width:10%" class="text-center">Quantit&agrave;</th>
-                                    <th style="width:15%" class="text-center">Prezzo unitario</th>
-                                    <th style="width:15%" class="text-center">Totale prodotto</th>
+                                    <th style="width:10%" class="text-right">Quantit&agrave;</th>
+                                    <th style="width:15%" class="text-right">Prezzo unitario</th>
+                                    <th style="width:15%" class="text-right">Totale prodotto</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -184,15 +195,15 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td data-th="Quantity" class="text-center">
+                                    <td data-th="Quantity" class="text-right">
                                       <%
                                       quantita=rs("quantita")
                                       if quantita="" then quantita=1
                                       %>
                                       <%=quantita%> pezzi
                                     </td>
-                                    <td data-th="Price" class="text-center"><%=FormatNumber(rs("PrezzoProdotto"),2)%>&euro;</td>
-                                    <td data-th="Subtotal" class="text-center"><%=FormatNumber(rs("TotaleRiga"),2)%>&euro;</td>
+                                    <td data-th="Price" class="text-right"><%=FormatNumber(rs("PrezzoProdotto"),2)%>&euro;</td>
+                                    <td data-th="Subtotal" class="text-right"><%=FormatNumber(rs("TotaleRiga"),2)%>&euro;</td>
                                 </tr>
                               <%
                               rs.movenext
@@ -205,8 +216,15 @@
                                 <tr class="visible-xs">
                                     <td></td>
                                     <td></td>
-                                    <td class="text-center"><strong>Totale Carrello</strong></td>
-																		<td class="text-center"><strong><%=FormatNumber(TotaleCarrello,2)%>&euro;</strong></td>
+                                    <td class="text-right"><strong>Totale Carrello</strong></td>
+																		<td class="text-right"><strong><%=FormatNumber(TotaleCarrello,2)%>&euro;</strong></td>
+                                </tr>
+																<tr class="visible-xs">
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-right"><strong>Sconto Extra</strong></td>
+																		<td class="text-right"><strong><%if Sconto<>0 then%>
+																		-<%=FormatNumber(Sconto,2)%><%else%>0,00<%end if%>&euro;</strong></td>
                                 </tr>
                                 <tr class="hidden-xs">
                                     <td></td>
@@ -214,17 +232,19 @@
 																		<td class="text-center"><strong>Totale Carrello</strong></td>
 																		<td class="text-center"><strong><%=FormatNumber(TotaleCarrello,2)%>&euro;</strong></td>
                                 </tr>
+																<%if Len(NoteCliente)>0 then%>
                                 <tr>
                                     <td colspan="4">
                                         <br /><strong>EVENTUALI ANNOTAZIONI</strong>
                                         <textarea class="form-control" rows="3" readonly style="font-size: 13px; font-weight:bold;"><%=NoteCliente%></textarea>
                                     </td>
                                 </tr>
+																<%end if%>
                             </tfoot>
                         </table>
                     </div>
                 </div>
-                <div class="row top-buffer" style="padding: 0px 10px 0px 45px;">
+                <div class="row top-buffer" style="padding: 0px 15px 0px 35px;">
                     <div class="col-md-6">
                         <div class="col-md-12 top-buffer">
                             <table id="cart" class="table table-hover table-condensed table-cart">
@@ -295,7 +315,7 @@
                                             </div>
                                         </td>
                                         <td data-th="Quantity" class="text-center">
-                                            <%=FormatNumber(CostoPagamento,2)%>&euro;
+                                            <%if TipoCosto=4 or TipoCosto=5 then%>-<%end if%><%=FormatNumber(CostoPagamento,2)%>&euro;
                                         </td>
                                     </tr>
                                 </tbody>

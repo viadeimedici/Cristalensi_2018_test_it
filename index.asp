@@ -22,10 +22,11 @@ testo_footer_8="Nel settore dell’illuminazione e dell’arredamento uno spazio
 <html>
 
 <head>
-    <title>Vendita lampadari online | illuminazione interni | illuminazione da esterno</title>
+    <title>Vendita lampadari online: illuminazione interni e illuminazione da esterno</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Cristalensi, specializzato in vendita di lampari online. Showroom di lampade vicino Firenze, illuminazione interni, illuminazione da esterno, piantane, plafoniere, ventilatori, applique e faretti. Trovi ampia scelta di lampadari moderni, classici, rustici, in cristallo, in gesso, vetro Murano e lampade a LED.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="Vendita lampadari online: illuminazione interni e illuminazione da esterno">
     <meta property="og:description" content="Cristalensi, specializzato in vendita di lampari online. Showroom di lampade vicino Firenze, illuminazione interni, illuminazione da esterno, piantane, plafoniere, ventilatori, applique e faretti. Trovi ampia scelta di lampadari moderni, classici, rustici, in cristallo, in gesso, vetro Murano e lampade a LED.">
     <link rel="alternate" href="https://www.cristalensi.it/" hreflang="it-it" />
 		<link rel="alternate" href="https://www.cristalensi.com/de/" hreflang="de-de" />
@@ -130,8 +131,8 @@ testo_footer_8="Nel settore dell’illuminazione e dell’arredamento uno spazio
             </div>
             <div class="row top-buffer">
                 <div class="col-xl-12 clearfix">
-                    <h4 class="subtitle"><div class="dot"></div><span>Offerte e prodotti in promozione</span></h4> <a href="/offerte.asp" class="btn btn-default pull-right hidden-xs" title="Offerte e prodotti in promozione">Vedi tutte le Offerte <i class="fa fa-chevron-right"></i></a>
-                    <a href="offerte.asp" class="btn btn-default btn-block hidden visible-xs bottom-buffer" style="">vedi tutto <i class="fa fa-chevron-right"></i></a>
+                    <h4 class="subtitle"><div class="dot"></div><span>Offerte e prodotti in promozione</span></h4> <a href="/offerte.asp" class="btn btn-default btn-home-section pull-right hidden-xs" title="Offerte e prodotti in promozione">Vedi tutte le Offerte <i class="fa fa-chevron-right"></i></a>
+                    <a href="offerte.asp" class="btn btn-default btn-home-section btn-block hidden visible-xs bottom-buffer" style="">vedi tutto <i class="fa fa-chevron-right"></i></a>
                 </div>
                 <%
                 'random prodotti in offerta
@@ -194,9 +195,13 @@ testo_footer_8="Nel settore dell’illuminazione e dell’arredamento uno spazio
   										file_img=NoLettAcc(img_rs("file"))
                     end if
                     img_rs.close
+
+                    spedizionegratis=0
+                    if prezzoarticolo>250 then spedizionegratis=1
   							%>
                 <div class="col-xs-12 col-sm-4 col-md-3">
                   <article class="col-item">
+                      <%if spedizionegratis=1 then%><div class="options">SPEDIZIONE<br />GRATUITA</div><%end if%>
                       <div class="photo">
                           <a href="/<%=NomePagina%>" class="prod-img-replace" style="background-image: url(https://www.cristalensi.it/public/<%=file_img%>)" title="<%=titolo_prodotto%>"><img alt="<%=titolo_prodotto%>" src="/images/blank.png"></a>
                       </div>
@@ -216,7 +221,7 @@ testo_footer_8="Nel settore dell’illuminazione e dell’arredamento uno spazio
                                   </div>
                               </div>
                           </div>
-                          <div class="separator clear-left">
+                          <div class="separator clear-left clearfix">
                               <p class="btn-add">
                                   <a href="/preferiti.asp?id=<%=id%>" rel="nofollow" class="hidden-lg" data-toggle="tooltip" data-placement="top" title="Aggiungi ai preferiti"><i class="fa fa-heart"></i></a>
                               </p>
@@ -224,7 +229,7 @@ testo_footer_8="Nel settore dell’illuminazione e dell’arredamento uno spazio
                                   <a href="/<%=NomePagina%>" class="hidden-lg" data-toggle="tooltip" data-placement="top" title="vedi ed aggiungi al carrello">vedi scheda <i class="fa fa-chevron-right"></i></a>
                               </p>
                           </div>
-                          <div class="clearfix"></div>
+                          <div class=""></div>
                       </div>
                   </article>
                 </div>
@@ -244,8 +249,8 @@ testo_footer_8="Nel settore dell’illuminazione e dell’arredamento uno spazio
             %>
             <div class="row top-buffer">
                 <div class="col-xl-12 clearfix">
-                    <h4 class="subtitle"><div class="dot"></div><span>Novit&Agrave; illuminazione e ultimi arrivi</span></h4> <a href="/novita-illuminazione-ultimi-arrivi.asp" class="btn btn-default pull-right hidden-xs" title="Novit&Agrave; illuminazione e ultimi arrivi">Vedi tutte le Novit&agrave; <i class="fa fa-chevron-right"></i></a>
-                    <a href="/novita-illuminazione-ultimi-arrivi.asp" class="btn btn-default btn-block hidden visible-xs bottom-buffer" style="">vedi tutto <i class="fa fa-chevron-right"></i></a>
+                    <h4 class="subtitle"><div class="dot"></div><span>Novit&Agrave; illuminazione e ultimi arrivi</span></h4> <a href="/novita-illuminazione-ultimi-arrivi.asp" class="btn btn-default btn-home-section pull-right hidden-xs" title="Novit&Agrave; illuminazione e ultimi arrivi">Vedi tutte le Novit&agrave; <i class="fa fa-chevron-right"></i></a>
+                    <a href="/novita-illuminazione-ultimi-arrivi.asp" class="btn btn-default btn-home-section btn-block hidden visible-xs bottom-buffer" style="">vedi tutto <i class="fa fa-chevron-right"></i></a>
                 </div>
                 <%
                 Do while not prod_rs.EOF
@@ -292,9 +297,13 @@ testo_footer_8="Nel settore dell’illuminazione e dell’arredamento uno spazio
                       file_img=NoLettAcc(img_rs("file"))
                     end if
                     img_rs.close
+
+                    spedizionegratis=0
+                    if prezzoarticolo>250 then spedizionegratis=1
                 %>
                 <div class="col-xs-12 col-sm-4 col-md-3">
                   <article class="col-item">
+                        <%if spedizionegratis=1 then%><div class="options">SPEDIZIONE<br />GRATUITA</div><%end if%>
                       <div class="photo">
                           <a href="/<%=NomePagina%>" class="prod-img-replace" style="background-image: url(https://www.cristalensi.it/public/<%=file_img%>)" title="<%=titolo_prodotto%>"><img alt="<%=titolo_prodotto%>" src="/images/blank.png"></a>
                       </div>
@@ -306,7 +315,7 @@ testo_footer_8="Nel settore dell’illuminazione e dell’arredamento uno spazio
                                   <div class="price-box separator">
                                       <%if prezzoarticolo<>0 then%>
                                         <%if idsession=0 and prezzoprodottosoloclienti="si" then%>
-                                          <em><span class="price-new" style="color: #000;">SCONTO PER ISCRITTI !!!</span></em><br />
+                                          <em><span class="price-new" style="color: #000;">SCONTO PER ISCRITTI</span></em><br />
                                           <%if prezzolistino<>0 then%><span class="price-old">Prezzo di listino: <b><%=prezzolistino%> &euro;</b></span><%else%>&nbsp;<%end if%>
                                         <%else%>
                                           <span class="price-new"><i class="fa fa-tag"></i>&nbsp;<%=prezzoarticolo%> &euro;</span><br />
@@ -319,7 +328,7 @@ testo_footer_8="Nel settore dell’illuminazione e dell’arredamento uno spazio
                                   </div>
                               </div>
                           </div>
-                          <div class="separator clear-left">
+                          <div class="separator clear-left clearfix">
                               <p class="btn-add">
                                   <a href="/preferiti.asp?id=<%=id%>" rel="nofollow" class="hidden-lg" data-toggle="tooltip" data-placement="top" title="Aggiungi ai preferiti"><i class="fa fa-heart"></i></a>
                               </p>
@@ -327,7 +336,7 @@ testo_footer_8="Nel settore dell’illuminazione e dell’arredamento uno spazio
                                   <a href="/<%=NomePagina%>" class="hidden-lg" data-toggle="tooltip" data-placement="top" title="vedi ed aggiungi al carrello">vedi scheda <i class="fa fa-chevron-right"></i></a>
                               </p>
                           </div>
-                          <div class="clearfix"></div>
+                          <div class=""></div>
                       </div>
                   </article>
                 </div>

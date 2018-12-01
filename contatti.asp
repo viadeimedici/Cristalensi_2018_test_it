@@ -57,8 +57,8 @@
                       <span itemprop="address" itemtype="http://schema.org/PostalAddress">
                       <strong>Sede e Showroom</strong>: <span itemprop="postalCode">50056</span> <span itemprop="addressLocality">Montelupo F.no (FI)</span> - <span itemprop="streetAddress">Via arti e mestieri, 1</span><br /><br />
                       </span>
-                      <strong>Telefono</strong>: <a href="tel:0571911163"><span itemprop="telephone">0571.911163</span></a><br />
-                      <strong>Fax</strong>: <span itemprop="faxNumber">0571.073327</span><br />
+                      <strong>Telefono</strong>: <a href="tel:0571911163"><span itemprop="telephone">0571.911163</span></a><br /><br />
+
                       <a href="https://api.whatsapp.com/send?phone=393388064487" target="_blank"><strong>WhatsApp</strong></a>&nbsp;
                       <strong><font color="#CC0000">(SOLO per invio di messaggi o fotografie)</font></strong>
                       <br /><br />

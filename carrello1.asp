@@ -182,7 +182,30 @@
 				ss.Open sql, conn, 3, 3
 				if ss.recordcount>0 then
 					ss("TotaleCarrello")=TotaleCarrello
-					ss("TotaleGenerale")=TotaleCarrello
+
+					if TotaleCarrello>0 then
+						if TotaleCarrello<301 then
+							Sconto=0
+							TotaleGenerale=TotaleCarrello
+						end if
+						if TotaleCarrello>300 and TotaleCarrello<601 then
+							Sconto=((TotaleCarrello*2)/100)
+							TotaleGenerale=(TotaleCarrello-Sconto)
+						end if
+						if TotaleCarrello>600 and TotaleCarrello<901 then
+							Sconto=((TotaleCarrello*3)/100)
+							TotaleGenerale=(TotaleCarrello-Sconto)
+						end if
+						if TotaleCarrello>900 then
+							Sconto=((TotaleCarrello*4)/100)
+							TotaleGenerale=(TotaleCarrello-Sconto)
+						end if
+					Else
+						Sconto=0
+						TotaleGenerale=TotaleCarrello
+					end if
+					ss("Sconto")=Sconto
+					ss("TotaleGenerale")=TotaleGenerale
 					'ss("DataOrdine")=now()
 					ss("DataAggiornamento")=now()
 					ss("Stato")=0
@@ -262,7 +285,7 @@
             <div class="col-md-12 parentOverflowContainer">
             </div>
         </div>
-        <div class="col-sm-12">
+        <div class="col-sm-12 hidden-xs">
             <div class="row bs-wizard">
                 <div class="col-sm-5 bs-wizard-step active">
                     <div class="text-center bs-wizard-stepnum">1</div>
@@ -294,7 +317,7 @@
                         <div class="progress-bar"></div>
                     </div>
                     <a href="#" class="bs-wizard-dot"></a>
-                    <div class="bs-wizard-info text-center">Pagamento &amp; fatturazione</div>
+                    <div class="bs-wizard-info text-center">Pagamento &amp; Fatturazione</div>
                 </div>
                 <div class="col-sm-5 bs-wizard-step disabled">
                     <div class="text-center bs-wizard-stepnum">5</div>
@@ -310,7 +333,7 @@
             <div class="col-md-8">
                 <div class="row">
                     <div class="title">
-                        <h4>Carrello</h4>
+                        <h4><span class="visible-xs" style="padding-top: 20px;">Carrello - Passo 1 di 5</span></h4>
                     </div>
                     <div class="col-md-12">
                         <div class="top-buffer">
@@ -318,10 +341,10 @@
                                 <thead>
                                     <tr>
                                         <th style="width:45%">Prodotto</th>
-                                        <th style="width:10%">Prezzo</th>
-                                        <th style="width:8%">Quantit&agrave;</th>
-                                        <th style="width:22%" class="text-center">Totale Prodotto</th>
-                                        <th style="width:15%"></th>
+																				<th style="width:15%">Quantit&agrave;</th>
+                                        <th style="width:15%" class="text-right">Prezzo</th>
+                                        <th style="width:15%" class="text-right hidden-xs">Totale Pr.</th>
+                                        <th style="width:10%"></th>
                                     </tr>
                                 </thead>
 
@@ -354,20 +377,18 @@
                                         <td data-th="Product" class="cart-product">
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <h5 class="nomargin"><a href="<%=NomePagina%>" title="Scheda del prodotto: <%=NomePagina%>"><%=rs("titolo")%></a></h5>
+                                                    <h6 class="nomargin"><a href="<%=NomePagina%>" title="Scheda del prodotto: <%=NomePagina%>"><%=rs("titolo")%></a></h6>
 																										<p><strong>Codice: <%=rs("codicearticolo")%></strong></p>
                                                     <%if Len(rs("colore"))>0 or Len(rs("lampadina"))>0 then%><p><%if Len(rs("colore"))>0 then%>Col.: <%=rs("colore")%><%end if%><%if Len(rs("lampadina"))>0 then%> - Lamp.: <%=rs("lampadina")%><%end if%></p><%end if%>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td data-th="Price" class="hidden-xs"><%=FormatNumber(rs("PrezzoProdotto"),2)%>&euro;</td>
-                                        <td data-th="Quantity">
-                                            <input type="number" class="form-control text-center" name="quantita" value="<%=quantita%>">
-                                        </td>
-                                        <td data-th="Subtotal" class="text-center"><%=FormatNumber(rs("TotaleRiga"),2)%>&euro;</td>
-                                        <td class="actions" data-th="">
-                                            <button class="btn btn-info btn-sm" type="submit"><i class="fa fa-refresh"></i></button>
-                                            <button class="btn btn-danger btn-sm" type="button" onClick="location.href='/carrello1.asp?mode=2&riga=<%=rs("pkid")%>'"><i class="fa fa-trash-o"></i></button>
+                                        <td data-th="Quantity"><input type="number" class="form-control text-center" name="quantita" value="<%=quantita%>"></td>
+																				<td data-th="Price"class="text-right"><%=FormatNumber(rs("PrezzoProdotto"),2)%>&nbsp&euro;</td>
+                                        <td data-th="Subtotal" class="text-right hidden-xs"><%=FormatNumber(rs("TotaleRiga"),2)%>&nbsp&euro;</td>
+                                        <td class="actions text-center" data-th="">
+                                            <button class="btn btn-info btn-sm" type="submit"><i class="fa fa-refresh"></i></button><br />
+                                            <button class="btn btn-danger btn-sm" style="margin-top: 5px;" type="button" onClick="location.href='/carrello1.asp?mode=2&riga=<%=rs("pkid")%>'"><i class="fa fa-trash-o"></i></button>
                                         </td>
                                     </tr>
 																		</form>
@@ -380,16 +401,24 @@
 																	</tbody>
 																	<%if ss.recordcount>0 then%>
 	                                <tfoot>
-	                                    <tr class="visible-xs">
-	                                        <td class="text-center"><strong>Totale <%if ss("TotaleCarrello")<>0 then%>
-												  								<%=FormatNumber(ss("TotaleCarrello"),2)%>&euro;<%else%>0&euro;<%end if%></strong></td>
+	                                    <tr>
+																					<td class="text-right" colspan="3">Totale Carrello</td>
+																					<td class="text-right"><%if ss("TotaleCarrello")<>0 then%>
+												  								<%=FormatNumber(ss("TotaleCarrello"),2)%><%else%>0<%end if%>&nbsp&euro;</td>
+																					<td class="hidden-xs"></td>
+	                                    </tr>
+																			<tr>
+																					<td class="text-right" colspan="3"><strong>Sconto Extra</strong></td>
+																					<td class="text-right"><strong><%if ss("Sconto")<>0 then%>
+												  								-<%=FormatNumber(ss("Sconto"),2)%><%else%>0,00<%end if%>&nbsp&euro;</strong></td>
+																					<td class="hidden-xs"></td>
 	                                    </tr>
 	                                    <tr>
 	                                        <td><a href="/" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continua gli acquisti</a></td>
-	                                        <td colspan="2" class="hidden-xs"></td>
-	                                        <td class="hidden-xs text-center"><strong>Totale <%if ss("TotaleCarrello")<>0 then%>
-												  								<%=FormatNumber(ss("TotaleCarrello"),2)%><%else%>0<%end if%> &euro;</strong></td>
-	                                        <td></td>
+	                                        <td class="text-right" colspan="2"><strong>Totale Generale</strong></td>
+																					<td class="text-right"><strong><%if ss("TotaleGenerale")<>0 then%>
+												  								<%=FormatNumber(ss("TotaleGenerale"),2)%><%else%>0<%end if%>&nbsp&euro;</strong></td>
+																					<td class="hidden-xs"></td>
 	                                    </tr>
 	                                </tfoot>
 																	<%end if%>
@@ -429,8 +458,7 @@
 								</div>
 								</form>
 								<%end if%>
-								<div class="panel panel-default user-comment">
-										<!-- Default panel contents -->
+								<!--<div class="panel panel-default user-comment">
 										<div class="panel-heading">
 												<h5><i class="glyphicon glyphicon-warning-sign"></i> RICHIESTA INFORMAZIONI E DISPONIBILITA' DEI PRODOTTI</h5>
 										</div>
@@ -445,48 +473,91 @@
 										</ul>
 										<%richiesta_carrello=1%>
 										<div class="panel-footer"><a data-fancybox data-src="#hidden-content" href="javascript:;" class="btn launch btn-warning btn-block">Contattaci per dettagli e informazioni <i class="fa fa-angle-right"></i></a></div>
-								</div>
+								</div>-->
             </div>
             <div class="col-md-4">
 								<%if ss.recordcount>0 then%>
 								<div class="panel panel-default" style="box-shadow: 0 3px 5px #ccc;">
                     <ul class="list-group text-center">
                         <li class="list-group-item" style="padding-top: 20px">
-                            <p>Totale carrello:<br />
-                                <span class="price-new"><i class="fa fa-tag"></i>&nbsp;<%if ss("TotaleCarrello")<>0 then%>
-								<%=FormatNumber(ss("TotaleCarrello"),2)%><%else%>0<%end if%> &euro;</span>
+                            <p>Totale Generale:<br />
+                                <span class="price-new"><%if ss("TotaleGenerale")<>0 then%>
+								<%=FormatNumber(ss("TotaleGenerale"),2)%><%else%>0<%end if%> &euro;</span>
                             </p>
                         </li>
                     </ul>
                     <div class="panel-footer">
-                        <a href="#" class="btn btn-danger btn-block" onClick="NoteCliente();">Completa l'acquisto <i class="fa fa-angle-right"></i></a>
+                        <a href="#" class="btn btn-danger btn-block" style="padding: 10px 0px;" onClick="NoteCliente();">COMPLETA L'ACQUISTO <i class="fa fa-angle-right"></i></a>
                     </div>
                 </div>
 								<%end if%>
 
-								<!--condizioni di vendita-->
-								<div class="panel panel-default payment-list">
-										<!-- Default panel contents -->
-										<div class="panel-heading">
-											<h5>Condizioni di vendita</h5>
-										</div>
-										<ul class="list-group">
-											<li class="list-group-item"><strong>SPEDIZIONE ASSICURATA IN TUTTA ITALIA</strong></li>
-											<li class="list-group-item"><i class="fa fa-check"></i> <em>Per ordini superiori a 250&euro;:</em><div style="float: right;"><em><strong>0&euro;</strong></em></div></li>
-											<li class="list-group-item"><i class="fa fa-check"></i> <em>Per ordini fino a  250&euro;:</em><div style="float: right;"><em><strong>10&euro;</strong></em></div></li>
-											<li class="list-group-item"><i class="fa fa-check"></i> <em>Ritiro in sede:</em><div style="float: right;"><em><strong>0&euro;</strong></em></div></li>
-											<li class="list-group-item">&nbsp;</li>
-											<li class="list-group-item"><strong>PAGAMENTI SICURI</strong></li>
-											<li class="list-group-item"><i class="fa fa-check"></i> <em>Bonifico e PostePay:</em><div style="float: right;"><em><strong>0&euro;</strong></em></div></li>
-											<li class="list-group-item"><i class="fa fa-check"></i> <em>Carte di credito, Prepagate e PayPal:</em><div style="float: right;"><em><strong>0&euro;</strong></em></div></li>
-											<li class="list-group-item"><i class="fa fa-check"></i> <em>Contrassegno in contanti:</em><div style="float: right;"><em><strong>6&euro;</strong></em></div></li>
-										</ul>
-										<div class="panel-footer"><a href="/condizioni_di_vendita.asp" class="btn btn-default">Condizioni di vendita <i class="fa fa-chevron-right"></i></a></div>
+								<div class="clearfix"></div>
+								<div class="panel panel-default" style="margin: 10px 0px 30px 0px;">
+									<a data-fancybox data-src="#hidden-content" href="javascript:;" class="btn launch btn-warning btn-block" style="white-space: normal; padding: 10px 0px;"><i class="fa fa-info-circle"></i>   Domande e dubbi? Contattaci!!!</a>
 								</div>
+								<div class="clearfix"></div>
+								<div class="banner_2 banner_a">
+									<img src="/images/sconto_extra.png">
+
+								</div>
+								<div class="banner_2 banner_b">
+									<img src="/images/spedizione_gratuita.png">
+								</div>
+								<div class="banner_2 banner_c">
+									<img src="/images/sconto_bonifico.png">
+								</div>
+
             </div>
         </div>
 
-
+				<div class="col-md-8">
+					<div class="col-md-6">
+						<div class="panel panel-default payment-list">
+							<div class="panel-heading">
+								<h5>Spedizioni</h5>
+							</div>
+							<ul class="list-group">
+								<li class="list-group-item"><strong>SPEDIZIONE ASSICURATA IN TUTTA ITALIA</strong></li>
+								<li class="list-group-item"><i class="fa fa-check"></i> <em>Per ordini superiori a 250&euro;:</em><div style="float: right;"><em><strong>0&euro;</strong></em></div></li>
+								<li class="list-group-item"><i class="fa fa-check"></i> <em>Per ordini fino a  250&euro;:</em><div style="float: right;"><em><strong>10&euro;</strong></em></div></li>
+								<li class="list-group-item"><i class="fa fa-check"></i> <em>Ritiro in sede:</em><div style="float: right;"><em><strong>0&euro;</strong></em></div></li>
+							</ul>
+						</div>
+						<div class="panel panel-default payment-list">
+							<div class="panel-heading">
+								<h5>Condizioni di recesso</h5>
+							</div>
+							<ul class="list-group">
+								<li class="list-group-item"><strong>Diritto di recesso entro 14 giorni come da legge</strong></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="panel panel-default payment-list">
+							<div class="panel-heading">
+								<h5>Pagamenti</h5>
+							</div>
+							<ul class="list-group">
+								<li class="list-group-item"><strong>PAGAMENTI SICURI E PROTETTI</strong></li>
+								<li class="list-group-item"><i class="fa fa-check"></i> <em>Bonifico:</em><div style="float: right;"><em><strong>-2%</strong></em></div></li>
+								<li class="list-group-item"><i class="fa fa-check"></i> <em>Carte di credito, Prepagate, PostePay e PayPal:</em><div style="float: right;"><em><strong>0&euro;</strong></em></div></li>
+								<li class="list-group-item"><i class="fa fa-check"></i> <em>Contrassegno in contanti:</em><div style="float: right;"><em><strong>6&euro;</strong></em></div></li>
+							</ul>
+						</div>
+						<div class="panel panel-default payment-list">
+							<div class="panel-heading">
+								<h5>Preventivi personalizzati</h5>
+							</div>
+							<ul class="list-group">
+								<li class="list-group-item"><strong>Per importi oltre 1500&euro; preventivi e sconti personalizzati</strong></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<!--#include virtual="/inc_box_contatti.asp"-->
+				</div>
 		</div>
 		<%
 		ss.close

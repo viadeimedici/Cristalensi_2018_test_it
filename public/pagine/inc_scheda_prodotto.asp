@@ -213,7 +213,7 @@ end if
             <div class="col-md-12 parentOverflowContainer">
             </div>
         </div>
-		<div class="row clearfix">
+		<div class=" clearfix" style="margin-top: 20px;">
 			<div class="col-md-10 col-md-push-2">
 						<ol class="breadcrumb" itemtype="http://schema.org/BreadcrumbList">
                 <li itemprop="itemListElement" itemtype="http://schema.org/ListItem"><a href="/" itemprop="item" title="Cristalensi Vendita lampadari online"><span itemprop="name"><i class="fa fa-home"></i></span></a><meta itemprop="position" content="1" /></li>
@@ -229,17 +229,17 @@ end if
 		</div>
         <div class="top-buffer hidden-md hidden-lg"></div>
         <div class="" itemscope itemtype="http://schema.org/Product">
-						<div class="col-md-12" style="margin-bottom: 20px;">
-								<div class="row">
-										<div class="title">
-												<h1 class="product-name"><span itemprop="name"><%=Titolo_prodotto%></span></h1>
-												<p class="details">codice: <b><span itemprop="mpn"><%=codicearticolo%></span></b> - produttore: <b><a href="<%=url_produttore%>" title="Catalogo <%=produttore%> vendita online prodotti illuminazione"><span itemprop="brand"><%=produttore%></a></span></b></p>
-										</div>
-								</div>
-						</div>
+			<div class="col-md-12" style="margin-bottom: 10px;margin-top: 10px;">
+					<div class="row">
+							<div class="title">
+									<h1 class="product-name"><span itemprop="name"><%=Titolo_prodotto%></span></h1>
+									<p class="details">codice: <b><span itemprop="mpn"><%=codicearticolo%></span></b> - produttore: <b><a href="<%=url_produttore%>" title="Catalogo <%=produttore%> vendita online prodotti illuminazione"><span itemprop="brand"><%=produttore%></a></span></b></p>
+							</div>
+					</div>
+			</div>
 
-						<div class="col-md-8">
-								<div class="row">
+			<div class="col-md-8">
+				<div class="row">
                     <!--<div class="title">
                         <h1 class="product-name"><span itemprop="name"><%=Titolo_prodotto%></span></h1>
                         <p class="details">codice: <b><span itemprop="mpn"><%=codicearticolo%></span></b> - produttore: <b><a href="<%=url_produttore%>" title="Catalogo <%=produttore%> vendita online prodotti illuminazione"><span itemprop="brand"><%=produttore%></a></span></b></p>
@@ -286,7 +286,7 @@ end if
 														<a href="/public/etichetta-classe-energetica-<%=ClasseEnergetica%>.jpg" data-fancybox="group2" data-caption="<%=Titolo_prodotto%> - <%=produttore%> - <%=Titolo_2_cat%>" title="<%if titolo_img<>"" then%><%=titolo_img%>&nbsp;<%=titolo_cat%><%else%><%=titolo_prodotto%>&nbsp;<%=titolo_1_cat%><%end if%>"><img src="/public/etichetta-classe-energetica-<%=ClasseEnergetica%>.jpg" alt="<%=Titolo_prodotto%> - <%=produttore%> - <%=Titolo_2_cat%>" align="right" valign="middle" height="150px" width="75px"></a>
 														<%end if%>
 
-														<small><%=Descrizione_prodotto%></small>
+														<%=Descrizione_prodotto%>
 
 														<%if allegato_prodotto<>"" then%>
 														<br /><br />E' presente un allegato: >> <a href="/public/<%=allegato_prodotto%>" target="_blank" title="E' presente un allegato per il prodotto: <%=titolo_prodotto%>">Scarica l'allegato</a>
@@ -314,183 +314,273 @@ end if
 															ams.close
 														Next
 														%>
-														ma per suggerimenti pi&ugrave; dettagliati contattate il nostro staff.
-														</em>
+														ma per suggerimenti pi&ugrave; dettagliati contattate il nostro staff.</em>
+
 													<%
 													end if
 													%>
 													<p>&nbsp;</p>
-													</span>
-		                      </div>
-												</div>
-
-												</div>
-												</div>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
                         </div>
                     </div>
+										<div class="row">
+											<%
+											Randomize()
+											constnum = 5
+
+											Set com_rs = Server.CreateObject("ADODB.Recordset")
+											sql = "SELECT PkId,FkIscritto,Testo,Valutazione,Pubblicato FROM Commenti_Clienti WHERE Pubblicato=1 ORDER BY PkId DESC"
+											com_rs.open sql,conn, 1, 1
+											if com_rs.recordcount>0 then
+
+											%>
+											<div class="panel panel-default hidden-sm hidden-xs visible-md-block visible-lg-block user-comment" itemprop="review" itemscope itemtype="http://schema.org/Review">
+												<!-- Default panel contents -->
+												<div class="panel-heading">
+													<h5><i class="fa fa-users"></i> Dicono di noi...</h5>
+												</div>
+												<ul class="list-group">
+													<%
+													IF NOT com_rs.EOF THEN
+													rndArray = com_rs.GetRows()
+													com_rs.Close
+
+													Lenarray =  UBOUND( rndArray, 2 ) + 1
+				  								skip =  Lenarray  / constnum
+				  								IF Lenarray <= constnum THEN skip = 1
+				  								FOR i = 0 TO Lenarray - 1 STEP skip
+				  									numero = RND * ( skip - 1 )
+				  									'id = rndArray( 0, i + numero )
+				  									FkIscritto = rndArray( 1, i + numero )
+														if FkIscritto="" or isNull(FkIscritto) then FkIscritto=0
+				  									Testo_Commento = rndArray( 2, i + numero )
+				  									Valutazione = rndArray( 3, i + numero )
+
+
+													  if FkIscritto>0 then
+															Set cr_rs = Server.CreateObject("ADODB.Recordset")
+															sql = "SELECT PkId, Nome FROM Clienti WHERE PkId="&FkIscritto
+															cr_rs.open sql,conn, 1, 1
+															if cr_rs.recordcount>0 then
+																NomeIscritto=cr_rs("Nome")
+															end if
+															cr_rs.close
+														end if
+													%>
+													<li class="list-group-item"><i class="fa fa-user"></i> <em><span itemprop="description"><%=Left(NoHTML(Testo_Commento), 100)%>...</span><span itemprop="author" style="display: none;"><%=NomeIscritto%></span>
+														<span itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">Voto: <meta itemprop="worstRating" content = "1"><span itemprop="ratingValue"><%=Valutazione%></span>/<span itemprop="bestRating">5</span></span></em></li>
+													<%
+													next
+													end if
+													%>
+												</ul>
+												<div class="panel-footer"><a href="/commenti_elenco.asp" class="btn btn-default">leggi tutti i commenti <i class="fa fa-chevron-right"></i></a></div>
+											</div>
+											<%
+											Else
+											com_rs.close
+											end if
+											%>
+										</div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="panel panel-default" style="box-shadow: 0 3px 5px #ccc;" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-										<%if prezzoarticolo=0 then%>
-											<%richiesta_prev=1%>
-											<ul class="list-group text-center">
+                <div class="panel panel-default" style="box-shadow: 0 3px 5px #ccc; position: relative;" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+					<p class="btn-add" style="position: absolute; right: 15px; top: 15px; font-size: 1.5em; z-index: 5">
+						<a href="/preferiti.asp?id=<%=id%>" rel="nofollow" data-toggle="tooltip" data-placement="top" title="Aggiungi ai preferiti"><i class="fa fa-heart"></i></a>
+					</p>
+					<%if prezzoarticolo=0 then%>
+						<%richiesta_prev=1%>
+						<ul class="list-group text-center">
 
-													<li class="list-group-item" style="padding-top: 20px">
+							<li class="list-group-item" style="padding-top: 20px">
 	                            <p>
-															<span class="price-old">Prezzo di Listino  <b><%=prezzolistino%> &euro;</b><meta itemprop="priceCurrency" content="EUR" /></span><br /><br />
-															Vuoi sapere il Prezzo Cristalensi?
+									<span class="price-old">Prezzo di Listino  <b><%=prezzolistino%> &euro;</b><meta itemprop="priceCurrency" content="EUR" /></span><br /><br />
+									Vuoi sapere il Prezzo Cristalensi?
 	                            </p>
 	                        </li>
-											</ul>
+							<li class="list-group-item" style="padding-top: 20px; background-color:#f5f5f5;">
+								<%if offerta=10 then%>
+									IL PRODOTTO NON E' DISPONIBILE
+								<%else%>
+									<%if Len(Consegna)>0 then%>
+									<small><em><%=Consegna%></em></small>
+									<%else%>
+									<small><em>Consegna entro 30 giorni</em></small>
+									<%end if%>
+								<%end if%>
+							<li>
+						</ul>
 	                    <div class="panel-footer">
 	                        <a data-fancybox data-src="#hidden-content-prev" href="javascript:;" rel="nofollow" class="btn launch-prev btn-danger btn-block" title="Richiedi un preventivo al nostro staff">Richiedi un preventivo al nostro staff <i class="glyphicon glyphicon-shopping-cart"></i></a>
 	                    </div>
-										<%else%>
+							<%else%>
+								<%if offerta=10 then%>
+									<ul class="list-group text-center">
+									<li class="list-group-item" style="padding-top: 20px">
+											<p>
+													<span class="price-new">Prodotto non disponibile</span><br />
+											</p>
+									</li>
+									</ul>
+								<%else%>
+									<form name="newsform2" id="newsform2" onSubmit="return verifica_2();">
+									<input type="hidden" name="id" id="id" value="<%=id%>">
+									<ul class="list-group text-center" style="margin-bottom: 0;">
+
+											<li class="list-group-item" style="padding-top: 20px">
+													<p>
+															<%if prezzoarticolo<>0 then%>
+																<%if idsession=0 and prezzoprodottosoloclienti="si" then%>
+																	<!--<span class="price-new"><em><span itemprop="price">SCONTO EXTRA<br />PER GLI ISCRITTI !!!</span></em></span><br /><br />-->
+																	<%if prezzolistino<>0 then%>
+																		<span class="price-old">Prezzo di Listino <b><%=prezzolistino%> &euro;</b></span>
+																	<%end if%>
+																<%Else%>
+																	<%if prezzolistino<>0 then%>
+																		<span class="price-old">Listino: <b><del>&nbsp;<%=prezzolistino%> &euro;&nbsp;</del></b></span><br>
+																	<%end if%>
+																	<span class="price-new"><span itemprop="price"><%=prezzoarticolo%></span> &euro;<meta itemprop="priceCurrency" content="EUR" /></span><br><small>iva inclusa</small>
+
+																<%end if%>
+															<%end if%>
+
+
+													</p>
+											</li>
+
+
 											<%if offerta=10 then%>
-												<ul class="list-group text-center">
-												<li class="list-group-item" style="padding-top: 20px">
-														<p>
-																<span class="price-new">Prodotto non disponibile</span><br />
-														</p>
+												<li class="list-group-item">
+													IL PRODOTTO NON E' DISPONIBILE
 												</li>
-												</ul>
 											<%else%>
-												<form name="newsform2" id="newsform2" onSubmit="return verifica_2();">
-												<input type="hidden" name="id" id="id" value="<%=id%>">
-												<ul class="list-group text-center">
-
-														<li class="list-group-item" style="padding-top: 20px">
-																<p>
-																		<%if prezzoarticolo<>0 then%>
-																			<%if idsession=0 and prezzoprodottosoloclienti="si" then%>
-																				<span class="price-new"><em><span itemprop="price">SCONTO EXTRA<br />PER GLI ISCRITTI !!!</span></em></span><br /><br />
-																				<%if prezzolistino<>0 then%>
-																					<span class="price-old">Prezzo di Listino <b><%=prezzolistino%> &euro;</b></span>
-																				<%end if%>
-																			<%Else%>
-																				Prezzo Cristalensi:<br />
-																				<span class="price-new"><i class="fa fa-tag"></i>&nbsp;<span itemprop="price"><%=prezzoarticolo%></span> &euro;<meta itemprop="priceCurrency" content="EUR" /></span><br />
-																				<%if prezzolistino<>0 then%>
-																					<span class="price-old">invece di  <b><%=prezzolistino%> &euro;</b></span>
-																				<%end if%>
-																			<%end if%>
-																		<%end if%>
-
-
-																</p>
-														</li>
-
-
-														<%if idsession=0 and prezzoprodottosoloclienti="si" then%>
-															<%'qui eventualmente possiamo metter un banner per rafforzare iscrizione e sconto%>
-															<li class="list-group-item" style="background-color: #FF972C; Color: #fff">Prezzo con SCONTO EXTRA riservato<br />per tutti i clienti iscritti</li>
-														<%else%>
-															<%
-															Set col_rs = Server.CreateObject("ADODB.Recordset")
-															sql = "SELECT [Prodotto-Colore].FkProdotto, Colori.Titolo FROM [Prodotto-Colore] INNER JOIN Colori ON [Prodotto-Colore].FkColore = Colori.PkId WHERE ((([Prodotto-Colore].FkProdotto)="&id&")) ORDER BY Colori.Titolo ASC"
-															col_rs.open sql,conn, 1, 1
-															if col_rs.recordcount>0 then
-															%>
-																	<input type="hidden" name="num_colori" id="num_colori" value="<%=col_rs.recordcount%>">
-															<%else%>
-																	<input type="hidden" name="num_colori" id="num_colori" value="0">
-																	<input type="hidden" name="colore" id="colore" value="*****">
-															<%end if%>
-
-															<%
-															Set lam_rs = Server.CreateObject("ADODB.Recordset")
-															sql = "SELECT [Prodotto-Lampadina].FkProdotto, Lampadine.Titolo FROM [Prodotto-Lampadina] INNER JOIN Lampadine ON [Prodotto-Lampadina].FkLampadina = Lampadine.PkId WHERE ((([Prodotto-Lampadina].FkProdotto)="&id&")) ORDER BY Lampadine.Titolo ASC"
-															lam_rs.open sql,conn, 1, 1
-															if lam_rs.recordcount>0 then
-															%>
-																	<input type="hidden" name="num_lampadine" id="num_lampadine" value="<%=lam_rs.recordcount%>">
-															<%else%>
-																	<input type="hidden" name="num_lampadine" id="num_lampadine" value="0">
-																	<input type="hidden" name="lampadina" id="lampadina" value="*****">
-															<%end if%>
-
-															<%if col_rs.recordcount>0 then%>
-															<li class="list-group-item">
-																	<select name="colore" id="colore" class="selectpicker show-menu-arrow  show-tick" data-size="4" title="Scegli il colore e/o la finitura">
-																	<%
-																	Do While Not col_rs.EOF
-																	%>
-																			<option title="<%=col_rs("Titolo")%>" value="<%=col_rs("Titolo")%>"><%=col_rs("Titolo")%></option>
-																	<%
-																	col_rs.movenext
-																	loop
-																	%>
-																	</select>
-															</li>
-															<%
-															end if
-															col_rs.close
-															%>
-															<%if lam_rs.recordcount>0 then%>
-															<li class="list-group-item">
-																	<select name="lampadina" id="lampadina" class="selectpicker show-menu-arrow  show-tick" data-size="4" title="Scegli la lampadina e/o il vetro">
-																	<%
-																	Do While Not lam_rs.EOF
-																	%>
-																			<option title="<%=lam_rs("Titolo")%>" value="<%=lam_rs("Titolo")%>"><%=lam_rs("Titolo")%></option>
-																	<%
-																	lam_rs.movenext
-																	loop
-																	%>
-																	</select>
-															</li>
-															<%
-															end if
-															lam_rs.close
-															%>
-															<li class="list-group-item">
-																	<input type="number" data-width="auto" class="form-control" name="quantita" id="quantita" placeholder="Quanti Pezzi?" aria-label="Pezzi">
-															</li>
-														<%end if%>
-
-
-												</ul>
-												<div class="panel-footer">
-														<%if idsession=0 and prezzoprodottosoloclienti="si" then%>
-															<a href="/iscrizione.asp?prov=3" id="invia_qta_2" rel="nofollow" class="btn btn-danger btn-block" title="Iscriviti per vedere gli sconti!"><i class="glyphicon glyphicon-log-in"></i>&nbsp;&nbsp;Iscriviti o Accedi !!!</a>
-														<%else%>
-															<a href="#" onClick="return verifica_1();" id="invia_qta_2" rel="nofollow" class="btn btn-danger btn-block" title="Aggiungi al carrello <%=titolo_prodotto%>&nbsp;<%=codicearticolo%>">Aggiungi al carrello <i class="glyphicon glyphicon-shopping-cart"></i></a>
-														<%end if%>
-												</div>
-												</form>
+												<%if Len(Consegna)>0 then%>
+													<li class="list-group-item" style="background-color:#f5f5f5;">
+														<small><em><i class="fa fa-truck"></i> <%=Consegna%></em></small>
+													</li>
+												<%else%>
+													<li class="list-group-item" style="background-color:#f5f5f5;">
+														<small><em><i class="fa fa-truck"></i> Consegna entro 30 giorni</em></small>
+													</li>
+												<%end if%>
 											<%end if%>
-										<%end if%>
+											<%if idsession=0 and prezzoprodottosoloclienti="si" then%>
+												<%'qui eventualmente possiamo metter un banner per rafforzare iscrizione e sconto%>
+												<li class="list-group-item" style="background-color: #FF972C; Color: #fff">Prezzo con SCONTO EXTRA riservato<br />per tutti i clienti iscritti</li>
+											<%else%>
+												<%
+												Set col_rs = Server.CreateObject("ADODB.Recordset")
+												sql = "SELECT [Prodotto-Colore].FkProdotto, Colori.Titolo FROM [Prodotto-Colore] INNER JOIN Colori ON [Prodotto-Colore].FkColore = Colori.PkId WHERE ((([Prodotto-Colore].FkProdotto)="&id&")) ORDER BY Colori.Titolo ASC"
+												col_rs.open sql,conn, 1, 1
+												if col_rs.recordcount>0 then
+												%>
+														<input type="hidden" name="num_colori" id="num_colori" value="<%=col_rs.recordcount%>">
+												<%else%>
+														<input type="hidden" name="num_colori" id="num_colori" value="0">
+														<input type="hidden" name="colore" id="colore" value="*****">
+												<%end if%>
+
+												<%
+												Set lam_rs = Server.CreateObject("ADODB.Recordset")
+												sql = "SELECT [Prodotto-Lampadina].FkProdotto, Lampadine.Titolo FROM [Prodotto-Lampadina] INNER JOIN Lampadine ON [Prodotto-Lampadina].FkLampadina = Lampadine.PkId WHERE ((([Prodotto-Lampadina].FkProdotto)="&id&")) ORDER BY Lampadine.Titolo ASC"
+												lam_rs.open sql,conn, 1, 1
+												if lam_rs.recordcount>0 then
+												%>
+														<input type="hidden" name="num_lampadine" id="num_lampadine" value="<%=lam_rs.recordcount%>">
+												<%else%>
+														<input type="hidden" name="num_lampadine" id="num_lampadine" value="0">
+														<input type="hidden" name="lampadina" id="lampadina" value="*****">
+												<%end if%>
+
+												<%if col_rs.recordcount>0 then%>
+												<li class="list-group-item">
+														<select name="colore" id="colore" class="selectpicker show-menu-arrow  show-tick" data-size="4" title="Scegli il colore e/o la finitura">
+														<%
+														Do While Not col_rs.EOF
+														%>
+																<option title="<%=col_rs("Titolo")%>" value="<%=col_rs("Titolo")%>"><%=col_rs("Titolo")%></option>
+														<%
+														col_rs.movenext
+														loop
+														%>
+														</select>
+												</li>
+												<%
+												end if
+												col_rs.close
+												%>
+												<%if lam_rs.recordcount>0 then%>
+												<li class="list-group-item">
+														<select name="lampadina" id="lampadina" class="selectpicker show-menu-arrow  show-tick" data-size="4" title="Scegli la lampadina e/o il vetro">
+														<%
+														Do While Not lam_rs.EOF
+														%>
+																<option title="<%=lam_rs("Titolo")%>" value="<%=lam_rs("Titolo")%>"><%=lam_rs("Titolo")%></option>
+														<%
+														lam_rs.movenext
+														loop
+														%>
+														</select>
+												</li>
+												<%
+												end if
+												lam_rs.close
+												%>
+												<li class="list-group-item">
+														<input type="number" data-width="auto" class="form-control" name="quantita" id="quantita" placeholder="Quanti Pezzi?" aria-label="Pezzi">
+												</li>
+											<%end if%>
+
+									</ul>
+									<div class="panel-footer">
+											<%if idsession=0 and prezzoprodottosoloclienti="si" then%>
+												<a href="/iscrizione.asp?prov=3" id="invia_qta_2" rel="nofollow" class="btn btn-danger btn-block" title="Iscriviti per vedere gli sconti!"><i class="glyphicon glyphicon-log-in"></i>&nbsp;&nbsp;Iscriviti o Accedi!</a>
+											<%else%>
+												<a href="#" onClick="return verifica_1();" id="invia_qta_2" rel="nofollow" class="btn btn-danger btn-block" style="padding: 10px 0px;" title="Aggiungi al carrello <%=titolo_prodotto%>&nbsp;<%=codicearticolo%>">AGGIUNGI AL CARRELLO <i class="glyphicon glyphicon-shopping-cart"></i></a>
+											<%end if%>
+									</div>
+									</form>
+								<%end if%>
+							<%end if%>
 
                 </div>
 				<div class="clearfix"></div>
-				<div class="panel panel-default user-comment">
-					<!-- Default panel contents -->
-					<div class="panel-heading">
-						<h5><i class="glyphicon glyphicon-warning-sign"></i> DISPONIBILITA' DEI PRODOTTI</h5>
-					</div>
-					<ul class="list-group">
-						<li class="list-group-item">
-								<%if offerta=10 then%>
-								IL PRODOTTO NON E' DISPONIBILE
-								<%else%>
-									<%if Len(Consegna)>0 then%>
-									<%=Consegna%>
-									<%else%>
-									<em>Consegna entro 30 giorni</em>
-									<%end if%>
-								<%end if%>
-						</li>
-					</ul>
-					<div class="panel-footer"><a data-fancybox data-src="#hidden-content" href="javascript:;" class="btn launch btn-warning btn-block" style="white-space: normal">Contattaci per info sulla consegna <i class="fa fa-angle-right"></i></a></div>
+				<div class="panel panel-default" style="margin: 10px 0px 30px 0px;">
+					<a data-fancybox data-src="#hidden-content" href="javascript:;" class="btn launch btn-warning btn-block" style="white-space: normal; padding: 10px 0px;"><i class="fa fa-info-circle"></i>   Domande e dubbi? Contattaci!</a>
 				</div>
+				<div class="clearfix"></div>
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-4 col-xsl-4 col-xs-12">
+						<div class="banner_2 banner_a">
+							<img src="/images/sconto_extra.png">
+
+						</div>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-4 col-xsl-4 col-xs-12">
+						<div class="banner_2 banner_b">
+							<img src="/images/spedizione_gratuita.png">
+						</div>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-4 col-xsl-4 col-xs-12">
+						<div class="banner_2 banner_c">
+							<img src="/images/sconto_bonifico.png">
+						</div>
+					</div>
+				</div>
+				<!--#include virtual="/inc_box_contatti.asp"-->
+
 				<%
 				Set com_rs = Server.CreateObject("ADODB.Recordset")
-				sql = "SELECT TOP 1 * FROM Commenti_Clienti WHERE Pubblicato=1 ORDER BY PkId DESC"
+				sql = "SELECT TOP 3 * FROM Commenti_Clienti WHERE Pubblicato=1 ORDER BY PkId DESC"
 				com_rs.open sql,conn, 1, 1
 				if com_rs.recordcount>0 then
 				%>
-				<div class="panel panel-default user-comment" itemprop="review" itemscope itemtype="http://schema.org/Review">
+				<div class="panel panel-default hidden visible-sm-block visible-xs-block user-comment" itemprop="review" itemscope itemtype="http://schema.org/Review">
 					<!-- Default panel contents -->
 					<div class="panel-heading">
 						<h5><i class="fa fa-users"></i> Dicono di noi...</h5>
@@ -506,7 +596,7 @@ end if
 						end if
 						cr_rs.close
 						%>
-						<li class="list-group-item"><i class="fa fa-user"></i> <em><span itemprop="description"><%=Left(NoHTML(com_rs("Testo")), 30)%>...</span><span itemprop="author" style="display: none;"><%=NomeIscritto%></span>
+						<li class="list-group-item"><i class="fa fa-user"></i> <em><span itemprop="description"><%=Left(NoHTML(com_rs("Testo")), 100)%>...</span><span itemprop="author" style="display: none;"><%=NomeIscritto%></span>
 							<span itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">Voto: <meta itemprop="worstRating" content = "1"><span itemprop="ratingValue"><%=com_rs("Valutazione")%></span>/<span itemprop="bestRating">5</span></span></em></li>
 						<%
 							com_rs.movenext
@@ -522,51 +612,7 @@ end if
 
       </div>
 			<div class="col-md-8">
-				<div class="col-md-6">
-					<div class="panel panel-default payment-list">
-						<div class="panel-heading">
-							<h5>Spedizioni</h5>
-						</div>
-						<ul class="list-group">
-							<li class="list-group-item"><strong>SPEDIZIONE ASSICURATA IN TUTTA ITALIA</strong></li>
-							<li class="list-group-item"><i class="fa fa-check"></i> <em>Per ordini superiori a 250&euro;:</em><div style="float: right;"><em><strong>0&euro;</strong></em></div></li>
-							<li class="list-group-item"><i class="fa fa-check"></i> <em>Per ordini fino a  250&euro;:</em><div style="float: right;"><em><strong>10&euro;</strong></em></div></li>
-							<li class="list-group-item"><i class="fa fa-check"></i> <em>Ritiro in sede:</em><div style="float: right;"><em><strong>0&euro;</strong></em></div></li>
-						</ul>
-					</div>
-					<div class="panel panel-default payment-list">
-						<div class="panel-heading">
-							<h5>Condizioni di recesso</h5>
-						</div>
-						<ul class="list-group">
-							<li class="list-group-item"><strong>Diritto di recesso entro 14 giorni come da legge</strong></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="panel panel-default payment-list">
-						<div class="panel-heading">
-							<h5>Pagamenti</h5>
-						</div>
-						<ul class="list-group">
-							<li class="list-group-item"><strong>PAGAMENTI SICURI E PROTETTI</strong></li>
-							<li class="list-group-item"><i class="fa fa-check"></i> <em>Bonifico e PostePay:</em><div style="float: right;"><em><strong>0&euro;</strong></em></div></li>
-							<li class="list-group-item"><i class="fa fa-check"></i> <em>Carte di credito, Prepagate e PayPal:</em><div style="float: right;"><em><strong>0&euro;</strong></em></div></li>
-							<li class="list-group-item"><i class="fa fa-check"></i> <em>Contrassegno in contanti:</em><div style="float: right;"><em><strong>6&euro;</strong></em></div></li>
-						</ul>
-					</div>
-					<div class="panel panel-default payment-list">
-						<div class="panel-heading">
-							<h5>Preventivi personalizzati</h5>
-						</div>
-						<ul class="list-group">
-							<li class="list-group-item"><strong>Per importi oltre 500&euro; preventivi e sconti personalizzati</strong></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<!--#include virtual="/inc_box_contatti.asp"-->
+
 			</div>
 
       </div>

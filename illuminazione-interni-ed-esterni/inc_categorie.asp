@@ -92,10 +92,7 @@ gr_rs.close
     <!--#include virtual="/inc_header_1.asp"-->
     <!--#include virtual="/inc_header_2.asp"-->
     <div class="container content">
-        <div class="row hidden">
-            <div class="col-md-12 parentOverflowContainer">
-            </div>
-        </div>
+
         <div class="col-xl-12">
             <ol class="breadcrumb" itemtype="http://schema.org/BreadcrumbList">
                 <li itemprop="itemListElement" itemtype="http://schema.org/ListItem"><a href="/" itemprop="item" title="Cristalensi Vendita lampadari online"><span itemprop="name"><i class="fa fa-home"></i></span></a><meta itemprop="position" content="1" /></li>
@@ -117,7 +114,7 @@ gr_rs.close
         </div>
         <div class="col-md-3">
             <div class=" top-buffer">
-                <nav class="navbar">
+                <nav class="navbar hidden-xs">
                     <!-- menu - normal collapsible navbar markup -->
                     <%
                     Set tip_rs = Server.CreateObject("ADODB.Recordset")
@@ -147,6 +144,19 @@ gr_rs.close
                     tip_rs.close
                     %>
                 </nav>
+                <div class="banner preventivi">
+                    <h3 class="title">Promozione di Novembre</h3>
+                    <p class="text" style="padding-left: 40px;"><strong><em>Sconti Extra in Carrello</em></strong><br />-2% Oltre 300&nbsp&euro;<br />-3% Oltre 600&nbsp&euro;<br />-4% Oltre 900&nbsp&euro;</strong></p>
+                </div>
+                <div class="banner pagamenti">
+                    <h3 class="title">Paga in sicurezza!</h3>
+                    <p class="text"><strong><em>PAGHI CON BONIFICO? -2%</em></strong><br />Altri pagamenti disponibili:<br />Carte di Credito e PayPal, PostePay e Contrassegno.
+                    </p>
+                </div>
+                <div class="banner consegne">
+                    <h3 class="title">SPEDIZIONI ASSICURATE</h3>
+                    <p class="text">Consegna <u>GRATUITA</u> in tutta Italia per ordini superiori a 250&euro;<br />Per ordini fino a 250&euro;: 10&euro;</p>
+                </div>
             </div>
         </div>
         <div class="col-md-9">
@@ -250,9 +260,13 @@ gr_rs.close
                       file_img=Replace(file_img, "&rsquo;", "")
                     end if
                     img_rs.close
+
+                    spedizionegratis=0
+                    if prezzoarticolo>250 then spedizionegratis=1
                 %>
                 <div class="col-xs-12 col-sm-4 col-md-4">
                   <article class="col-item">
+                      <%if spedizionegratis=1 then%><div class="options">SPEDIZIONE<br />GRATUITA</div><%end if%>
                       <div class="photo">
                           <a href="/<%=NomePagina%>" class="prod-img-replace" style="background-image: url(/public/<%=file_img%>)" title="<%=titolo_prodotto%>"><img alt="<%=titolo_prodotto%>" src="/images/blank.png"></a>
                       </div>
@@ -264,7 +278,7 @@ gr_rs.close
                                   <div class="price-box separator">
                                     <%if prezzoarticolo<>0 then%>
                                       <%if idsession=0 and prezzoprodottosoloclienti="si" then%>
-                                        <em><span class="price-new" style="color: #000;">SCONTO PER ISCRITTI !!!</span></em><br />
+                                        <em><span class="price-new" style="color: #000;">SCONTO PER ISCRITTI</span></em><br />
                                         <%if prezzolistino<>0 then%><span class="price-old">Prezzo di listino: <b><%=prezzolistino%> &euro;</b></span><%else%>&nbsp;<%end if%>
                                       <%else%>
                                         <span class="price-new"><i class="fa fa-tag"></i>&nbsp;<%=prezzoarticolo%> &euro;</span><br />
@@ -277,7 +291,7 @@ gr_rs.close
                                   </div>
                               </div>
                           </div>
-                          <div class="separator clear-left">
+                          <div class="separator clear-left clearfix">
                               <p class="btn-add">
                                   <a href="/preferiti.asp?id=<%=id%>" rel="nofollow" class="hidden-lg" data-toggle="tooltip" data-placement="top" title="Aggiungi ai preferiti"><i class="fa fa-heart"></i></a>
                               </p>
@@ -285,7 +299,7 @@ gr_rs.close
                                   <a href="/<%=NomePagina%>" class="hidden-lg" data-toggle="tooltip" data-placement="top" title="vedi ed aggiungi al carrello">vedi scheda <i class="fa fa-chevron-right"></i></a>
                               </p>
                           </div>
-                          <div class="clearfix"></div>
+                          <div class=""></div>
                       </div>
                   </article>
                 </div>

@@ -232,7 +232,7 @@
             </div>
         </div>
         <div class="col-sm-12">
-            <div class="row bs-wizard">
+            <div class="row bs-wizard hidden-xs">
                 <div class="col-sm-5 bs-wizard-step complete">
                     <div class="text-center bs-wizard-stepnum">1</div>
                     <div class="progress">

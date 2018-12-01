@@ -12,14 +12,15 @@
                   <span itemprop="postalCode">50056</span> <span itemprop="addressLocality">Montelupo Fiorentino (FI)</span><br />
                   <span itemprop="streetAddress">Via arti e mestieri, 1<br /></span>
                   </span>
+                  <br />
                   Tel.: <span itemprop="telephone">0571.911163</span><br />
-                  Fax: <span itemprop="faxNumber">0571.073327</span><br />
                   E-mail: <span itemprop="email">info@cristalensi.it</span>
                 </p>
                 <h4>Contatti Social</h4>
                 <p class="social">
-                    <a href="https://www.facebook.com/CristalensiLampadari/" target="_blank"><i class="fa fa-facebook-square"></i></a>
-                    <a href="https://www.youtube.com/channel/UCsP3WTO0PryxgRq6OymSfpA/videos" target="_blank"><i class="fa fa-youtube-square"></i></a>
+                    <a href="https://www.facebook.com/CristalensiLampadari/" target="_blank" rel="nofollow"><i class="fa fa-facebook-square"></i></a>
+                    <a href="https://www.youtube.com/channel/UCsP3WTO0PryxgRq6OymSfpA/videos" target="_blank" rel="nofollow"><i class="fa fa-youtube-square"></i></a>
+                    <a href="https://www.pinterest.it/cristalensilampadari/" target="_blank" rel="nofollow"><i class="fa fa-pinterest-square"></i></a>
                 </p>
                 <p>
                     <br /><br />&raquo; <a href="https://www.viadeimedici.it" target="_blank" rel="nofollow" style="color:#000;" title="ViaDeiMedici: Realizzazione campagne Web Marketing e Siti Internet">ViaDeiMedici: Web Marketing e Siti Internet</a>
@@ -82,7 +83,7 @@
 
 </div>
 <span id="top-link-block" class="hidden">
-    <a href="#top" class="btn btn-default"  onclick="$('html,body').animate({scrollTop:0},'slow');return false;">
+    <a href="#top" class="btn btn-warning"  onclick="$('html,body').animate({scrollTop:0},'slow');return false;">
         <i class="glyphicon glyphicon-chevron-up"></i> Back to Top
     </a>
 </span>

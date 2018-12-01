@@ -20,7 +20,7 @@
 
 	Set trasp_rs = Server.CreateObject("ADODB.Recordset")
 	if TipoPagamentoScelto=0 then
-		sql = "SELECT * FROM CostiPagamento"
+		sql = "SELECT * FROM CostiPagamento ORDER BY Nome ASC"
 	else
 		sql = "SELECT * FROM CostiPagamento where PkId="&TipoPagamentoScelto
 	end if
@@ -33,29 +33,44 @@
 	end if
 	trasp_rs.close
 
+	'**********modifica temporanea
+	'if TipoPagamentoScelto=10 then
+	'PkIdPagamentoScelto=10
+	'NomePagamentoScelto="Bonifico Scontato"
+	'CostoPagamentoScelto=2
+	'TipoCostoPagamentoScelto=10
+	'end if
+	'**********modifica temporanea
 
 	Set os1 = Server.CreateObject("ADODB.Recordset")
 	sql = "SELECT * FROM Ordini where PkId="&idOrdine
 	os1.Open sql, conn, 3, 3
 
 	TotaleCarrello=os1("TotaleCarrello")
+	Sconto=os1("Sconto")
 	CostoSpedizione=os1("CostoSpedizione")
 
-	if TipoCostoPagamentoScelto=1 then
+	if TipoCostoPagamentoScelto=1 or TipoCostoPagamentoScelto=4 then
 		CostoPagamento=CostoPagamentoScelto
 	end if
-	if TipoCostoPagamentoScelto=2 then
-		CostoPagamento=((TotaleCarrello+CostoSpedizione)*CostoPagamentoScelto)/100
+	if TipoCostoPagamentoScelto=2 or TipoCostoPagamentoScelto=5 then
+		CostoPagamento=((TotaleCarrello-Sconto+CostoSpedizione)*CostoPagamentoScelto)/100
 	end if
 	if TipoCostoPagamentoScelto=3 then
 		CostoPagamento=0
 	end if
 
+
+
 	os1("FkPagamento")=PkIdPagamentoScelto
 	os1("TipoPagamento")=NomePagamentoScelto
 	os1("CostoPagamento")=CostoPagamento
 	'TotaleGnerale_AG=TotaleCarrello+CostoSpedizione+CostoPagamento
-	os1("TotaleGenerale")=TotaleCarrello+CostoSpedizione+CostoPagamento
+	if TipoCostoPagamentoScelto=4 or TipoCostoPagamentoScelto=5 then
+		os1("TotaleGenerale")=TotaleCarrello-Sconto+CostoSpedizione-CostoPagamento
+	else
+		os1("TotaleGenerale")=TotaleCarrello-Sconto+CostoSpedizione+CostoPagamento
+	end if
 	os1("FkCliente")=idsession
 
 	Nominativo_sp=os1("Nominativo_sp")
@@ -184,6 +199,7 @@
 
   	if ss.recordcount>0 then
   		TotaleCarrello=ss("TotaleCarrello")
+			Sconto=ss("Sconto")
   		CostoSpedizioneTotale=ss("CostoSpedizione")
   		TipoTrasporto=ss("TipoTrasporto")
   		'DatiSpedizione=ss("DatiSpedizione")
@@ -214,7 +230,7 @@
             <div class="col-md-12 parentOverflowContainer">
             </div>
         </div>
-        <div class="col-sm-12">
+        <div class="col-sm-12 hidden-xs">
             <div class="row bs-wizard">
 
                 <div class="col-sm-5 bs-wizard-step complete">
@@ -247,7 +263,7 @@
                         <div class="progress-bar"></div>
                     </div>
                     <a href="#" class="bs-wizard-dot"></a>
-                    <div class="bs-wizard-info text-center">Pagamento &amp; fatturazione</div>
+                    <div class="bs-wizard-info text-center">Pagamento &amp; Fatturazione</div>
                 </div>
 
                 <div class="col-sm-5 bs-wizard-step disabled">
@@ -262,19 +278,19 @@
         </div>
         <div class="col-md-12">
             <div class="title">
-                <h4>Modalit&agrave; di pagamento</h4>
+                <h4><span class="visible-xs" style="padding-top: 20px;">Modalit&agrave; di pagamento - Passo 4 di 5</span></h4>
             </div>
             <div class="col-md-12">
                 <div class="top-buffer">
                     <table id="cart" class="table table-hover table-condensed table-cart">
-                        <thead>
-                            <tr>
-                                <th style="width:45%">Prodotto</th>
-                                <th style="width:10%" class="text-center">Quantit&agrave;</th>
-                                <th style="width:10%" class="text-center">Prezzo unitario</th>
-                                <th style="width:20%" class="text-center">Totale Prodotto</th>
-                            </tr>
-                        </thead>
+											<thead>
+												<tr>
+														<th style="width:60%">Prodotto</th>
+														<th style="width:10%" class="text-center">Quantit&agrave;</th>
+														<th style="width:15%" class="text-right">Prezzo</th>
+														<th style="width:15%" class="text-right hidden-xs">Totale Prodotto</th>
+												</tr>
+											</thead>
                         <%if rs.recordcount>0 then%>
 												<tbody>
 														<%
@@ -307,11 +323,9 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td data-th="Quantity" class="text-center">
-                                    <%=quantita%>
-                                </td>
-                                <td data-th="Price" class="hidden-xs text-center"><%=FormatNumber(rs("PrezzoProdotto"),2)%>&euro;</td>
-                                <td data-th="Subtotal" class="text-center"><%=FormatNumber(rs("TotaleRiga"),2)%>&euro;</td>
+																<td data-th="Quantity" class="text-center"><%=quantita%></td>
+                                <td data-th="Price" class="text-right"><%=FormatNumber(rs("PrezzoProdotto"),2)%>&nbsp&euro;</td>
+                                <td data-th="Subtotal" class="text-right hidden-xs"><%=FormatNumber(rs("TotaleRiga"),2)%>&nbsp&euro;</td>
                             </tr>
 														<%
 														rs.movenext
@@ -321,23 +335,24 @@
 												<%end if%>
 												<%if ss.recordcount>0 then%>
 												<tfoot>
-                            <tr class="visible-xs">
-                                <td class="text-center"><strong>Totale <%if ss("TotaleCarrello")<>0 then%>
-								<%=FormatNumber(ss("TotaleCarrello"),2)%>&euro;<%else%>0&euro;<%end if%></strong></td>
-                            </tr>
-                            <tr>
-                                <td class="hidden-xs"></td>
-                                <td class="hidden-xs"></td>
-                                <td class="hidden-xs"></td>
-                                <td class="hidden-xs text-center"><strong>Totale <%if ss("TotaleCarrello")<>0 then%>
-								<%=FormatNumber(ss("TotaleCarrello"),2)%>&euro;<%else%>0&euro;<%end if%></strong></td>
-                            </tr>
-                            <tr>
-                                <td colspan="4">
-                                    <h5>Eventuali annotazioni</h5>
-                                    <textarea class="form-control" rows="3" readonly style="font-size: 12px;"><%=NoteCliente%></textarea>
-                                </td>
-                            </tr>
+													<tr>
+															<td class="hidden-xs"></td>
+															<td class="text-right" colspan="2">Totale Carrello</td>
+															<td class="text-right"><%if ss("TotaleCarrello")<>0 then%>
+															<%=FormatNumber(ss("TotaleCarrello"),2)%><%else%>0<%end if%>&nbsp&euro;</td>
+													</tr>
+													<tr>
+															<td class="hidden-xs"></td>
+															<td class="text-right" colspan="2"><strong>Sconto Extra</strong></td>
+															<td class="text-right"><strong><%if ss("Sconto")<>0 then%>
+															-<%=FormatNumber(ss("Sconto"),2)%><%else%>0,00<%end if%>&nbsp&euro;</strong></td>
+													</tr>
+                          <tr>
+                              <td colspan="4">
+                                  <h5>Eventuali annotazioni</h5>
+                                  <textarea class="form-control" rows="3" readonly style="font-size: 12px;"><%=NoteCliente%></textarea>
+                              </td>
+                          </tr>
                         </tfoot>
 												<%end if%>
                     </table>
@@ -391,11 +406,11 @@
 										<%
 										Set trasp_rs = Server.CreateObject("ADODB.Recordset")
 										if Nazione_sp="IT" then
-											sql = "SELECT * FROM CostiPagamento"
+											sql = "SELECT * FROM CostiPagamento WHERE IT=1 ORDER BY Nome ASC"
+											'sql = "SELECT * FROM CostiPagamento ORDER BY Nome ASC"
 										else
-											sql = "SELECT Top 2 * FROM CostiPagamento"
+											sql = "SELECT * FROM CostiPagamento WHERE COM=1 ORDER BY Nome ASC"
 										end if
-
 										trasp_rs.Open sql, conn, 1, 1
 										if trasp_rs.recordcount>0 then
 										%>
@@ -433,17 +448,18 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td data-th="Price" style=""><%=FormatNumber(CostoPagamento,2)%><%if TipoCosto=1 then%>&#8364;<%end if%><%if TipoCosto=2 then%>%<%end if%></td>
-                                    <td data-th="Subtotal" class="hidden-xs"><%if PkIdPagamento=PkIdPagamentoScelto then%><%=FormatNumber(CostoPagamentoTotale,2)%>&#8364;<%else%>-<%end if%></td>
+                                    <td data-th="Price" style=""><%if TipoCosto=4 or TipoCosto=5 then%>-<%end if%><%=FormatNumber(CostoPagamento,2)%><%if TipoCosto=1 or TipoCosto=4 then%>&#8364;<%end if%><%if TipoCosto=2 or TipoCosto=5 then%>%<%end if%></td>
+                                    <td data-th="Subtotal"><%if PkIdPagamento=PkIdPagamentoScelto then%><%if TipoCosto=4 or TipoCosto=5 then%>-<%end if%><%=FormatNumber(CostoPagamentoTotale,2)%>&#8364;<%else%>-<%end if%></td>
                                 </tr>
 																<%
 																trasp_rs.movenext
 																loop
 																%>
+
                                 <tr>
                                     <td data-th="Product"><h5>costo pagamento:</h5></td>
-                                    <td data-th="Price" class="hidden-xs"></td>
-                                    <td data-th="Subtotal"><h5><%=FormatNumber(CostoPagamentoTotale,2)%>&#8364;</h5></td>
+                                    <td data-th="Price"></td>
+                                    <td data-th="Subtotal"><h5><%if PkIdPagamentoScelto>0 then%><%if TipoCostoPagamentoScelto=4 or TipoCostoPagamentoScelto=5 then%>-<%end if%><%end if%><%=FormatNumber(CostoPagamentoTotale,2)%>&#8364;</h5></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -523,7 +539,7 @@
 										</b></p>
                 </div>
                 <a href="/carrello2.asp" class="btn btn-danger pull-left" style="margin-top: 10px;"><i class="glyphicon glyphicon-chevron-left"></i> Passo precedente</a>
-                <a href="#" class="btn btn-danger pull-right" onClick="Continua();" style="margin-top: 10px;">Concludi l'acquisto <i class="glyphicon glyphicon-chevron-right"></i></a>
+                <%if TipoPagamentoScelto>0 then%><a href="#" class="btn btn-danger pull-right" onClick="Continua();" style="margin-top: 10px;">Concludi l'acquisto <i class="glyphicon glyphicon-chevron-right"></i></a><%end if%>
             </div>
 						<%end if%>
         </div>

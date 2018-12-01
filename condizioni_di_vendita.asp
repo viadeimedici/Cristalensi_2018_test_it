@@ -28,7 +28,7 @@
     <meta name="msapplication-square150x150logo" content="mstile-150x150.png" />
     <meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
     <meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
-    
+
     <link href="stylesheets/styles.css" media="screen" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="stylesheets/customization.css" shim-shadowdom>
     <link rel="stylesheet" type="text/css" href="stylesheets/camera.css" shim-shadowdom>
@@ -68,6 +68,7 @@
                         <a href="privacy.asp">&raquo; Privacy e note legali</a>
                       </small>
                     </p>
+                    <div style="font-size: 13px;">
                     <p><a name="catalogo"></a>
                     <em><strong>Il catalogo del sito internet:</strong></em><br />
                     Sul sito internet &egrave; presente un'ampia gamma dei prodotti che abbiamo in listino presso il nostro negozio di Montelupo Fiorentino (provincia di Firenze), situato nel cuore della Toscana facilmente raggiungibile dalle maggiori province: Firenze, Pisa, Siena, Pistoia, Lucca e Livorno.<br />
@@ -90,7 +91,7 @@
                       <br />
                       <em><strong>La merce potr&agrave; essere ritirata anche presso il nostro negozio senza alcun costo di spedizione:<br />
                       </strong></em><strong>Cristalensi Snc</strong> Di Lensi Massimiliano & C. (P.I. 05305820481)<br />
-          50056 Montelupo F.no (FI) Via arti e mestieri, 1 - tel: 0571.911163 - fax: 0571.073327<br />
+                      50056 Montelupo F.no (FI) Via arti e mestieri, 1 - tel: 0571.911163<br />
                       <br />
                       Per i clienti della provincia di Firenze e di determinate aree della Toscana, la consegna potr&agrave; essere effettuata dal nostro staff.<br />
                       <br />
@@ -103,14 +104,15 @@
                         Se gli articoli risultassero danneggiati contattateci immediatamente via e-mail (info@cristalensi.it).<br />
                         Il corriere espresso prevede due tentativi di consegna. In caso di assenza dopo il secondo tentativo le spese per la terza riconsegna sono a carico del destinatario, altrimenti &egrave; possibile ritirare il pacco presso la sede di zona del corriere.
                     </p>
-<p><a name="pagamento"></a>
-      <em><strong>Modalit&agrave; di pagamento:</strong></em><br />
-      il pagamento dell'ordine totale (quindi comprensivo di spese di spedizione e di pagamento) potr&agrave; essere effettuato con Bonifico bancario, in contrassegno (solo con contanti), con carta PostePay o con le pi&ugrave; diffuse carte di credito, carte prepagate e PostePay attraverso il sistema sicuro di pagamento online di Paypal.<br />
-      <br />
-      Per il pagamento con <em><strong>Bonifico bancario</strong></em>, <em><strong>PostePay</strong></em> e <em><strong>PayPal</strong></em> non sar&agrave; addebitato <em><strong>nessun costo</strong></em>, ma la merce sar&agrave; inviata solo quando sar&agrave; certificato il pagamento. <br />
-      <br />
-      Per il pagamento online ci affidiamo al <span class="sfondo-giallo"><em><strong>sistema sicuro di Paypal</strong></em></span> che permette di pagare con un'ampia scelta di sistemi: dalle carte di credito pi&ugrave; diffuse, alle carte prepagate e ricaricabili.<br />
-Ecco l'ampia scelta: <p>
+                    <p><a name="pagamento"></a>
+                          <em><strong>Modalit&agrave; di pagamento:</strong></em><br />
+                          il pagamento dell'ordine totale (quindi comprensivo di spese di spedizione e di pagamento) potr&agrave; essere effettuato con Bonifico bancario, in contrassegno alla consegna (solo con contanti), con carta PostePay o con le pi&ugrave; diffuse carte di credito, carte prepagate e PostePay attraverso il sistema sicuro di pagamento online di Paypal, anche senza obbligo di iscrizione alla piattaforma di pagamento.<br />
+                          <br />
+                          Per il pagamento con <em><strong>Bonifico bancario</strong></em>, <em><strong>PostePay</strong></em> e <em><strong>PayPal</strong></em> non sar&agrave; addebitato <em><strong>nessun costo</strong></em> oppure saranno presenti sconti, e la merce sar&agrave; inviata solo quando sar&agrave; certificato il pagamento. <br />
+                          <br />
+                          Per il pagamento online ci affidiamo al <span class="sfondo-giallo"><em><strong>sistema sicuro di Paypal</strong></em></span> che permette di pagare con un'ampia scelta di sistemi: dalle carte di credito pi&ugrave; diffuse, alle carte prepagate e ricaricabili.<br />
+                    Ecco l'ampia scelta:
+                    <p>
                     <p>
                     <a href="#" onClick="javascript:window.open('https://www.paypal.com/it/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside','olcwhatispaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=400, height=350');"><img src="https://www.cristalensi.it/images/logo_paypal_carte.jpg" style="width: 319px; float: none" border="0" alt="Che cos'&egrave; PayPal"></a>
                     </p>
@@ -120,13 +122,12 @@ Ecco l'ampia scelta: <p>
                     </p>
                     <p><a name="fatturazione"></a>
                     <em><strong>Fatturazione e documentazione fiscale:</strong></em> <br />
-      La fattura &egrave; emessa su richiesta sia per aziende che per privati.<br />
+                    La fattura &egrave; emessa su richiesta sia per aziende che per privati.<br />
                     La documentazione fiscale, mediante carta di accompagnamento fisicamente acclusa al pacco o inviata via mail, relativa ai Prodotti ordinati sar&agrave; emessa da Cristalensi al momento della spedizione dei prodotti stessi al Cliente.
                     </p>
                     <p><a name="garanzia"></a>
-                    <em><strong>
-      Garanzia:</strong></em><br />
-      Tutti i prodotti proposti da Cristalensi sono coperti da garanzia originale italiana del produttore di due anni per difetti di conformit&agrave;. Non sono garantiti i danni provocati da cattivo uso e non ci riterremo responsabili per danni diretti o indiretti derivanti da un uso improprio dei prodotti da noi venduti.
+                    <em><strong>Garanzia:</strong></em><br />
+                      Tutti i prodotti proposti da Cristalensi sono coperti da garanzia originale italiana del produttore di due anni per difetti di conformit&agrave;. Non sono garantiti i danni provocati da cattivo uso e non ci riterremo responsabili per danni diretti o indiretti derivanti da un uso improprio dei prodotti da noi venduti.
                     </p>
                     <p>
                     <em><strong>
@@ -138,27 +139,39 @@ Ecco l'ampia scelta: <p>
                     <em><strong>
                     Condizioni di recesso:</strong></em><br />
                     Le vendite di prodotti via Internet sono disciplinate dal <strong>DECRETO LEGISLATIVO 21 Febbraio 2014, n. 21 (CODICE DEL CONSUMO)</strong> che regola la materia dei contratti a distanza, da intendersi per tali le vendite effettuate al di fuori dei locali commerciali. La normativa &egrave; in vigore dal 26 Marzo 2014.<br />
-                    Norme citate direttamente dal decreto:<br />
+                    <br />Norme citate direttamente dal decreto:<br />
                     se il Cliente &egrave; un consumatore (ossia una persona fisica che acquista la merce per scopi non riferibili alla propria attivit&agrave; professionale, ovvero non effettua l'acquisto indicando nel modulo d'ordine un riferimento di Partita IVA), ha diritto a recedere dal contratto di acquisto per qualsiasi motivo, senza alcuna penalit&agrave; e fatto salvo quanto indicato successivamente.<br />
+                    Il diritto di recesso non si applica, dunque, nel caso di acquisti effettuati da aziende e professionisti fatturati con Partita IVA.<br />
                     Lei ha il diritto di recedere dal contratto, senza indicarne le ragioni, entro 14 giorni.<br />
                     Il periodo di recesso scade dopo 14 giorni dal giorno in cui Lei o un terzo, diverso dal vettore e da Lei designato, acquisisce il possesso fisico dei beni.<br />
-      Per esercitare il diritto di recesso, Lei &egrave; tenuto a informarci ( <a href="https://www.cristalensi.it/contatti.asp">contatti e riferimenti</a> ) della sua decisione di recedere dal presente contratto tramite una dichiarazione esplicita (ad esempio lettera inviata per posta, fax o posta elettronica), possibilmente contattandoci prima via telefono.<br />
-      <em>Per rispettare il termine di recesso, &egrave; sufficiente che Lei invii la comunicazione relativa all'esercizio del diritto di recesso prima della scadenza del periodo di recesso.</em><br />
-      Se Lei recede dal presente contratto, Le saranno rimborsati tutti i pagamenti che ha effettuato a nostro favore, compresi i costi di consegna (ad eccezione dei costi supplementari derivanti dalla Sua eventuale scelta di un tipo di consegna diverso dal tipo meno costoso di consegna standard da noi offerto), senza indebito ritardo e in ogni caso non oltre 14 giorni dal giorno in cui siamo informati della Sua decisione di recedere dal presente contratto. Detti rimborsi saranno effettuati utilizzando lo stesso mezzo di pagamento da Lei usato per la transazione iniziale, salvo che Lei non abbia espressamente convenuto altrimenti; in ogni caso, non dovr&agrave; sostenere alcun costo quale conseguenza di tale rimborso. Il rimborso pu&ograve; essere sospeso fino al ricevimento dei beni.<br />
-                    &egrave; pregato di rispedire i beni o di consegnarli a noi, senza indebiti ritardi e in ogni caso entro 14 giorni dal giorno in cui ci ha comunicato il suo recesso dal presente contratto. Il termine &egrave; rispettato se Lei rispedisce i beni prima della scadenza del periodo di 14 giorni.<br />
-                    I costi diretti della restituzione dei beni saranno a Suo carico. Il costo &egrave; stimato essere da un minimo di 10&euro; a un massimo di 30&euro; in base al volume del prodotto e con un nostro corriere di fiducia.<br />
-                    Lei &egrave; responsabile solo della diminuzione del valore dei beni risultante da una manipolazione del bene diversa da quella necessaria per stabilire la natura, le caratteristiche e il funzionamento dei beni.
+                    Il diritto di recesso non &egrave; applicabile a prodotti ordinati e modificati appositamente su specifica richiesta del cliente con varianti personalizzate.<br />
+                    Il diritto di recesso non &egrave; applicabile a lampadine in quanto materiale di consumo.<br /><br />
+
+                    <em>Come esercitare il diritto di recesso</em><br />
+                    Per esercitare il diritto di recesso, Lei &egrave; tenuto a informarci ( <a href="https://www.cristalensi.it/contatti.asp">contatti e mappa</a> ) della sua decisione di recedere dal presente contratto tramite una dichiarazione esplicita (ad esempio lettera inviata per posta o email), possibilmente contattandoci prima via telefono.<br />
+                    <em>Per rispettare il termine di recesso, &egrave; sufficiente che Lei invii la comunicazione relativa all'esercizio del diritto di recesso prima della scadenza del periodo di recesso.</em><br />
+                    <br /><em>Rimborso</em><br />
+                    Se Lei recede dal presente contratto, Le saranno rimborsati i costi di acquisto dei prodotti con i relativi sconti come da ordine effettuato.<br />
+                    Non saranno rimborsati i costi di spedizione e di pagamento se previsti e specificati nell'ordine in quanto servizi di cui il consumatore ha usufruito.<br />
+                    Il rimborso avverr&agrave; dopo una settimana dal ricevimento e successiva verifica dell'integrit&agrave; dei prodotti ricevuti. Detti rimborsi saranno effettuati utilizzando lo stesso mezzo di pagamento da Lei usato per la transazione iniziale, salvo che Lei non abbia espressamente convenuto altrimenti.<br />
+                    
+                    <em>I costi diretti della restituzione dei beni saranno a Suo carico.</em><br />
+                    Cristalensi non &egrave; in alcun modo responsabile per furti, smarrimenti o danneggiamenti delle spedizioni di reso.<br />
+                    In caso di danneggiamenti durante il trasporto di reso, la richiesta di recesso sar&agrave; annullata: Cristalensi le invier&agrave; una comunicazione per consentirle di inoltrare reclamo nei confronti del corriere e chiedere il rimborso.<br />
+                    Cristalensi offre un servizio di restituzione ad un costo, variabile in base al volume dei prodotti, stimato da un minimo di 15&euro; a un massimo di 30&euro; con un nostro corriere di fiducia.<br />
+                    In alternativa &egrave; possibile spedirli con un proprio corriere consigliando una spedizione assicurata.<br >
+                    Lei &egrave; responsabile della diminuizione del valore dei beni risultante da una manipolazione del bene diversa da quella necessaria per stabilire la natura, le caratteristiche e il funzionamento dei beni.
 
                     <br />
                     <br />
                     <strong>Decadenza del diritto di recesso.</strong><br />
                     Il diritto di recesso decade totalmente qualora il prodotto restituito non sia integro, ovvero:<br />
                     mancanza dell'imballo originale o danneggiamento dello stesso;<br />
-                    assenza di elementi integranti del prodotto (accessori, cavi, manuali d'istruzione etc) e di tutto ci&ograve; che &egrave; stato fornito a titolo di omaggio;<br />
+                    assenza di elementi integranti del prodotto (accessori, cavi, manuali d'istruzione etc) e di tutto ci&ograve; che &egrave; stato fornito anche a titolo di omaggio;<br />
                     danneggiamento del prodotto per cause diverse dal trasporto;<br />
                     danneggiamento del prodotto per cause derivanti dal trasporto e dovute ad imperizia nell'imballaggio del prodotto; per imperizia si intende l'errato impiego dell'imballaggio originale;<br />
                     qualora in seguito al ricevimento della merce sia stato richiesto l'invio di materiale in sostituzione (ad esempio se il prodotto &egrave; arrivato danneggiato);<br />
-                    i prodotti non siano stati montati.
+                    i prodotti non siano stati montati e installati anche parzialmente.
                     <br /><a name="rotture"></a>
                     <br />
                     <strong>Rotture derivanti dal trasporto</strong><br /><em>Le spedizioni sono tutte assicurate.</em><br /><strong>
@@ -174,6 +187,7 @@ Ecco l'ampia scelta: <p>
                     <br />
                     <a href="https://www.cristalensi.it/condizioni_di_vendita.pdf" target="_blank" title="Condizioni generali di vendita su file stampabile">Condizioni generali di vendita su file stampabile (pdf)</a>
                     </p>
+                  </div>
                 </div>
 
                 <%
