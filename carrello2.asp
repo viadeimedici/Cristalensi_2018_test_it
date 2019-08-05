@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <!--#include file="inc_strConn.asp"-->
 <%
 	mode=request("mode")
@@ -82,11 +83,11 @@
 	else
 		os1("stato")=2
 
-		Nominativo_sp=request("Nominativo_sp")
+		Nominativo_sp=NoLettAccDescrizioni(request("Nominativo_sp"))
 		Telefono_sp=request("Telefono_sp")
-		Indirizzo_sp=request("Indirizzo_sp")
+		Indirizzo_sp=NoLettAccDescrizioni(request.form("Indirizzo_sp"))
 		CAP_sp=request("CAP_sp")
-		Citta_sp=request("Citta_sp")
+		Citta_sp=NoLettAccDescrizioni(request.form("Citta_sp"))
 		Provincia_sp=request("Provincia_sp")
 		Nazione_sp=request("Nazione_sp")
 
@@ -108,11 +109,11 @@
 	if mode=1 and TipoCostoTrasportoScelto=10 then response.Redirect("/carrello2extra.asp")
 
 %>
-<!DOCTYPE html>
 <html>
 
 <head>
     <title>Cristalensi</title>
+		<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Cristalensi.">
     <meta name="keywords" content="">
@@ -328,7 +329,7 @@
                 </div>
             </div>
         </div>
-				<form name="modulocarrello" id="modulocarrello" class="form-horizontal">
+				<form name="modulocarrello" id="modulocarrello" class="form-horizontal" method="post">
         <div class="col-md-12">
             <div class="title">
                 <h4><span class="visible-xs" style="padding-top: 20px;">Dati di spedizione - Passo 3 di 5</span></h4>
@@ -350,7 +351,7 @@
 														Do while not rs.EOF
 
 														Set url_prodotto_rs = Server.CreateObject("ADODB.Recordset")
-														sql = "SELECT PkId, NomePagina FROM Prodotti where PkId="&rs("FkProdotto")&""
+														sql = "SELECT PkId, NomePagina, FkProduttore FROM Prodotti where PkId="&rs("FkProdotto")&""
 														url_prodotto_rs.Open sql, conn, 1, 1
 
 														NomePagina=url_prodotto_rs("NomePagina")
@@ -359,6 +360,7 @@
 														else
 															NomePagina="#"
 														end if
+														FkProduttore=url_prodotto_rs("FkProduttore")
 
 														url_prodotto_rs.close
 														%>
@@ -371,8 +373,11 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <h5 class="nomargin"><%=rs("titolo")%></h5>
-																						<p><strong>Codice: <%=rs("codicearticolo")%></strong></p>
-                                            <%if Len(rs("colore"))>0 or Len(rs("lampadina"))>0 then%><p><%if Len(rs("colore"))>0 then%>Col.: <%=rs("colore")%><%end if%><%if Len(rs("lampadina"))>0 then%> - Lamp.: Bianco satinato<%=rs("lampadina")%><%end if%></p><%end if%>
+																						<p>
+																							<strong>Codice: <%=rs("codicearticolo")%></strong>
+																							<%if Len(rs("colore"))>0 or Len(rs("lampadina"))>0 then%><br /><%if Len(rs("colore"))>0 then%>Col.: <%=rs("colore")%><%end if%><%if Len(rs("lampadina"))>0 then%> - Lamp.: <%=rs("lampadina")%><%end if%><%end if%>
+																							<%if FkProduttore=59 then%><br /><span style="color:#a01010;"><strong><em>Sconti Extra non applicabili</em></strong></span><%end if%>
+																						</p>
                                         </div>
                                     </div>
                                 </td>

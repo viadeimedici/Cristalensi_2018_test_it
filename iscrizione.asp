@@ -428,18 +428,23 @@ end if
 	end if
 
 	if mode=4 then
-		Set rs=Server.CreateObject("ADODB.Recordset")
-		sql = "Select email,password,nominativo,nome From Clienti where email='"&email&"'"
-		rs.Open sql, conn, 1, 1
-		if rs.recordcount=0 then
-			mode=5
-			errore=5
-		else
-			nominativo=rs("nominativo")
-			nome=rs("nome")
-			password=rs("password")
+		if Len(email)>0 then
+			Set rs=Server.CreateObject("ADODB.Recordset")
+			sql = "Select email,password,nominativo,nome From Clienti where email='"&email&"'"
+			rs.Open sql, conn, 1, 1
+			if rs.recordcount=0 then
+				mode=5
+				errore=5
+			else
+				nominativo=rs("nominativo")
+				nome=rs("nome")
+				password=rs("password")
+			end if
+			rs.close
+		Else
+				mode=5
+				errore=5
 		end if
-		rs.close
 	end if
 
 	if mode = 4 then

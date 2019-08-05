@@ -40,6 +40,8 @@
 		Citta=ss("Citta")
 		Provincia=ss("Provincia")
 		CAP=ss("CAP")
+		Codice_SDI=ss("Codice_SDI")
+		Email_PEC=ss("Email_PEC")
 
 		TotaleGenerale=ss("TotaleGenerale")
 
@@ -93,6 +95,7 @@
 
 <head>
     <title>Cristalensi - Ordine n. <%=idordine%> - Data <%=Left(DataAggiornamento, 10)%></title>
+		<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Cristalensi.">
     <meta name="keywords" content="">
@@ -173,9 +176,10 @@
 															sql = "SELECT PkId, FkProduttore FROM Prodotti WHERE PKId="&rs("FkProdotto")
 															prod_rs.open sql,conn, 3, 3
 															if prod_rs.recordcount>0 then
+																FkProduttore=prod_rs("FkProduttore")
 
 																Set pr_rs = Server.CreateObject("ADODB.Recordset")
-																sql = "SELECT PkId, Titolo, Consegna FROM Produttori WHERE PkId="&prod_rs("fkproduttore")
+																sql = "SELECT PkId, Titolo, Consegna FROM Produttori WHERE PkId="&FkProduttore
 																pr_rs.open sql,conn, 1, 1
 																if pr_rs.recordcount>0 then
 																	produttore=pr_rs("titolo")
@@ -190,8 +194,10 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <h5 class="nomargin" style="font-size: 13px;">[<%=rs("codicearticolo")%>]&nbsp;<%=rs("titolo")%></h5>
-                                                <%if Len(rs("colore"))>0 or Len(rs("lampadina"))>0 then%><p><%if Len(rs("colore"))>0 then%>&nbsp;Col.:&nbsp;<%=rs("colore")%><%end if%><%if Len(rs("lampadina"))>0 then%>&nbsp;-&nbsp;Lamp.:&nbsp;<%=rs("lampadina")%><%end if%></p><%end if%>
-																								<%if idadmin>0 then%><small><%=Produttore&": "&Consegna%></small><%end if%>
+                                                <%if Len(rs("colore"))>0 or Len(rs("lampadina"))>0 then%><%if Len(rs("colore"))>0 then%>&nbsp;Col.:&nbsp;<%=rs("colore")%><%end if%><%if Len(rs("lampadina"))>0 then%>&nbsp;-&nbsp;Lamp.:&nbsp;<%=rs("lampadina")%><%end if%><%end if%>
+
+																								<%if FkProduttore=59 then%><br /><span style="color:#a01010;"><strong><em>Sconti Extra non applicabili</em></strong><%end if%>
+																								<%if idadmin>0 then%>&nbsp;<small><%=Produttore&": "&Consegna%></small><%end if%>
                                             </div>
                                         </div>
                                     </td>
@@ -335,7 +341,9 @@
 																								<div class="col-sm-12">
 																								<p>
 										                              <%if Rag_Soc<>"" then%><%=Rag_Soc%>&nbsp;&nbsp;<%end if%><%if nominativo<>"" then%><%=nominativo%><%end if%>&nbsp;-&nbsp;
-										                              <%if Cod_Fisc<>"" then%>Codice fiscale: <%=Cod_Fisc%>&nbsp;&nbsp;<%end if%><%if PartitaIVA<>"" then%>Partita IVA: <%=PartitaIVA%><%end if%><br />
+										                              <%if Cod_Fisc<>"" then%>Codice fiscale: <%=Cod_Fisc%>&nbsp;&nbsp;<%end if%><%if PartitaIVA<>"" then%>Partita IVA: <%=PartitaIVA%>&nbsp;&nbsp;<%end if%><br />
+																									<%if Codice_SDI<>"" then%>SDI: <%=Codice_SDI%>&nbsp;&nbsp;<%end if%><%if Email_PEC<>"" then%>PEC: <%=Email_PEC%><%end if%>
+																									<br />
 										                              <%=indirizzo%>&nbsp;-&nbsp;<%=CAP%>&nbsp;-&nbsp;<%=Citta%><%if provincia<>"" then%>(<%=provincia%>)<%end if%>
 										                            </p>
 																								</div>

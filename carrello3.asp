@@ -42,11 +42,25 @@
 	'end if
 	'**********modifica temporanea
 
+	Set rs2 = Server.CreateObject("ADODB.Recordset")
+	sql = "SELECT FkOrdine, SUM(TotaleRiga) AS TotaleCarrello FROM RigheOrdine WHERE FkOrdine="&IdOrdine&" AND Scontabile=1 GROUP BY FkOrdine"
+	rs2.Open sql, conn, 3, 3
+			TotaleCarrello_Scontabile_Si=rs2("TotaleCarrello")
+		if TotaleCarrello_Scontabile_Si="" or isnull(TotaleCarrello_Scontabile_Si) then TotaleCarrello_Scontabile_Si=0
+	rs2.close
+
+	Set rs2 = Server.CreateObject("ADODB.Recordset")
+	sql = "SELECT FkOrdine, SUM(TotaleRiga) AS TotaleCarrello FROM RigheOrdine WHERE FkOrdine="&IdOrdine&" AND Scontabile=0 GROUP BY FkOrdine"
+	rs2.Open sql, conn, 3, 3
+			TotaleCarrello_Scontabile_No=rs2("TotaleCarrello")
+		if TotaleCarrello_Scontabile_No="" or isnull(TotaleCarrello_Scontabile_No) then TotaleCarrello_Scontabile_No=0
+	rs2.close
+
 	Set os1 = Server.CreateObject("ADODB.Recordset")
 	sql = "SELECT * FROM Ordini where PkId="&idOrdine
 	os1.Open sql, conn, 3, 3
 
-	TotaleCarrello=os1("TotaleCarrello")
+	'TotaleCarrello=os1("TotaleCarrello")
 	Sconto=os1("Sconto")
 	CostoSpedizione=os1("CostoSpedizione")
 
@@ -54,7 +68,7 @@
 		CostoPagamento=CostoPagamentoScelto
 	end if
 	if TipoCostoPagamentoScelto=2 or TipoCostoPagamentoScelto=5 then
-		CostoPagamento=((TotaleCarrello-Sconto+CostoSpedizione)*CostoPagamentoScelto)/100
+		CostoPagamento=((TotaleCarrello_Scontabile_Si-Sconto+CostoSpedizione)*CostoPagamentoScelto)/100
 	end if
 	if TipoCostoPagamentoScelto=3 then
 		CostoPagamento=0
@@ -67,9 +81,9 @@
 	os1("CostoPagamento")=CostoPagamento
 	'TotaleGnerale_AG=TotaleCarrello+CostoSpedizione+CostoPagamento
 	if TipoCostoPagamentoScelto=4 or TipoCostoPagamentoScelto=5 then
-		os1("TotaleGenerale")=TotaleCarrello-Sconto+CostoSpedizione-CostoPagamento
+		os1("TotaleGenerale")=TotaleCarrello_Scontabile_No+TotaleCarrello_Scontabile_Si-Sconto+CostoSpedizione-CostoPagamento
 	else
-		os1("TotaleGenerale")=TotaleCarrello-Sconto+CostoSpedizione+CostoPagamento
+		os1("TotaleGenerale")=TotaleCarrello_Scontabile_No+TotaleCarrello_Scontabile_Si-Sconto+CostoSpedizione+CostoPagamento
 	end if
 	os1("FkCliente")=idsession
 
@@ -88,8 +102,8 @@
 		os1("stato")=3
 	end if
 
-	Nominativo=request("Nominativo")
-	Rag_Soc=request("Rag_Soc")
+	Nominativo=NoLettAccDescrizioni(request("Nominativo"))
+	Rag_Soc=NoLettAccDescrizioni(request("Rag_Soc"))
 
 	if Nominativo="" and Rag_Soc="" then
 		Nominativo=os1("Nominativo")
@@ -100,13 +114,17 @@
 		CAP=os1("CAP")
 		Citta=os1("Citta")
 		Provincia=os1("Provincia")
+		Codice_SDI=os1("Codice_SDI")
+		Email_PEC=os1("Email_PEC")
 	else
 		Cod_Fisc=request("Cod_Fisc")
 		PartitaIVA=request("PartitaIVA")
-		Indirizzo=request("Indirizzo")
+		Indirizzo=NoLettAccDescrizioni(request("Indirizzo"))
 		CAP=request("CAP")
-		Citta=request("Citta")
-		Provincia=request("Provincia")
+		Citta=NoLettAccDescrizioni(request("Citta"))
+		Provincia=NoLettAccDescrizioni(request("Provincia"))
+		Codice_SDI=request("Codice_SDI")
+		Email_PEC=request("Email_PEC")
 	end if
 
 	os1("Nominativo")=Nominativo
@@ -117,6 +135,8 @@
 	os1("CAP")=CAP
 	os1("Citta")=Citta
 	os1("Provincia")=Provincia
+	os1("Codice_SDI")=Codice_SDI
+	os1("Email_PEC")=Email_PEC
 
 	os1("DataAggiornamento")=now()
 	os1("IpOrdine")=Request.ServerVariables("REMOTE_ADDR")
@@ -131,9 +151,9 @@
 
 <head>
     <title>Cristalensi</title>
+		<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Cristalensi.">
-    <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:description" content="Cristalensi.">
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
@@ -223,6 +243,8 @@
   		CAPOrdine=ss("CAP")
   		CittaOrdine=ss("Citta")
   		ProvinciaOrdine=ss("Provincia")
+			Codice_SDIOrdine=ss("Codice_SDI")
+			Email_PECOrdine=ss("Email_PEC")
   	end if
   %>
     <div class="container content">
@@ -297,7 +319,7 @@
 														Do while not rs.EOF
 
 														Set url_prodotto_rs = Server.CreateObject("ADODB.Recordset")
-														sql = "SELECT PkId, NomePagina FROM Prodotti where PkId="&rs("FkProdotto")&""
+														sql = "SELECT PkId, NomePagina, FkProduttore FROM Prodotti where PkId="&rs("FkProdotto")&""
 														url_prodotto_rs.Open sql, conn, 1, 1
 
 														NomePagina=url_prodotto_rs("NomePagina")
@@ -306,6 +328,7 @@
 														else
 															NomePagina="#"
 														end if
+														FkProduttore=url_prodotto_rs("FkProduttore")
 
 														url_prodotto_rs.close
 														%>
@@ -318,8 +341,11 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <h5 class="nomargin"><%=rs("titolo")%></h5>
-																						<p><strong>Codice: <%=rs("codicearticolo")%></strong></p>
-                                            <%if Len(rs("colore"))>0 or Len(rs("lampadina"))>0 then%><p><%if Len(rs("colore"))>0 then%>Col.: <%=rs("colore")%><%end if%><%if Len(rs("lampadina"))>0 then%> - Lamp.: Bianco satinato<%=rs("lampadina")%><%end if%></p><%end if%>
+																						<p>
+																							<strong>Codice: <%=rs("codicearticolo")%></strong>
+																							<%if Len(rs("colore"))>0 or Len(rs("lampadina"))>0 then%><br /><%if Len(rs("colore"))>0 then%>Col.: <%=rs("colore")%><%end if%><%if Len(rs("lampadina"))>0 then%> - Lamp.: <%=rs("lampadina")%><%end if%><%end if%>
+																							<%if FkProduttore=59 then%><br /><span style="color:#a01010;"><strong><em>Sconti Extra non applicabili</em></strong></span><%end if%>
+																						</p>
                                         </div>
                                     </div>
                                 </td>
@@ -436,6 +462,9 @@
 
 																TipoCosto=trasp_rs("TipoCosto")
 																if TipoCosto="" then TipoCosto=3
+
+																'condizione specifica per pagamento in contrassegno'
+																if not (PkIdPagamento=3 and ss("TotaleCarrello")>500) then
 																%>
 																<tr>
                                     <td data-th="Product" class="cart-product">
@@ -452,6 +481,8 @@
                                     <td data-th="Subtotal"><%if PkIdPagamento=PkIdPagamentoScelto then%><%if TipoCosto=4 or TipoCosto=5 then%>-<%end if%><%=FormatNumber(CostoPagamentoTotale,2)%>&#8364;<%else%>-<%end if%></td>
                                 </tr>
 																<%
+																end if
+
 																trasp_rs.movenext
 																loop
 																%>
@@ -495,6 +526,18 @@
 								<label for="PartitaIVA" class="col-sm-4 control-label">Partita IVA<br />(solo per Aziende)</label>
 								<div class="col-sm-8">
 										<input type="number" class="form-control" name="PartitaIVA" id="PartitaIVA" value="<%=PartitaIVAOrdine%>" maxlength="20">
+								</div>
+						</div>
+						<div class="form-group clearfix">
+								<label for="Codice_SDI" class="col-sm-4 control-label">Codice SDI<br />(solo per Aziende)</label>
+								<div class="col-sm-8">
+										<input type="text" class="form-control" name="Codice_SDI" id="Codice_SDI" value="<%=Codice_SDIOrdine%>" maxlength="7">
+								</div>
+						</div>
+						<div class="form-group clearfix">
+								<label for="Email_PEC" class="col-sm-4 control-label">PEC<br />(solo per Aziende)</label>
+								<div class="col-sm-8">
+										<input type="text" class="form-control" name="Email_PEC" id="Email_PEC" value="<%=Email_PECOrdine%>" maxlength="50">
 								</div>
 						</div>
 						<div class="form-group clearfix">

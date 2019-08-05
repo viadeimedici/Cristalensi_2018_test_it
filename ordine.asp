@@ -1,4 +1,5 @@
 <!--#include file="inc_strConn.asp"-->
+<!--#include file="cStripeFunctions.asp"-->
 <%
 	Call Visualizzazione("",0,"ordine.asp")
 
@@ -10,6 +11,8 @@
 	if IdOrdine="" then IdOrdine=0
 	if idOrdine=0 then response.redirect("/carrello1.asp")
 
+	Set stripeFunc = New cStripeFunctions
+	guid=stripeFunc.createWindowsGUID()
 	'if idsession=1 then response.redirect("/ordine-test.asp")
 
 	if idsession=0 then response.redirect("/iscrizione.asp?prov=1")
@@ -18,6 +21,8 @@
 	session("ordine_shop")=""
 	'******* DA COMMENTARE QUANDO SI METTE IN TEST
 
+	
+	
 	Set ss = Server.CreateObject("ADODB.Recordset")
 	sql = "SELECT * FROM Ordini where pkid="&idOrdine
 	ss.Open sql, conn, 3, 3
@@ -49,6 +54,8 @@
 		Citta=ss("Citta")
 		Provincia=ss("Provincia")
 		CAP=ss("CAP")
+		Codice_SDI=ss("Codice_SDI")
+		Email_PEC=ss("Email_PEC")
 
 		TotaleGenerale=ss("TotaleGenerale")
 
@@ -71,6 +78,8 @@
 		end if
 		trasp_rs.close
 	end if
+
+	FkPagamento=10
 
 	if FkPagamento=1 or FkPagamento=5 then
 		Set rs=Server.CreateObject("ADODB.Recordset")
@@ -441,7 +450,7 @@
 			HTML1 = HTML1 & "<table width='553' border='0' cellspacing='0' cellpadding='0'>"
 			HTML1 = HTML1 & "<tr>"
 			HTML1 = HTML1 & "<td>"
-			HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000>Grazie "&nominativo_email&" per aver scelto i nostri prodotti!<br>Questa &egrave; un email di conferma per il completamento dell'ordine n&deg; "&idordine&".<br><br><strong>TOTALE ORDINE: <u>"&TotaleGenerale&"&#8364;</u></strong><br><br> Per completare l'ordine &egrave; necessario effettuare il pagamento su Carta POSTEPAY con i seguenti dati:<br><br><strong>Beneficiario: LENSI GIULIANO - c.f. LNS GLN 42A30 D403J<br>Numero carta: 5333 1710 4546 4407</strong><br><br>Nella causale indicare: <strong>Ordine da sito internet n&deg; "&idordine&"</strong><br><br><br>Il nostro staff avr&agrave; cura di spedirti la merce appena ricever&agrave; la notifica del pagamento oppure, per velocizzare la spedizione, &egrave; possibile inviarci per email la ricevuta dell'avvenuto pagamento.</font><br>"
+			HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000>Grazie "&nominativo_email&" per aver scelto i nostri prodotti!<br>Questa &egrave; un email di conferma per il completamento dell'ordine n&deg; "&idordine&".<br><br><strong>TOTALE ORDINE: <u>"&TotaleGenerale&"&#8364;</u></strong><br><br> Per completare l'ordine &egrave; necessario effettuare il pagamento su Carta POSTEPAY con i seguenti dati:<br><br><strong>Beneficiario: LENSI GIULIANO - c.f. LNS GLN 42A30 D403J<br>Numero carta: 5333 1710 7681 8950</strong><br><br>Nella causale indicare: <strong>Ordine da sito internet n&deg; "&idordine&"</strong><br><br><br>Il nostro staff avr&agrave; cura di spedirti la merce appena ricever&agrave; la notifica del pagamento oppure, per velocizzare la spedizione, &egrave; possibile inviarci per email la ricevuta dell'avvenuto pagamento.</font><br>"
 			HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000><br><br>Cordiali Saluti, lo staff di Cristalensi</font>"
 			HTML1 = HTML1 & "</td>"
 			HTML1 = HTML1 & "</tr>"
@@ -768,7 +777,7 @@ End If
 											per completare l'ordine &egrave; necessario effettuare il versamente sulla Carta di POSTEPAY con i seguenti dati:<br>
 											<br><br>
 											<strong>Beneficiario: LENSI GIULIANO - c.f. LNS GLN 42A30 D403J<br>
-											Numero carta: 5333 1710 4546 4407</strong>
+											Numero carta: 5333 1710 7681 8950</strong>
 											<br><br>Nella causale indicare: "<strong>Ordine da sito internet n&deg; <%=idordine%></strong>"<br><br>
 
 										La merce verr&agrave; spedita al momento che riceveremo il pagamento oppure, per velocizzare la spedizione, &egrave; possibile inviarci per email la ricevuta dell'avvenuto pagamento.<br>
@@ -814,10 +823,11 @@ End If
 								<input type="hidden" name="business" value="6MLLMNTV88VW6"><!-- Codice conto commerciante -->
 								<input type="hidden" name="paymentaction" value="<%=paymentType%>">
 								<input type="hidden" name="return" value="<%=returnURL%>">
-								<input type="hidden" name="template" value=”TemplateB">  <!--PayPal templates -->
+								<input type="hidden" name="template" value="TemplateB">  <!--PayPal templates -->
 
 								<input type="hidden" name="cancel_return" value="<%=cancelURL%>">
 								<input type="hidden" name="cbt" value="Torna al sito di Cristalensi Lampadari">
+								<input type="hidden" name="lc" value="IT">
 
 								  <!-- Enable override of payer’s stored PayPal address. -->
 								<input type="hidden" name="address_override" value="true">
@@ -839,10 +849,57 @@ End If
 								<input type="hidden" name="invoice" value="<%=INVNUM%>">
 								<input type="hidden" name="custom" value="Ordine n. <%=INVNUM%>">
 
-								<input type="submit" name="METHOD" value=" Clicca qui per Pagare adesso con PayPal! " class="btn btn-danger pull-left">
+								<input type="submit" name="METHOD" value=" &raquo; PAGA adesso con Carta di Credito o PayPal! " class="btn btn-danger pull-left">
 
 
 								</form>
+								<br><br>
+						<%end if%>
+
+						<%if FkPagamento=10 then%>
+							<div class="col-md-12">
+							<p class="description">
+								Grazie per aver scelto i nostri prodotti,<br>
+								per completare l'ordine &egrave; necessario effettuare il pagamento con i sistemi sicuri di Stripe protetti dai loro protocolli di sicurezza.<br>Stripe permette di pagare con moltissime carte di credito e carte ricaribili garantendo massima potezione per i dati.<br>
+								<br><br>
+							</p>
+							<div class="col-md-8">
+								<form action="stripe.asp" method="post" id="payment-form" class="form-horizontal">
+									<input type="hidden" name="paymentId" id="paymentId" value="<%=guid%>" />
+									<input type="hidden" name="orderId" id="orderId" value="<%=IdOrdine%>" />
+									<input type="hidden" name="totale_da_pagare" id="totale_da_pagare" value="<%=Replace(FormatNumber(TotaleGenerale,2), ",", "")%>" />
+
+	                    <div class="title">
+	                        <h4>Dati carta di credito</h4>
+	                    </div>
+	                    <div class="col-md-12" style="padding-top: 20px;">
+													<div class="form-group clearfix">
+															<label for="nominativo" class="col-sm-6 control-label">Numero carta</label>
+															<div class="col-sm-6">
+																	<input type="text" class="form-control" name="card-number" id="card-number" value="">
+															</div>
+													</div>
+													<div class="form-group clearfix">
+															<label for="cod_fisc" class="col-sm-6 control-label">CVC</label>
+															<div class="col-sm-6">
+																	<input type="text" class="form-control" name="card-cvc" id="card-cvc" value="" size="5" maxlength="3" style="width: 50px; text-align: left;">
+															</div>
+													</div>
+													<div class="form-group clearfix">
+															<label for="cod_fisc" class="col-sm-6 control-label">Data di scadenza (MM/YY)</label>
+															<div class="col-sm-6">
+																	<input type="text" class="form-control" name="card-month" id="card-month" value="" maxlength="2" style="width: 50px; text-align: left; display: inline;">&nbsp&nbsp/&nbsp&nbsp<input type="text" class="form-control" name="card-year" id="card-year" value="" maxlength="2" style="width: 50px; text-align: left; display: inline;">
+															</div>
+													</div>
+													<div class="form-group clearfix">
+															<div class="col-sm-12">
+																	<input type="submit" name="METHOD" value=" &raquo; PAGA adesso con Carta di Credito! " class="btn btn-danger pull-right">
+															</div>
+													</div>
+											</div>
+										</form>
+								</div>
+							</div>
 								<br><br>
 						<%end if%>
 
@@ -873,7 +930,7 @@ End If
 														Do while not rs.EOF
 
 														Set url_prodotto_rs = Server.CreateObject("ADODB.Recordset")
-														sql = "SELECT PkId, NomePagina FROM Prodotti where PkId="&rs("FkProdotto")&""
+														sql = "SELECT PkId, NomePagina, FkProduttore FROM Prodotti where PkId="&rs("FkProdotto")&""
 														url_prodotto_rs.Open sql, conn, 1, 1
 
 														NomePagina=url_prodotto_rs("NomePagina")
@@ -882,6 +939,7 @@ End If
 														else
 															NomePagina="#"
 														end if
+														FkProduttore=url_prodotto_rs("FkProduttore")
 
 														url_prodotto_rs.close
 														%>
@@ -894,8 +952,11 @@ End If
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <h5 class="nomargin"><%=rs("titolo")%></h5>
-																						<p><strong>Codice: <%=rs("codicearticolo")%></strong></p>
-                                            <%if Len(rs("colore"))>0 or Len(rs("lampadina"))>0 then%><p><%if Len(rs("colore"))>0 then%>Col.: <%=rs("colore")%><%end if%><%if Len(rs("lampadina"))>0 then%> - Lamp.: Bianco satinato<%=rs("lampadina")%><%end if%></p><%end if%>
+																						<p>
+																							<strong>Codice: <%=rs("codicearticolo")%></strong>
+																							<%if Len(rs("colore"))>0 or Len(rs("lampadina"))>0 then%><br /><%if Len(rs("colore"))>0 then%>Col.: <%=rs("colore")%><%end if%><%if Len(rs("lampadina"))>0 then%> - Lamp.: <%=rs("lampadina")%><%end if%><%end if%>
+																							<%if FkProduttore=59 then%><br /><span style="color:#a01010;"><strong><em>Sconti Extra non applicabili</em></strong></span><%end if%>
+																						</p>
                                         </div>
                                     </div>
                                 </td>
@@ -1012,7 +1073,8 @@ End If
                         <p>
 													<%if Rag_Soc<>"" then%><%=Rag_Soc%>&nbsp;&nbsp;<%end if%><%if nominativo<>"" then%><%=nominativo%><%end if%><br />
 													<%if Cod_Fisc<>"" then%>Codice fiscale: <%=Cod_Fisc%>&nbsp;&nbsp;<%end if%><%if PartitaIVA<>"" then%>Partita IVA: <%=PartitaIVA%><%end if%><br />
-													<%if Len(indirizzo)>0 then%><%=indirizzo%><br /><%end if%>
+													<%if Codice_SDI<>"" then%>Codice SDI: <%=Codice_SDI%>&nbsp;&nbsp;<%end if%><%if Email_PEC<>"" then%>PEC: <%=Email_PEC%><%end if%><br />
+													<%if Len(indirizzo)>0 then%><%=indirizzo%>&nbsp;<%end if%>
 													<%=cap%>&nbsp;&nbsp;<%=citta%><%if provincia<>"" then%>&nbsp;(<%=provincia%>)&nbsp;<%end if%>
 												</p>
                     </div>

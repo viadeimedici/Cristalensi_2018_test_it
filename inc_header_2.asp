@@ -111,8 +111,8 @@
                                             <li class="subcategory">
                                                 <a href="/illuminazione-interni-ed-esterni/8nt-lampade-allo-specchio.asp" title="Applique, Luci, Lampade allo specchio"><h4><strong>Lampade allo specchio</strong></h4></a>
                                                 <ul class="list-unstyled lampade-specchio">
-                                                    <li><a href="/illuminazione-interni-ed-esterni/54nc-lampade-allo-specchio-moderne.asp" title="Lampade allo specchio moderne">Lampade allo specchio <b>moderne</b></a></li>
-                                                    <li><a href="/illuminazione-interni-ed-esterni/55nc-lampade-led-allo-specchio.asp" title="Lampade LED allo specchio">Lampade <b>LED</b> allo specchio</a></li>
+                                                    <li><a href="/illuminazione-interni-ed-esterni/54nc-lampade-allo-specchio-moderne.asp" title="Lampade allo specchio moderne e classiche">Applique <b>moderne e classiche</b></a></li>
+                                                    <li><a href="/illuminazione-interni-ed-esterni/55nc-lampade-led-allo-specchio.asp" title="Lampade LED allo specchio">Applique <b>LED</b> allo specchio</a></li>
                                                     <li><a href="/illuminazione-interni-ed-esterni/56nc-specchi-con-luce.asp" title="Specchi con luce">Specchi <b>con luce</b></a></li>
                                                 </ul>
                                             </li>
@@ -217,7 +217,7 @@
                                                 <ul class="list-unstyled plafoniere">
                                                     <li><a href="/illuminazione-interni-ed-esterni/69nc-plafoniere-esterne-moderne.asp" title="Plafoniere esterne moderne">Plafoniere esterne <b>moderne</b></a></li>
                                                     <li><a href="/illuminazione-interni-ed-esterni/74nc-lampade-esterne-classiche-a-soffitto.asp" title="Lampade esterne classiche a soffitto">Lampade esterne <b>classiche</b> a soffitto</a></li>
-                                                    <li><a href="/illuminazione-interni-ed-esterni/76nc-lampade-esterne-classiche-a-sospensione.asp" title="Lampade esterne classiche a sospensione">Lampade esterne <b>classiche</b> a sospensione</a></li>
+                                                    <li><a href="/illuminazione-interni-ed-esterni/76nc-lampade-esterne-classiche-a-sospensione.asp" title="Lampade esterne a sospensione">Lampade esterne a sospensione</a></li>
                                                     <li>&nbsp;</li>
                                                 </ul>
                                             </li>

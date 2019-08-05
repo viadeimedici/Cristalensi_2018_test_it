@@ -156,6 +156,8 @@ end if
 
 																		if stato=4 then etichetta_stato="Pagato con PayPal"
 																		if stato=5 then etichetta_stato="Pagamento annullato"
+																		if stato=9 then etichetta_stato="Pagato con Carta di Credito"
+																		if stato=10 then etichetta_stato="Pagamento annullato"
 																		if stato=6 then etichetta_stato="In fase di pagamento"
 																		if stato=7 then etichetta_stato="Ordine in lavorazione"
 																		if stato=8 then
@@ -185,7 +187,7 @@ end if
                                         <td class="actions text-center" data-th="">
 																				<button type="button" name="visualizza" class="btn btn-default" onClick="MM_openBrWindow('stampa_ordine.asp?idordine=<%=rs("PkId")%>&mode=0','','width=760,height=400,scrollbars=yes')">visualizza</button>
 																				&nbsp;<button type="button" name="stampa" class="btn btn-default" onClick="MM_openBrWindow('stampa_ordine.asp?idordine=<%=rs("PkId")%>&mode=1','','width=760,height=900,scrollbars=yes')">stampa</button>
-																				<%if stato=0 or stato=1 or stato=2 or stato=3 or stato=6 then%>
+																				<%if stato=0 or stato=1 or stato=2 or stato=3 or stato=5 or stato=6 or stato=10 then%>
 																				<br><button type="button" name="modifica" class="btn btn-default" style="margin-top:5px;" onClick="document.location.href='ordini_elenco.asp?IdOrdine=<%=rs("PkId")%>&mode=1';">continua l'ordine</button>
 																				<%else%>
 																					<%if stato=12 or stato=22 then%>
