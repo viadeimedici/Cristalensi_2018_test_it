@@ -7,7 +7,7 @@
 	if mode="" then mode=0
 
 		Set ss = Server.CreateObject("ADODB.Recordset")
-		sql = "SELECT * FROM Ordini where pkid="&idOrdine
+		sql = "SELECT * FROM Ordini WHERE Dominio LIKE '"&dominio&"' AND pkid="&idOrdine
 		ss.Open sql, conn, 3, 3
 
 	if ss.recordcount>0 then
@@ -52,7 +52,7 @@
 
 		if FkCliente>0 then
 			Set cs = Server.CreateObject("ADODB.Recordset")
-			sql = "SELECT PkId, Nome, Nominativo, Email, Telefono FROM Clienti where pkid="&FkCliente
+			sql = "SELECT PkId, Nome, Nominativo, Email, Telefono, Dominio FROM Clienti WHERE Dominio LIKE '"&dominio&"' AND pkid="&FkCliente
 			cs.Open sql, conn, 1, 1
 			if cs.recordcount>0 then
 				Nome_cliente=cs("Nome")
@@ -163,7 +163,7 @@
                               	if idOrdine<12210 then
                               		sql = "SELECT RigheOrdine.PkId, RigheOrdine.FkOrdine, RigheOrdine.PrezzoProdotto as PrezzoProdotto, RigheOrdine.FkProdotto, RigheOrdine.Quantita, RigheOrdine.TotaleRiga, Prodotti.Titolo, Prodotti.CodiceArticolo, RigheOrdine.Colore, RigheOrdine.Lampadina FROM Prodotti INNER JOIN RigheOrdine ON Prodotti.PkId = RigheOrdine.FkProdotto WHERE (((RigheOrdine.FkOrdine)="&idOrdine&"))"
                               	else
-                              		sql = "SELECT PkId, FkOrdine, FkProdotto, PrezzoProdotto, Quantita, TotaleRiga, Titolo, CodiceArticolo, Colore, Lampadina FROM RigheOrdine WHERE FkOrdine="&idOrdine&" Order by PkId ASC"
+                              		sql = "SELECT PkId, FkOrdine, FkProdotto, PrezzoProdotto, Quantita, TotaleRiga, Titolo, CodiceArticolo, Colore, Lampadina, Dominio FROM RigheOrdine WHERE Dominio LIKE '"&dominio&"' AND FkOrdine="&idOrdine&" Order by PkId ASC"
                               	end if
                               		rs.Open sql, conn, 1, 1
                               	num_prodotti_carrello=rs.recordcount

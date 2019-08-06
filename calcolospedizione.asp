@@ -10,7 +10,7 @@
 	if idsession=0 then response.Redirect("iscrizione.asp?prov=1")
 
 		Set rs=Server.CreateObject("ADODB.Recordset")
-		sql = "Select * From Clienti where pkid="&idsession
+		sql = "Select * From Clienti WHERE Dominio LIKE '"&dominio&"' AND pkid="&idsession
 		rs.Open sql, conn, 1, 1
 
 		nominativo_email=rs("nome")&" "&rs("nominativo")

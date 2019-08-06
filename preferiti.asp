@@ -40,6 +40,7 @@
 				ts("PrezzoProdotto")=PrezzoProdotto
 				ts("NomePagina")=NomePagina
 				ts("Data")=Now()
+				ts("Dominio")=Dominio
 				ts.update
 			ts.close
 
@@ -57,7 +58,7 @@
 		'response.write("riga:"&riga)
 		if riga>0 then
 			Set ts = Server.CreateObject("ADODB.Recordset")
-			sql = "SELECT * FROM Preferiti where PkId="&riga
+			sql = "SELECT * FROM Preferiti WHERE Dominio LIKE '"&dominio&"' AND PkId="&riga
 			ts.Open sql, conn, 3, 3
 				ts.delete
 				ts.update
@@ -115,7 +116,7 @@
   <!--#include file="inc_header_2.asp"-->
 	<%
 		Set rs = Server.CreateObject("ADODB.Recordset")
-		sql = "SELECT * FROM Preferiti WHERE FkCliente="&idsession&""
+		sql = "SELECT * FROM Preferiti WHERE Dominio LIKE '"&dominio&"' AND FkCliente="&idsession&""
 		rs.Open sql, conn, 1, 1
 		num_prodotti_carrello=rs.recordcount
 

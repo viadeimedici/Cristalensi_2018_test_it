@@ -6,7 +6,7 @@ if IdOrdine="" then IdOrdine=0
 if idOrdine=0 then response.redirect("/carrello1.asp")
 
 Set ss = Server.CreateObject("ADODB.Recordset")
-sql = "SELECT * FROM Ordini where pkid="&idOrdine
+sql = "SELECT * FROM Ordini WHERE Dominio LIKE '"&dominio&"' AND pkid="&idOrdine
 ss.Open sql, conn, 3, 3
 
 if ss.recordcount>0 then
@@ -20,7 +20,7 @@ ss.close
 
 if idsession>0 then
   Set rs=Server.CreateObject("ADODB.Recordset")
-  sql = "Select * From Clienti where pkid="&idsession
+  sql = "SELECT * From Clienti WHERE Dominio LIKE '"&dominio&"' AND pkid="&idsession
   rs.Open sql, conn, 1, 1
 
   nominativo_email=rs("nome")&" "&rs("nominativo")

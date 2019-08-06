@@ -32,11 +32,12 @@
 			cli_rs("Data")=now()
 			cli_rs("Pubblicato")=False
 			cli_rs("Risposta")=False
+			cli_rs("Dominio")=Dominio
 		cli_rs.update
 		cli_rs.close
 
 		Set rs=Server.CreateObject("ADODB.Recordset")
-		sql = "Select * From Clienti where pkid="&idsession
+		sql = "SELECT * From Clienti WHERE Dominio LIKE '"&dominio&"' AND pkid="&idsession
 		rs.Open sql, conn, 1, 1
 
 		nominativo_email=rs("nome")&" "&rs("nominativo")

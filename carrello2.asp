@@ -11,7 +11,7 @@
 	'inserisco le eventuali note dal carrello1
 	if fromURL="carrello1.asp" then
 		Set os1 = Server.CreateObject("ADODB.Recordset")
-		sql = "SELECT * FROM Ordini where PkId="&idOrdine
+		sql = "SELECT * FROM Ordini WHERE Dominio LIKE '"&dominio&"' AND PkId="&idOrdine
 		os1.Open sql, conn, 3, 3
 		os1("NoteCliente")=request("NoteCliente")
 		os1.update
@@ -32,7 +32,7 @@
 	if TipoTrasportoScelto="" then TipoTrasportoScelto=0
 
 	Set os1 = Server.CreateObject("ADODB.Recordset")
-	sql = "SELECT * FROM Ordini where PkId="&idOrdine
+	sql = "SELECT * FROM Ordini WHERE Dominio LIKE '"&dominio&"' AND PkId="&idOrdine
 	os1.Open sql, conn, 3, 3
 
 	TotaleCarrello=os1("TotaleCarrello")
@@ -252,12 +252,12 @@
 <!--#include file="inc_header_2.asp"-->
 <%
 	Set rs = Server.CreateObject("ADODB.Recordset")
-	sql = "SELECT PkId, FkOrdine, FkProdotto, PrezzoProdotto, Quantita, TotaleRiga, Titolo, CodiceArticolo, Colore, Lampadina FROM RigheOrdine WHERE FkOrdine="&idOrdine&""
+	sql = "SELECT PkId, FkOrdine, Dominio, FkProdotto, PrezzoProdotto, Quantita, TotaleRiga, Titolo, CodiceArticolo, Colore, Lampadina FROM RigheOrdine WHERE Dominio LIKE '"&dominio&"' AND FkOrdine="&idOrdine&""
 	rs.Open sql, conn, 1, 1
 	num_prodotti_carrello=rs.recordcount
 
 	Set ss = Server.CreateObject("ADODB.Recordset")
-	sql = "SELECT * FROM Ordini where pkid="&idOrdine
+	sql = "SELECT * FROM Ordini WHERE Dominio LIKE '"&dominio&"' AND pkid="&idOrdine
 	ss.Open sql, conn, 1, 1
 
 	if ss.recordcount>0 then

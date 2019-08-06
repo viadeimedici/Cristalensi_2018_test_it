@@ -43,21 +43,21 @@
 	'**********modifica temporanea
 
 	Set rs2 = Server.CreateObject("ADODB.Recordset")
-	sql = "SELECT FkOrdine, SUM(TotaleRiga) AS TotaleCarrello FROM RigheOrdine WHERE FkOrdine="&IdOrdine&" AND Scontabile=1 GROUP BY FkOrdine"
+	sql = "SELECT FkOrdine, SUM(TotaleRiga) AS TotaleCarrello, Dominio FROM RigheOrdine WHERE Dominio LIKE '"&dominio&"' AND FkOrdine="&IdOrdine&" AND Scontabile=1 GROUP BY FkOrdine, Dominio"
 	rs2.Open sql, conn, 3, 3
 			TotaleCarrello_Scontabile_Si=rs2("TotaleCarrello")
 		if TotaleCarrello_Scontabile_Si="" or isnull(TotaleCarrello_Scontabile_Si) then TotaleCarrello_Scontabile_Si=0
 	rs2.close
 
 	Set rs2 = Server.CreateObject("ADODB.Recordset")
-	sql = "SELECT FkOrdine, SUM(TotaleRiga) AS TotaleCarrello FROM RigheOrdine WHERE FkOrdine="&IdOrdine&" AND Scontabile=0 GROUP BY FkOrdine"
+	sql = "SELECT FkOrdine, SUM(TotaleRiga) AS TotaleCarrello, Dominio FROM RigheOrdine WHERE Dominio LIKE '"&dominio&"' AND FkOrdine="&IdOrdine&" AND Scontabile=0 GROUP BY FkOrdine, Dominio"
 	rs2.Open sql, conn, 3, 3
 			TotaleCarrello_Scontabile_No=rs2("TotaleCarrello")
 		if TotaleCarrello_Scontabile_No="" or isnull(TotaleCarrello_Scontabile_No) then TotaleCarrello_Scontabile_No=0
 	rs2.close
 
 	Set os1 = Server.CreateObject("ADODB.Recordset")
-	sql = "SELECT * FROM Ordini where PkId="&idOrdine
+	sql = "SELECT * FROM Ordini WHERE Dominio LIKE '"&dominio&"' AND PkId="&idOrdine
 	os1.Open sql, conn, 3, 3
 
 	'TotaleCarrello=os1("TotaleCarrello")
@@ -209,12 +209,12 @@
   <!--#include file="inc_header_2.asp"-->
   <%
   	Set rs = Server.CreateObject("ADODB.Recordset")
-  	sql = "SELECT PkId, FkOrdine, FkProdotto, PrezzoProdotto, Quantita, TotaleRiga, Titolo, CodiceArticolo, Colore, Lampadina FROM RigheOrdine WHERE FkOrdine="&idOrdine&""
+  	sql = "SELECT PkId, FkOrdine, FkProdotto, PrezzoProdotto, Quantita, TotaleRiga, Titolo, CodiceArticolo, Colore, Lampadina, Dominio FROM RigheOrdine WHERE Dominio LIKE '"&dominio&"' AND FkOrdine="&idOrdine&""
   	rs.Open sql, conn, 1, 1
   	num_prodotti_carrello=rs.recordcount
 
   	Set ss = Server.CreateObject("ADODB.Recordset")
-  	sql = "SELECT * FROM Ordini where pkid="&idOrdine
+  	sql = "SELECT * FROM Ordini WHERE Dominio LIKE '"&dominio&"' AND pkid="&idOrdine
   	ss.Open sql, conn, 1, 1
 
   	if ss.recordcount>0 then

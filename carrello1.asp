@@ -141,7 +141,7 @@
 				riga_rs.close
 
 				Set riga_rs = Server.CreateObject("ADODB.Recordset")
-				sql = "SELECT * FROM RigheOrdine" 'aggiungere dominio?'
+				sql = "SELECT * FROM RigheOrdine"
 				riga_rs.Open sql, conn, 3, 3
 
 				riga_rs.addnew
@@ -182,14 +182,14 @@
 				'rs2.close
 
 				Set rs2 = Server.CreateObject("ADODB.Recordset")
-				sql = "SELECT FkOrdine, Dominio, SUM(TotaleRiga) AS TotaleCarrello FROM RigheOrdine WHERE FkOrdine="&IdOrdine&" AND Dominio LIKE '"&dominio&"' AND Scontabile=1 GROUP BY FkOrdine"
+				sql = "SELECT FkOrdine, Dominio, SUM(TotaleRiga) AS TotaleCarrello FROM RigheOrdine WHERE FkOrdine="&IdOrdine&" AND Dominio LIKE '"&dominio&"' AND Scontabile=1 GROUP BY FkOrdine, Dominio"
 				rs2.Open sql, conn, 3, 3
 						TotaleCarrello_Scontabile_Si=rs2("TotaleCarrello")
 					if TotaleCarrello_Scontabile_Si="" or isnull(TotaleCarrello_Scontabile_Si) then TotaleCarrello_Scontabile_Si=0
 				rs2.close
 
 				Set rs2 = Server.CreateObject("ADODB.Recordset")
-				sql = "SELECT FkOrdine, Dominio, SUM(TotaleRiga) AS TotaleCarrello FROM RigheOrdine WHERE FkOrdine="&IdOrdine&" AND Dominio LIKE '"&dominio&"' AND Scontabile=0 GROUP BY FkOrdine"
+				sql = "SELECT FkOrdine, Dominio, SUM(TotaleRiga) AS TotaleCarrello FROM RigheOrdine WHERE FkOrdine="&IdOrdine&" AND Dominio LIKE '"&dominio&"' AND Scontabile=0 GROUP BY FkOrdine, Dominio"
 				rs2.Open sql, conn, 3, 3
 						TotaleCarrello_Scontabile_No=rs2("TotaleCarrello")
 					if TotaleCarrello_Scontabile_No="" or isnull(TotaleCarrello_Scontabile_No) then TotaleCarrello_Scontabile_No=0

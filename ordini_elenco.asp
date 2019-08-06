@@ -135,7 +135,7 @@ end if
                                 </thead>
 																<%
 																	Set rs = Server.CreateObject("ADODB.Recordset")
-																	sql = "SELECT * FROM Ordini WHERE FkCliente="&idsession&" ORDER BY PkId DESC"
+																	sql = "SELECT * FROM Ordini WHERE Dominio LIKE '"&dominio&"' AND FkCliente="&idsession&" ORDER BY PkId DESC"
 																	rs.Open sql, conn, 1, 1
 																%>
 																<%if rs.recordcount>0 then%>

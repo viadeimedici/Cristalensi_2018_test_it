@@ -16,7 +16,7 @@ if prov="" then prov=0
 
 	if prov=3 and mode=0 THEN
 		session("url_prodotto")=fromURL_preferiti
-		response.write(fromURL_preferiti)
+		'response.write(fromURL_preferiti)
 	end if
 
 	'iscrizione prima volta
@@ -59,7 +59,7 @@ if prov="" then prov=0
 
 	if mode=1 and pkid=0 then
 		Set rs=Server.CreateObject("ADODB.Recordset")
-		sql = "Select email From Clienti where email='"&email&"'"
+		sql = "Select email, dominio From Clienti WHERE Dominio LIKE '"&dominio&"' AND email='"&email&"'"
 		rs.Open sql, conn, 1, 1
 		if rs.recordcount>0 then
 			errore=1
@@ -70,7 +70,7 @@ if prov="" then prov=0
 
 	if mode=1 and pkid>0 then
 		Set rs=Server.CreateObject("ADODB.Recordset")
-		sql = "Select email, pkid From Clienti where email='"&email&"'"
+		sql = "Select email, pkid, dominio From Clienti WHERE Dominio LIKE '"&dominio&"' AND email='"&email&"'"
 		rs.Open sql, conn, 1, 1
 		if rs.recordcount>0 then
 			if rs("pkid")=pkid then
@@ -86,7 +86,7 @@ if prov="" then prov=0
 if mode=1 then
 	if pkid=0 then
 		Set rs=Server.CreateObject("ADODB.Recordset")
-		sql = "Select Top 1 PkId From Clienti Order by PkId DESC"
+		sql = "Select Top 1 PkId, Dominio From Clienti WHERE Dominio LIKE '"&dominio&"' Order by PkId DESC"
 		rs.Open sql, conn, 1, 1
 		PkId_Prec=rs("PkId")
 		rs.close
@@ -96,7 +96,7 @@ if mode=1 then
 
 	Set rs=Server.CreateObject("ADODB.Recordset")
 	sql = "Select * From Clienti"
-	if pkid > 0 then sql = "Select * From Clienti where pkid="&pkid
+	if pkid > 0 then sql = "Select * From Clienti WHERE Dominio LIKE '"&dominio&"' AND pkid="&pkid
 	rs.Open sql, conn, 3, 3
 
 		if pkid = 0 then
@@ -112,6 +112,7 @@ if mode=1 then
 		rs("data")=data
 		rs("ip")=ip
 		rs("aut_privacy")=True
+		rs("ip")=dominio
 
 		rs.update
 		rs.close
@@ -359,7 +360,7 @@ end if
 
 
   	Set log_rs = Server.CreateObject("ADODB.Recordset")
-  	sql = "SELECT * FROM Clienti WHERE Email='" & login & "' AND Password='" & password & "'"
+  	sql = "SELECT * FROM Clienti WHERE Dominio LIKE '"&dominio&"' AND Email='" & login & "' AND Password='" & password & "'"
   	log_rs.open sql,conn
 
   	if not log_rs.eof then
@@ -430,7 +431,7 @@ end if
 	if mode=4 then
 		if Len(email)>0 then
 			Set rs=Server.CreateObject("ADODB.Recordset")
-			sql = "Select email,password,nominativo,nome From Clienti where email='"&email&"'"
+			sql = "SELECT email,password,nominativo,nome,dominio From Clienti WHERE Dominio LIKE '"&dominio&"' AND email='"&email&"'"
 			rs.Open sql, conn, 1, 1
 			if rs.recordcount=0 then
 				mode=5
@@ -800,7 +801,7 @@ end if
 								<%
 								if pkid>0 then
 									Set rs=Server.CreateObject("ADODB.Recordset")
-									sql = "Select * From Clienti where pkid="&pkid
+									sql = "SELECT * From Clienti WHERE Dominio LIKE '"&dominio&"' AND pkid="&pkid
 									rs.Open sql, conn, 1, 1
 									if rs.recordcount>0 then
 									nome=rs("nome")

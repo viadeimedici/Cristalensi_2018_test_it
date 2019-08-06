@@ -21,10 +21,10 @@
 	session("ordine_shop")=""
 	'******* DA COMMENTARE QUANDO SI METTE IN TEST
 
-	
-	
+
+
 	Set ss = Server.CreateObject("ADODB.Recordset")
-	sql = "SELECT * FROM Ordini where pkid="&idOrdine
+	sql = "SELECT * FROM Ordini WHERE Dominio LIKE '"&dominio&"' AND pkid="&idOrdine
 	ss.Open sql, conn, 3, 3
 
 	if ss.recordcount>0 then
@@ -83,7 +83,7 @@
 
 	if FkPagamento=1 or FkPagamento=5 then
 		Set rs=Server.CreateObject("ADODB.Recordset")
-		sql = "Select * From Clienti where pkid="&idsession
+		sql = "SELECT * From Clienti WHERE Dominio LIKE '"&dominio&"' AND pkid="&idsession
 		rs.Open sql, conn, 1, 1
 
 		nominativo_email=rs("nome")&" "&rs("nominativo")
@@ -257,7 +257,7 @@
 
 	if FkPagamento=3 then
 		Set rs=Server.CreateObject("ADODB.Recordset")
-		sql = "Select * From Clienti where pkid="&idsession
+		sql = "SELECT * From Clienti WHERE Dominio LIKE '"&dominio&"' AND pkid="&idsession
 		rs.Open sql, conn, 1, 1
 
 		nominativo_email=rs("nome")&" "&rs("nominativo")
@@ -432,7 +432,7 @@
 
 	if FkPagamento=4 then
 		Set rs=Server.CreateObject("ADODB.Recordset")
-		sql = "Select * From Clienti where pkid="&idsession
+		sql = "SELECT * From Clienti WHERE Dominio LIKE '"&dominio&"' AND pkid="&idsession
 		rs.Open sql, conn, 1, 1
 
 		nominativo_email=rs("nome")&" "&rs("nominativo")
@@ -919,7 +919,7 @@ End If
                         </thead>
 												<%
 													Set rs = Server.CreateObject("ADODB.Recordset")
-													sql = "SELECT * FROM RigheOrdine WHERE FkOrdine="&idOrdine&""
+													sql = "SELECT * FROM RigheOrdine WHERE Dominio LIKE '"&dominio&"' AND FkOrdine="&idOrdine&""
 													rs.Open sql, conn, 1, 1
 													num_prodotti_carrello=rs.recordcount
 
