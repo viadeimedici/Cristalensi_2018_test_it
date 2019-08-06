@@ -14,7 +14,7 @@
 
 		if IdOrdine=0 and id<>0 then
 			Set os1 = Server.CreateObject("ADODB.Recordset")
-			sql = "SELECT Top 1 PkId, PkId_Contatore, Dominio FROM Ordini WHERE Dominio='"&dominio&"' Order by PkId_Contatore Desc" 'aggiunto per passaggio 2019'
+			sql = "SELECT Top 1 PkId, PkId_Contatore, Dominio FROM Ordini WHERE Dominio LIKE '"&dominio&"' Order by PkId_Contatore Desc" 'aggiunto per passaggio 2019'
 			os1.Open sql, conn, 1, 1
 			IdOrdine_ultimo=os1("PkId")
 			IdOrdine_ultimo=CLng(IdOrdine_ultimo)
@@ -59,7 +59,7 @@
 				if riga="" or isnull(riga) then riga=0
 				if riga>0 then
 					Set ts = Server.CreateObject("ADODB.Recordset")
-					sql = "SELECT * FROM RigheOrdine where PkId="&riga 'aggiungere dominio?'
+					sql = "SELECT * FROM RigheOrdine WHERE Dominio LIKE '"&dominio&"' AND PkId="&riga 'aggiunto per passaggio 2019'
 					ts.Open sql, conn, 3, 3
 						ts.delete
 						ts.update
@@ -77,7 +77,7 @@
 
 				if riga>0 and quantita>0 then
 					Set ts = Server.CreateObject("ADODB.Recordset")
-					sql = "SELECT * FROM RigheOrdine where PkId="&riga 'aggiungere dominio?'
+					sql = "SELECT * FROM RigheOrdine WHERE Dominio LIKE '"&dominio&"' AND PkId="&riga 'aggiunto per passaggio 2019'
 					ts.Open sql, conn, 3, 3
 						PrezzoProdotto=ts("PrezzoProdotto")
 						ts("Quantita")=Quantita
@@ -133,7 +133,7 @@
 
 
 				Set riga_rs = Server.CreateObject("ADODB.Recordset")
-				sql = "SELECT Top 1 PkId, PkId_Contatore FROM RigheOrdine Order by Pkid_Contatore Desc" 'aggiungere dominio?'
+				sql = "SELECT Top 1 PkId, PkId_Contatore, Dominio FROM RigheOrdine WHERE Dominio LIKE '"&dominio&"' Order by Pkid_Contatore Desc" 'aggiunto per passaggio 2019'
 				riga_rs.Open sql, conn, 1, 1
 				PkId_riga_ultimo=riga_rs("PkId")
 				PkId_riga_ultimo=CLng(PkId_riga_ultimo)
@@ -146,6 +146,7 @@
 
 				riga_rs.addnew
 				riga_rs("PkId")=PkId_riga
+				riga_rs("Dominio")=dominio 'aggiunto per passaggio 2019'
 				riga_rs("FkOrdine")=IdOrdine
 				riga_rs("FkCliente")=idsession
 				riga_rs("FkProdotto")=id
@@ -181,14 +182,14 @@
 				'rs2.close
 
 				Set rs2 = Server.CreateObject("ADODB.Recordset")
-				sql = "SELECT FkOrdine, SUM(TotaleRiga) AS TotaleCarrello FROM RigheOrdine WHERE FkOrdine="&IdOrdine&" AND Scontabile=1 GROUP BY FkOrdine"
+				sql = "SELECT FkOrdine, Dominio, SUM(TotaleRiga) AS TotaleCarrello FROM RigheOrdine WHERE FkOrdine="&IdOrdine&" AND Dominio LIKE '"&dominio&"' AND Scontabile=1 GROUP BY FkOrdine"
 				rs2.Open sql, conn, 3, 3
 						TotaleCarrello_Scontabile_Si=rs2("TotaleCarrello")
 					if TotaleCarrello_Scontabile_Si="" or isnull(TotaleCarrello_Scontabile_Si) then TotaleCarrello_Scontabile_Si=0
 				rs2.close
 
 				Set rs2 = Server.CreateObject("ADODB.Recordset")
-				sql = "SELECT FkOrdine, SUM(TotaleRiga) AS TotaleCarrello FROM RigheOrdine WHERE FkOrdine="&IdOrdine&" AND Scontabile=0 GROUP BY FkOrdine"
+				sql = "SELECT FkOrdine, Dominio, SUM(TotaleRiga) AS TotaleCarrello FROM RigheOrdine WHERE FkOrdine="&IdOrdine&" AND Dominio LIKE '"&dominio&"' AND Scontabile=0 GROUP BY FkOrdine"
 				rs2.Open sql, conn, 3, 3
 						TotaleCarrello_Scontabile_No=rs2("TotaleCarrello")
 					if TotaleCarrello_Scontabile_No="" or isnull(TotaleCarrello_Scontabile_No) then TotaleCarrello_Scontabile_No=0
@@ -197,7 +198,7 @@
 
 				'Aggiorno la tabella dell'ordine con la somma calcolata prima
 				Set ss = Server.CreateObject("ADODB.Recordset")
-				sql = "SELECT * FROM Ordini where PkId="&IdOrdine
+				sql = "SELECT * FROM Ordini WHERE Dominio LIKE '"&dominio&"' AND PkId="&IdOrdine
 				'response.write("sql2:"&sql)
 				ss.Open sql, conn, 3, 3
 				if ss.recordcount>0 then
@@ -293,12 +294,12 @@
   <!--#include file="inc_header_2.asp"-->
 	<%
 		Set rs = Server.CreateObject("ADODB.Recordset")
-		sql = "SELECT PkId, FkOrdine, FkProdotto, PrezzoProdotto, Quantita, TotaleRiga, Titolo, CodiceArticolo, Colore, Lampadina FROM RigheOrdine WHERE FkOrdine="&idOrdine&""
+		sql = "SELECT PkId, Dominio, FkOrdine, FkProdotto, PrezzoProdotto, Quantita, TotaleRiga, Titolo, CodiceArticolo, Colore, Lampadina FROM RigheOrdine WHERE FkOrdine="&idOrdine&" AND Dominio LIKE '"&dominio&"'"
 		rs.Open sql, conn, 1, 1
 		num_prodotti_carrello=rs.recordcount
 
 		Set ss = Server.CreateObject("ADODB.Recordset")
-		sql = "SELECT * FROM Ordini where pkid="&idOrdine
+		sql = "SELECT * FROM Ordini where pkid="&idOrdine&" AND Dominio LIKE '"&dominio&"'"
 		ss.Open sql, conn, 1, 1
 	%>
     <div class="container content">
