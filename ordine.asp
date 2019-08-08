@@ -11,8 +11,6 @@
 	if IdOrdine="" then IdOrdine=0
 	if idOrdine=0 then response.redirect("/carrello1.asp")
 
-	Set stripeFunc = New cStripeFunctions
-	guid=stripeFunc.createWindowsGUID()
 	'if idsession=1 then response.redirect("/ordine-test.asp")
 
 	if idsession=0 then response.redirect("/iscrizione.asp?prov=1")
@@ -21,7 +19,8 @@
 	session("ordine_shop")=""
 	'******* DA COMMENTARE QUANDO SI METTE IN TEST
 
-
+	Set stripeFunc = New cStripeFunctions
+	guid=stripeFunc.createWindowsGUID()
 
 	Set ss = Server.CreateObject("ADODB.Recordset")
 	sql = "SELECT * FROM Ordini WHERE Dominio LIKE '"&dominio&"' AND pkid="&idOrdine
@@ -79,8 +78,6 @@
 		trasp_rs.close
 	end if
 
-	FkPagamento=10
-
 	if FkPagamento=1 or FkPagamento=5 then
 		Set rs=Server.CreateObject("ADODB.Recordset")
 		sql = "SELECT * From Clienti WHERE Dominio LIKE '"&dominio&"' AND pkid="&idsession
@@ -101,7 +98,7 @@
 			HTML1 = HTML1 & "<table width='553' border='0' cellspacing='0' cellpadding='0'>"
 			HTML1 = HTML1 & "<tr>"
 			HTML1 = HTML1 & "<td>"
-			HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000>Grazie "&nominativo_email&" per aver scelto i nostri prodotti!<br>Questa &egrave; un email di conferma per il completamento dell'ordine n&deg; "&idordine&".<br><br><b>TOTALE ORDINE: <u>"&TotaleGenerale&"&#8364;</u></b><br><br> Per completare l'ordine &egrave; necessario effettuare il bonifico con i seguenti dati:<br><u>BANCA DI CREDITO COOPERATIVO DI CAMBIANO AG. MONTELUPO FIORENTINO</u><br>IBAN: <u>IT33E0842537960000030277941</u><br>Codice BIC/SWIFT: <u>CRACIT33</u><br>Nella causale indicare: Ordine da sito internet n&deg; "&idordine&"<br><br>Beneficiario: Cristalensi Snc di Lensi Massimiliano & C. (P.Iva e C.Fiscale 05305820481)<br>Via arti e mestieri, 1 - 50056 Montelupo F.no (FI)<br><br><br>Il nostro staff avr&agrave; cura di spedirti la merce appena la banca avr&agrave; notificato il pagamento del bonifico oppure, per velocizzare la spedizione, &egrave; possibile inviarci per email la ricevuta dell'avvenuto pagamento con bonifico (in caso di bonifico fatto con home banking spesso viene fornita dalla banca una ricevuta, oppure &egrave; possibile scannerizzare la ricevuta rilasciata dalla banca).</font><br>"
+			HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000>Grazie "&nominativo_email&" per aver scelto i nostri prodotti!<br>Questa &egrave; un email di conferma per il completamento dell'ordine n&deg; "&idordine&".<br><br><b>TOTALE ORDINE: <u>"&FormatNumber(TotaleGenerale,2)&"&#8364;</u></b><br><br> Per completare l'ordine &egrave; necessario effettuare il bonifico con i seguenti dati:<br><u>BANCA DI CREDITO COOPERATIVO DI CAMBIANO AG. MONTELUPO FIORENTINO</u><br>IBAN: <u>IT33E0842537960000030277941</u><br>Codice BIC/SWIFT: <u>CRACIT33</u><br>Nella causale indicare: Ordine da sito internet n&deg; "&idordine&"<br><br>Beneficiario: Cristalensi Snc di Lensi Massimiliano & C. (P.Iva e C.Fiscale 05305820481)<br>Via arti e mestieri, 1 - 50056 Montelupo F.no (FI)<br><br><br>Il nostro staff avr&agrave; cura di spedirti la merce appena la banca avr&agrave; notificato il pagamento del bonifico oppure, per velocizzare la spedizione, &egrave; possibile inviarci per email la ricevuta dell'avvenuto pagamento con bonifico (in caso di bonifico fatto con home banking spesso viene fornita dalla banca una ricevuta, oppure &egrave; possibile scannerizzare la ricevuta rilasciata dalla banca).</font><br>"
 			HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000><br><br>Cordiali Saluti, lo staff di Cristalensi</font>"
 			HTML1 = HTML1 & "</td>"
 			HTML1 = HTML1 & "</tr>"
@@ -450,7 +447,7 @@
 			HTML1 = HTML1 & "<table width='553' border='0' cellspacing='0' cellpadding='0'>"
 			HTML1 = HTML1 & "<tr>"
 			HTML1 = HTML1 & "<td>"
-			HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000>Grazie "&nominativo_email&" per aver scelto i nostri prodotti!<br>Questa &egrave; un email di conferma per il completamento dell'ordine n&deg; "&idordine&".<br><br><strong>TOTALE ORDINE: <u>"&TotaleGenerale&"&#8364;</u></strong><br><br> Per completare l'ordine &egrave; necessario effettuare il pagamento su Carta POSTEPAY con i seguenti dati:<br><br><strong>Beneficiario: LENSI GIULIANO - c.f. LNS GLN 42A30 D403J<br>Numero carta: 5333 1710 7681 8950</strong><br><br>Nella causale indicare: <strong>Ordine da sito internet n&deg; "&idordine&"</strong><br><br><br>Il nostro staff avr&agrave; cura di spedirti la merce appena ricever&agrave; la notifica del pagamento oppure, per velocizzare la spedizione, &egrave; possibile inviarci per email la ricevuta dell'avvenuto pagamento.</font><br>"
+			HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000>Grazie "&nominativo_email&" per aver scelto i nostri prodotti!<br>Questa &egrave; un email di conferma per il completamento dell'ordine n&deg; "&idordine&".<br><br><strong>TOTALE ORDINE: <u>"&FormatNumber(TotaleGenerale,2)&"&#8364;</u></strong><br><br> Per completare l'ordine &egrave; necessario effettuare il pagamento su Carta POSTEPAY con i seguenti dati:<br><br><strong>Beneficiario: LENSI GIULIANO - c.f. LNS GLN 42A30 D403J<br>Numero carta: 5333 1710 7681 8950</strong><br><br>Nella causale indicare: <strong>Ordine da sito internet n&deg; "&idordine&"</strong><br><br><br>Il nostro staff avr&agrave; cura di spedirti la merce appena ricever&agrave; la notifica del pagamento oppure, per velocizzare la spedizione, &egrave; possibile inviarci per email la ricevuta dell'avvenuto pagamento.</font><br>"
 			HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000><br><br>Cordiali Saluti, lo staff di Cristalensi</font>"
 			HTML1 = HTML1 & "</td>"
 			HTML1 = HTML1 & "</tr>"
@@ -855,8 +852,7 @@ End If
 								</form>
 								<br><br>
 						<%end if%>
-
-						<%if FkPagamento=10 then%>
+						<%if FkPagamento=6 then%>
 							<div class="col-md-12">
 							<p class="description">
 								Grazie per aver scelto i nostri prodotti,<br>
@@ -865,9 +861,13 @@ End If
 							</p>
 							<div class="col-md-8">
 								<form action="stripe.asp" method="post" id="payment-form" class="form-horizontal">
-									<input type="hidden" name="paymentId" id="paymentId" value="<%=guid%>" />
 									<input type="hidden" name="orderId" id="orderId" value="<%=IdOrdine%>" />
-									<input type="hidden" name="totale_da_pagare" id="totale_da_pagare" value="<%=Replace(FormatNumber(TotaleGenerale,2), ",", "")%>" />
+									<input type="hidden" name="paymentId" id="paymentId" value="<%=guid%>" />
+									<%
+									TotaleGenerale_STR=Replace(FormatNumber(TotaleGenerale,2), ",", "")
+									TotaleGenerale_STR=Replace(TotaleGenerale_STR, ".", "")
+									%>
+									<input type="hidden" name="totale_da_pagare" id="totale_da_pagare" value="<%=TotaleGenerale_STR%>" />
 
 	                    <div class="title">
 	                        <h4>Dati carta di credito</h4>
@@ -904,7 +904,6 @@ End If
 						<%end if%>
 
 
-
 						</div>
             <div class="col-md-12">
                 <div class="top-buffer">
@@ -930,7 +929,7 @@ End If
 														Do while not rs.EOF
 
 														Set url_prodotto_rs = Server.CreateObject("ADODB.Recordset")
-														sql = "SELECT PkId, NomePagina, FkProduttore FROM Prodotti where PkId="&rs("FkProdotto")&""
+														sql = "SELECT PkId, NomePagina, FkProduttore FROM Prodotti WHERE PkId="&rs("FkProdotto")&""
 														url_prodotto_rs.Open sql, conn, 1, 1
 
 														NomePagina=url_prodotto_rs("NomePagina")

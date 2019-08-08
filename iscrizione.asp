@@ -112,7 +112,7 @@ if mode=1 then
 		rs("data")=data
 		rs("ip")=ip
 		rs("aut_privacy")=True
-		rs("ip")=dominio
+		rs("dominio")=dominio
 
 		rs.update
 		rs.close
