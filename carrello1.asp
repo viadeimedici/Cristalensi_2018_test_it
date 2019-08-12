@@ -14,7 +14,7 @@
 
 		if IdOrdine=0 and id<>0 then
 			Set os1 = Server.CreateObject("ADODB.Recordset")
-			sql = "SELECT Top 1 PkId, PkId_Contatore, Dominio FROM Ordini WHERE Dominio LIKE '"&dominio&"' Order by PkId_Contatore Desc" 'aggiunto per passaggio 2019'
+			sql = "SELECT Top 1 PkId, PkId_Contatore FROM Ordini Order by PkId_Contatore Desc"
 			os1.Open sql, conn, 1, 1
 			IdOrdine_ultimo=os1("PkId")
 			IdOrdine_ultimo=CLng(IdOrdine_ultimo)
@@ -133,7 +133,7 @@
 
 
 				Set riga_rs = Server.CreateObject("ADODB.Recordset")
-				sql = "SELECT Top 1 PkId, PkId_Contatore, Dominio FROM RigheOrdine WHERE Dominio LIKE '"&dominio&"' Order by Pkid_Contatore Desc" 'aggiunto per passaggio 2019'
+				sql = "SELECT Top 1 PkId, PkId_Contatore FROM RigheOrdine Order by Pkid_Contatore Desc"
 				riga_rs.Open sql, conn, 1, 1
 				PkId_riga_ultimo=riga_rs("PkId")
 				PkId_riga_ultimo=CLng(PkId_riga_ultimo)
