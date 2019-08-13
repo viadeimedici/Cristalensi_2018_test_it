@@ -86,7 +86,7 @@ if prov="" then prov=0
 if mode=1 then
 	if pkid=0 then
 		Set rs=Server.CreateObject("ADODB.Recordset")
-		sql = "Select Top 1 PkId, Dominio From Clienti WHERE Dominio LIKE '"&dominio&"' Order by PkId DESC"
+		sql = "Select Top 1 PkId, Dominio From Clienti Order by PkId DESC"
 		rs.Open sql, conn, 1, 1
 		PkId_Prec=rs("PkId")
 		rs.close
