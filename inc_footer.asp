@@ -49,6 +49,7 @@
                     <li><a href="/chi_siamo.asp">Chi siamo: lo showroom</a></li>
                     <li><a href="/video_elenco.asp">Video</a></li>
                     <li><a href="/commenti_elenco.asp">Dicono noi</a></li>
+                    <li><a href="/privacy.asp">Privacy e note legali</a></li>
                 </ul>
                 <h4>Area Clienti</h4>
                 <ul>
@@ -56,24 +57,19 @@
                     <li><a href="/preferiti.asp">Lista dei desideri</a></li>
                     <li><a href="/carrello1.asp">Carrello</a></li>
                     <li><a href="/areaprivata.asp">Elenco ordini</a></li>
+                    <li><a href="/condizioni_di_vendita.asp">Condizioni di vendita</a></li>
                 </ul>
             </div>
             <div class="col-md-3 menu-col">
-                <h4>Note legali</h4>
-                <ul>
-                    <li><a href="/condizioni_di_vendita.asp">Condizioni di vendita</a></li>
-                    <li><a href="/privacy.asp">Privacy e note legali</a></li>
-                </ul>
-                <h4>Spedizioni</h4>
+                <h4>Spedizioni e Metodi di Pagamento</h4>
                 <ul class="checklist">
                     <li>Spedizioni assicurate <strong>GRATUITE</strong> in tutta Italia per ordini superiori a 250&euro;</li>
                     <li>Spedizioni assicurate in tutta Italia per ordini fino a 250&euro;: <strong>10&euro;</strong></li>
                 </ul>
-                <h4>Pagamenti accettati</h4>
-                <ul class="checklist">
-                    <li>Bonifico Bancario - PostePay</li>
-                    <li>Contrassegno</li>
-                    <li>Carte di credito - Prepagate - PayPal</li>
+                <ul>
+                    <li>
+                      <img src="/images/metodi-di-pagamento.jpg" alt="Metodi di pagamento" />
+                    </li>
                 </ul>
             </div>
         </div>
