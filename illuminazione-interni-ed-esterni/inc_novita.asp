@@ -212,14 +212,14 @@ end if
                                     <%if prezzoarticolo<>0 then%>
                                       <%if idsession=0 and prezzoprodottosoloclienti="si" then%>
                                         <em><span class="price-new" style="color: #000;">SCONTO PER ISCRITTI</span></em><br />
-                                        <%if prezzolistino<>0 then%><span class="price-old">Prezzo di listino: <b><%=prezzolistino%> &euro;</b></span><%else%>&nbsp;<%end if%>
+                                        <%if prezzolistino<>0 then%><span class="price-old">Prezzo: <b><%=prezzolistino%> &euro;</b></span><%else%>&nbsp;<%end if%>
                                       <%else%>
                                         <span class="price-new"><i class="fa fa-tag"></i>&nbsp;<%=prezzoarticolo%> &euro;</span><br />
                                         <%if prezzolistino<>0 then%><span class="price-old">invece di  <b><%=prezzolistino%> &euro;</b></span><%else%>&nbsp;<%end if%>
                                       <%end if%>
                                     <%else%>
                                       <span class="price-new">&nbsp;<br /></span>
-                                      <%if prezzolistino<>0 then%><span class="price-old">Prezzo di listino: <b><%=prezzolistino%> &euro;</b></span><%else%>&nbsp;<%end if%>
+                                      <%if prezzolistino<>0 then%><span class="price-old">Prezzo: <b><%=prezzolistino%> &euro;</b></span><%else%>&nbsp;<%end if%>
                                     <%end if%>
                                   </div>
                               </div>

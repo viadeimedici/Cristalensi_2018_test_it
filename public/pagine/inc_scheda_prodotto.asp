@@ -399,7 +399,7 @@ end if
 
 							<li class="list-group-item" style="padding-top: 20px">
 	                            <p>
-									<span class="price-old">Prezzo di Listino  <b><%=prezzolistino%> &euro;</b><meta itemprop="priceCurrency" content="EUR" /></span><br /><br />
+									<span class="price-old">Prezzo <b><%=prezzolistino%> &euro;</b><meta itemprop="priceCurrency" content="EUR" /></span><br /><br />
 									Vuoi sapere il Prezzo Cristalensi?
 	                            </p>
 	                        </li>
@@ -438,11 +438,11 @@ end if
 																<%if idsession=0 and prezzoprodottosoloclienti="si" then%>
 																	<!--<span class="price-new"><em><span itemprop="price">SCONTO EXTRA<br />PER GLI ISCRITTI !!!</span></em></span><br /><br />-->
 																	<%if prezzolistino<>0 then%>
-																		<span class="price-old">Prezzo di Listino <b><%=prezzolistino%> &euro;</b></span>
+																		<span class="price-old">Prezzo <b><%=prezzolistino%> &euro;</b></span>
 																	<%end if%>
 																<%Else%>
 																	<%if prezzolistino<>0 then%>
-																		<span class="price-old">Listino: <b><del>&nbsp;<%=prezzolistino%> &euro;&nbsp;</del></b></span><br>
+																		<span class="price-old"><b><del>&nbsp;<%=prezzolistino%> &euro;&nbsp;</del></b></span><br>
 																	<%end if%>
 																	<span class="price-new"><span itemprop="price"><%=prezzoarticolo%></span> &euro;<meta itemprop="priceCurrency" content="EUR" /></span><br><small>iva inclusa</small>
 

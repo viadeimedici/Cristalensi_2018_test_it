@@ -194,7 +194,7 @@
                                         <%if prezzolistino<>0 then%><span class="price-old">invece di  <b><%=prezzolistino%> &euro;</b></span><%else%>&nbsp;<%end if%>
                                       <%else%>
                                         <span class="price-new">&nbsp;<br /></span>
-                                        <span class="price-old">Prezzo di listino: <b><%=prezzolistino%> &euro;</b></span>
+                                        <span class="price-old">Prezzo: <b><%=prezzolistino%> &euro;</b></span>
                                       <%end if%>
                                   </div>
                               </div>
