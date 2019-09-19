@@ -440,7 +440,7 @@
 																					<td class="hidden-xs"></td>
 	                                    </tr>
 	                                    <tr>
-	                                        <td><a href="/" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continua gli acquisti</a></td>
+	                                        <td><a href="/" class="btn btn-warning hidden-xs"><i class="fa fa-angle-left"></i> Continua gli acquisti</a></td>
 	                                        <td class="text-right" colspan="2"><strong>Totale Generale</strong></td>
 																					<td class="text-right"><strong><%if ss("TotaleGenerale")<>0 then%>
 												  								<%=FormatNumber(ss("TotaleGenerale"),2)%><%else%>0<%end if%>&nbsp&euro;</strong></td>
@@ -470,7 +470,7 @@
                 </div>
 								<%if ss.recordcount>0 then%>
 								<form method="post" name="modulocarrello" action="<%if italia_log="Si" or italia_log="" then%>https://www.cristalensi.it/carrello2.asp<%end if%><%if italia_log="No" then%>https://www.cristalensi.it/carrello2extra.asp<%end if%>">
-								<div class="panel panel-default user-comment">
+								<div class="panel panel-default user-comment hidden-xs">
 										<!-- Default panel contents -->
 										<div class="panel-heading">
 												<h5><i class="glyphicon glyphicon-warning-sign"></i> Eventuali annotazioni</h5>
