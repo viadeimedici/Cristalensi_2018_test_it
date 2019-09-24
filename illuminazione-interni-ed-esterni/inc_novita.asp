@@ -120,16 +120,16 @@ end if
                         <li><a href="/illuminazione-interni-ed-esterni/10-novita-lampade-da-giardino-ed-esterni.asp" title="Lampade da giardino ed esterni - Novit&agrave; e ultimi arrivi">Lampade da giardino ed esterni</a></li>
                     </ul>
                 </nav>
-                <div class="banner preventivi overflowContainer">
-                    <h3 class="title">Promozione di Novembre</h3>
+                <div class="banner preventivi">
+                    <h3 class="title">Promozione EXTRA</h3>
                     <p class="text" style="padding-left: 40px;"><strong><em>Sconti Extra in Carrello</em></strong><br />-2% Oltre 300&nbsp&euro;<br />-3% Oltre 600&nbsp&euro;<br />-4% Oltre 900&nbsp&euro;</strong></p>
                 </div>
-                <div class="banner pagamenti overflowContainer">
+                <div class="banner pagamenti">
                     <h3 class="title">Paga in sicurezza!</h3>
-                    <p class="text"><strong><em>PAGHI CON BONIFICO? -2%</em></strong><br />Altri pagamenti disponibili:<br />Carte di Credito e PayPal, PostePay e Contrassegno.
+                    <p class="text"><strong><em>PAGHI CON BONIFICO? -2%</em></strong><br />Altri pagamenti disponibili:<br />Carte di Credito, PostePay e Contrassegno in contanti.
                     </p>
                 </div>
-                <div class="banner consegne overflowContainer">
+                <div class="banner consegne">
                     <h3 class="title">SPEDIZIONI ASSICURATE</h3>
                     <p class="text">Consegna <u>GRATUITA</u> in tutta Italia per ordini superiori a 250&euro;<br />Per ordini fino a 250&euro;: 10&euro;</p>
                 </div>

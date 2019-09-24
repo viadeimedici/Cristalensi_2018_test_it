@@ -120,12 +120,12 @@ gr_rs.close
 
                 </nav>
                 <div class="banner preventivi">
-                    <h3 class="title">Promozione di Novembre</h3>
-                    <p class="text" ><strong><em>Sconti Extra in Carrello</em></strong><br />-2% Oltre 300&nbsp&euro;<br />-3% Oltre 600&nbsp&euro;<br />-4% Oltre 900&nbsp&euro;</strong></p>
+                    <h3 class="title">Promozione EXTRA</h3>
+                    <p class="text" style="padding-left: 40px;"><strong><em>Sconti Extra in Carrello</em></strong><br />-2% Oltre 300&nbsp&euro;<br />-3% Oltre 600&nbsp&euro;<br />-4% Oltre 900&nbsp&euro;</strong></p>
                 </div>
                 <div class="banner pagamenti">
                     <h3 class="title">Paga in sicurezza!</h3>
-                    <p class="text"><strong><em>PAGHI CON BONIFICO? -2%</em></strong><br />Altri pagamenti disponibili:<br />Carte di Credito e PayPal, PostePay e Contrassegno.
+                    <p class="text"><strong><em>PAGHI CON BONIFICO? -2%</em></strong><br />Altri pagamenti disponibili:<br />Carte di Credito, PostePay e Contrassegno in contanti.
                     </p>
                 </div>
                 <div class="banner consegne">
