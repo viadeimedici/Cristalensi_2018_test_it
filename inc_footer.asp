@@ -94,7 +94,7 @@
     nome=request("nome")
     telefono=request("telefono")
     richiesta=request("richiesta")
-    if InStr(richiesta, "http")>0 or InStr(richiesta, "www")>0 or InStr(richiesta, "href")>0 then
+    if InStr(richiesta, "http")>0 or InStr(richiesta, "www")>0 or InStr(richiesta, "href")>0 or InStr(nome, "http")>0 or InStr(nome, "www")>0 or InStr(nome, "href")>0 then
       invioemail="no"
     Else
       invioemail="si"
@@ -360,7 +360,7 @@
     nome=request("nome")
     telefono=request("telefono")
     richiesta=request("richiesta")
-    if InStr(richiesta, "http")>0 or InStr(richiesta, "www")>0 or InStr(richiesta, "href")>0 then
+    if InStr(richiesta, "http")>0 or InStr(richiesta, "www")>0 or InStr(richiesta, "href")>0 or InStr(nome, "http")>0 or InStr(nome, "www")>0 or InStr(nome, "href")>0 then
       invioemail="no"
     Else
       invioemail="si"
@@ -604,7 +604,7 @@ if ric=1 then
   nome=request("nome")
   telefono=request("telefono")
   richiesta=request("richiesta")
-  if InStr(richiesta, "http")>0 or InStr(richiesta, "www")>0 or InStr(richiesta, "href")>0 then
+  if InStr(richiesta, "http")>0 or InStr(richiesta, "www")>0 or InStr(richiesta, "href")>0 or InStr(nome, "http")>0 or InStr(nome, "www")>0 or InStr(nome, "href")>0 then
     invioemail="no"
   Else
     invioemail="si"
