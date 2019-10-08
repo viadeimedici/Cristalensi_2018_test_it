@@ -650,8 +650,8 @@ end if
         alert("Non  e\' stato compilato il campo \"Password\".");
         return false;
       }
-			if (password.indexOf("ì")!=-1 || password.indexOf("é")!=-1 || password.indexOf("è")!=-1 || password.indexOf("ò")!=-1 || password.indexOf("à")!=-1 || password.indexOf("ù")!=-1){
-      alert("ATTENZIONE! La \"Password\" non deve contenere caratteri accentati.");
+			if (password.indexOf("ì")!=-1 || password.indexOf("é")!=-1 || password.indexOf("è")!=-1 || password.indexOf("ò")!=-1 || password.indexOf("à")!=-1 || password.indexOf("ù")!=-1 || password.indexOf("\'")!=-1){
+      alert("ATTENZIONE! La \"Password\" non deve contenere caratteri accentati e apostrofi.");
       return false;
       }
 

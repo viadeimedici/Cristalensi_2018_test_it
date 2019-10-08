@@ -96,7 +96,7 @@ az_rs.close
         </div>
         <div class="col-md-3">
             <div class=" top-buffer">
-                <nav class="navbar">
+                <nav class="navbar hidden-xs">
                     <!-- menu - normal collapsible navbar markup -->
                     <%
                     Set tip_rs = Server.CreateObject("ADODB.Recordset")
@@ -122,6 +122,19 @@ az_rs.close
                     tip_rs.close
                     %>
                 </nav>
+            </div>
+            <div class="banner preventivi">
+                <h3 class="title">Promozione EXTRA</h3>
+                <p class="text" style="padding-left: 40px;"><strong><em>Sconti Extra in Carrello</em></strong><br />-2% Oltre 300&nbsp&euro;<br />-3% Oltre 600&nbsp&euro;<br />-4% Oltre 900&nbsp&euro;</strong></p>
+            </div>
+            <div class="banner pagamenti">
+                <h3 class="title">Paga in sicurezza!</h3>
+                <p class="text"><strong><em>PAGHI CON BONIFICO? -2%</em></strong><br />Altri pagamenti disponibili:<br />Carte di Credito, PostePay e Contrassegno in contanti.
+                </p>
+            </div>
+            <div class="banner consegne">
+                <h3 class="title">SPEDIZIONI ASSICURATE</h3>
+                <p class="text">Consegna <u>GRATUITA</u> in tutta Italia per ordini superiori a 250&euro;<br />Per ordini fino a 250&euro;: 10&euro;</p>
             </div>
         </div>
         <div class="col-md-9">
