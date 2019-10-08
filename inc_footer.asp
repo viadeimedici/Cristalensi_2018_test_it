@@ -283,6 +283,7 @@
     function verifica_request() {
 
     email=document.requestform.email.value;
+    telefono=document.requestform.telefono.value;
     richiesta=document.requestform.richiesta.value;
 
     if (email==""){
@@ -293,6 +294,10 @@
     alert("ATTENZIONE! \"e-mail\" non valida.");
     return false;
     }
+    if ((isNan(telefono)) && (telefono.length>0)){
+      alert("Il campo \"Telefono\" deve contenere solo numeri.");
+      return false;
+    }   
     if (richiesta.indexOf("https")>-1 || richiesta.indexOf("http")>-1 || richiesta.indexOf("www")>-1 || richiesta.indexOf("href")>-1){
     alert("ATTENZIONE! Non possono essere inseriti indirizzi di siti internet.");
     return false;
@@ -529,6 +534,7 @@
     function verifica_request_prev() {
 
     email=document.requestprev.email.value;
+    telefono=document.requestform.telefono.value;
     richiesta=document.requestprev.richiesta.value;
 
     if (email==""){
@@ -538,6 +544,10 @@
     if (email.indexOf("@")==-1 || email.indexOf(".")==-1){
     alert("ATTENZIONE! \"e-mail\" non valida.");
     return false;
+    }
+    if ((isNan(telefono)) && (telefono.length>0)){
+      alert("Il campo \"Telefono\" deve contenere solo numeri.");
+      return false;
     }
     if (richiesta.indexOf("https")>-1 || richiesta.indexOf("http")>-1 || richiesta.indexOf("www")>-1 || richiesta.indexOf("href")>-1){
     alert("ATTENZIONE! Non possono essere inseriti indirizzi di siti internet.");
@@ -773,6 +783,7 @@ end if
   function verifica_request() {
 
   email=document.requestform.email.value;
+  telefono=document.requestform.telefono.value;
   richiesta=document.requestform.richiesta.value;
 
   if (email==""){
@@ -782,6 +793,10 @@ end if
   if (email.indexOf("@")==-1 || email.indexOf(".")==-1){
   alert("ATTENZIONE! \"e-mail\" non valida.");
   return false;
+  }
+  if ((isNan(telefono)) && (telefono.length>0)){
+    alert("Il campo \"Telefono\" deve contenere solo numeri.");
+    return false;
   }
   if (richiesta.indexOf("https")>-1 || richiesta.indexOf("http")>-1 || richiesta.indexOf("www")>-1 || richiesta.indexOf("href")>-1){
   alert("ATTENZIONE! Non possono essere inseriti indirizzi di siti internet.");
