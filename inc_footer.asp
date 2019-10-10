@@ -99,6 +99,11 @@
     Else
       invioemail="si"
     end if
+    if Len(telefono)>0 then
+      if InStr(telefono, "a")>0 or InStr(telefono, "b")>0 or InStr(telefono, "c")>0 or InStr(telefono, "d")>0 or InStr(telefono, "e")>0 or InStr(telefono, "f")>0 or InStr(telefono, "g")>0 or InStr(telefono, "h")>0 or InStr(telefono, "i")>0 or InStr(telefono, "l")>0 or InStr(telefono, "m")>0 or InStr(telefono, "n")>0 or InStr(telefono, "o")>0 or InStr(telefono, "p")>0 or InStr(telefono, "q")>0 or InStr(telefono, "r")>0 or InStr(telefono, "s")>0 or InStr(telefono, "t")>0 or InStr(telefono, "u")>0 or InStr(telefono, "v")>0 or InStr(telefono, "w")>0 or InStr(telefono, "z")>0 then
+        invioemail="no"
+      end if
+    end if
     ip=Request.ServerVariables("REMOTE_ADDR")
 
     if email<>"" and invioemail="si" and ip<>"194.226.137.235" then
@@ -297,7 +302,7 @@
     if ((isNan(telefono)) && (telefono.length>0)){
       alert("Il campo \"Telefono\" deve contenere solo numeri.");
       return false;
-    }   
+    }
     if (richiesta.indexOf("https")>-1 || richiesta.indexOf("http")>-1 || richiesta.indexOf("www")>-1 || richiesta.indexOf("href")>-1){
     alert("ATTENZIONE! Non possono essere inseriti indirizzi di siti internet.");
     return false;
@@ -369,6 +374,11 @@
       invioemail="no"
     Else
       invioemail="si"
+    end if
+    if Len(telefono)>0 then
+      if InStr(telefono, "a")>0 or InStr(telefono, "b")>0 or InStr(telefono, "c")>0 or InStr(telefono, "d")>0 or InStr(telefono, "e")>0 or InStr(telefono, "f")>0 or InStr(telefono, "g")>0 or InStr(telefono, "h")>0 or InStr(telefono, "i")>0 or InStr(telefono, "l")>0 or InStr(telefono, "m")>0 or InStr(telefono, "n")>0 or InStr(telefono, "o")>0 or InStr(telefono, "p")>0 or InStr(telefono, "q")>0 or InStr(telefono, "r")>0 or InStr(telefono, "s")>0 or InStr(telefono, "t")>0 or InStr(telefono, "u")>0 or InStr(telefono, "v")>0 or InStr(telefono, "w")>0 or InStr(telefono, "z")>0 then
+        invioemail="no"
+      end if
     end if
     ip=Request.ServerVariables("REMOTE_ADDR")
 
@@ -618,6 +628,11 @@ if ric=1 then
     invioemail="no"
   Else
     invioemail="si"
+  end if
+  if Len(telefono)>0 then
+    if InStr(telefono, "a")>0 or InStr(telefono, "b")>0 or InStr(telefono, "c")>0 or InStr(telefono, "d")>0 or InStr(telefono, "e")>0 or InStr(telefono, "f")>0 or InStr(telefono, "g")>0 or InStr(telefono, "h")>0 or InStr(telefono, "i")>0 or InStr(telefono, "l")>0 or InStr(telefono, "m")>0 or InStr(telefono, "n")>0 or InStr(telefono, "o")>0 or InStr(telefono, "p")>0 or InStr(telefono, "q")>0 or InStr(telefono, "r")>0 or InStr(telefono, "s")>0 or InStr(telefono, "t")>0 or InStr(telefono, "u")>0 or InStr(telefono, "v")>0 or InStr(telefono, "w")>0 or InStr(telefono, "z")>0 then
+      invioemail="no"
+    end if
   end if
   ip=Request.ServerVariables("REMOTE_ADDR")
 
