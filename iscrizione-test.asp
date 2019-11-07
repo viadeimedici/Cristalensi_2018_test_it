@@ -21,12 +21,13 @@ if prov="" then prov=0
 
 	'iscrizione prima volta
 	if mode=1 then
-		If Request.Form("campoXYZ") = "" Then
 
-		Else
-			errore=1
-			mode=3
-		End If
+	If Request.Form("campoNascosto") = "" Then
+
+	Else
+		errore=1
+		mode=3
+	End If
 
 		nome=LTrim(request("nome"))
 		nominativo=LTrim(request("nominativo"))
@@ -679,6 +680,7 @@ end if
               }
     </SCRIPT>
 		<!--#include virtual="/inc_funzioni_head.asp"-->
+
 </head>
 
 <body>
@@ -829,10 +831,10 @@ end if
                             comunicazioni relativamente agli ordini e ai prodotti.<br>Ti ricordiamo inoltre che l'indirizzo Email lo dovrai utilizzare come Login per accedere ai tuoi futuri ordini.
                         </p>
 												<%if errore=1 then%><p><strong>ATTENZIONE! I DATI INSERITI NON POSSONO ESSERE ACCETTATI. RIPROVATE, GRAZIE.</strong></p><%end if%>
-                        <form class="form-horizontal" method="post" action="/iscrizione.asp?mode=1&amp;pkid=<%=pkid%>" name="newsform" id="newsform" onSubmit="return verifica();">
+                        <form class="form-horizontal" method="post" action="/iscrizione-test.asp?mode=1&amp;pkid=<%=pkid%>" name="newsform" id="newsform" onSubmit="return verifica();">
 												<input type="hidden" name="prov" value="<%=prov%>">
 												<div style="visibility: hidden;">
-												<input type="text" name="campoXYZ" value="" style="width:1px; height:1px; font-size:1px;" />
+												<input type="text" name="campoNascosto" value="" style="width:1px; height:1px; font-size:1px;" />
 												</div>
                             <div class="form-group">
                                 <label for="nome" class="col-sm-4 control-label">Nome</label>
