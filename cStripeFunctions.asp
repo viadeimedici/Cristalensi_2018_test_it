@@ -10,7 +10,7 @@ stripeURLPaymentMethods = "https://api.stripe.com/v1/payment_methods"
 stripeURLPaymentIntent = "https://api.stripe.com/v1/payment_intents"
 stripeURLCharge = "https://api.stripe.com/v1/charges"
 stripeURLToken = "https://api.stripe.com/v1/tokens"
-return_url = "http://test.cristalensi.it/stripe.asp"
+return_url = "http://cristalensi.it/stripe.asp"
 
 Class cStripeFunctions
 Sub Class_Initialize()
