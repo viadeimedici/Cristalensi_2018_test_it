@@ -10,7 +10,7 @@ stripeURLPaymentMethods = "https://api.stripe.com/v1/payment_methods"
 stripeURLPaymentIntent = "https://api.stripe.com/v1/payment_intents"
 stripeURLCharge = "https://api.stripe.com/v1/charges"
 stripeURLToken = "https://api.stripe.com/v1/tokens"
-return_url = "http://cristalensi.it/stripe.asp"
+return_url = "https://cristalensi.it/stripe.asp"
 
 Class cStripeFunctions
 Sub Class_Initialize()
@@ -64,7 +64,7 @@ Private Function makeStripeAPICallGET(url)
     On Error Resume Next
     objXmlHttpMain.open "GET", url, False
     objXmlHttpMain.setRequestHeader "Authorization", "Bearer "& apikey
-    objXmlHttpMain.setRequestHeader "Content-Type", "application/x-www-form-urlencoded"	
+    objXmlHttpMain.setRequestHeader "Content-Type", "application/x-www-form-urlencoded"
     objXmlHttpMain.send()
 
 	'Load JSON string
@@ -78,27 +78,27 @@ Private Function makeStripeAPICallGET(url)
 		val = Replace(val, Chr(13), "\r")
 		val = Replace(val, Chr(9), "\t")
 	aspLog(val)
-		
+
 	oJSON.loadJSON(objXmlHttpMain.responseText)
-		
+
 	'aspLog(Replace(objXmlHttpMain.responseText, "'", " "))
-	
-	
-	
+
+
+
 	id = oJSON.data("id")
-	'aspLog("id=" & id)	
-	aspLog("len=" & len(id))	
+	'aspLog("id=" & id)
+	aspLog("len=" & len(id))
 	'Wscript.Echo(err.Number)
-	if (len(id) = 0) Then 
-		
+	if (len(id) = 0) Then
+
 		aspLog(Replace(oJSON.data("error")("message"),"'"," "))
-		set makeStripeAPICallGET = Nothing		
+		set makeStripeAPICallGET = Nothing
 	Else
 		set makeStripeAPICallGET = oJSON
 	End If
-	
-	
-	
+
+
+
     'If err.Number <> 0 Then : showError() : End If
 
     'aspLog(objXmlHttpMain.responseText)
@@ -136,7 +136,7 @@ Private Function makeStripeAPICall(url,requestBody,idempotencyKey)
     On Error Resume Next
     objXmlHttpMain.open "POST", url, False
     objXmlHttpMain.setRequestHeader "Authorization", "Bearer "& apikey
-    objXmlHttpMain.setRequestHeader "Content-Type", "application/x-www-form-urlencoded"	
+    objXmlHttpMain.setRequestHeader "Content-Type", "application/x-www-form-urlencoded"
 	if (idempotencyKey<>"") Then
 		objXmlHttpMain.setRequestHeader "Idempotency-Key", idempotencyKey
 	End If
@@ -153,28 +153,28 @@ Private Function makeStripeAPICall(url,requestBody,idempotencyKey)
 		val = Replace(val, Chr(13), "\r")
 		val = Replace(val, Chr(9), "\t")
 	aspLog(val)
-		
+
 	oJSON.loadJSON(objXmlHttpMain.responseText)
-		
+
 	'aspLog(Replace(objXmlHttpMain.responseText, "'", " "))
-	
-	
-	
+
+
+
 	id = oJSON.data("id")
-	'aspLog("id=" & id)	
-	aspLog("len=" & len(id))	
+	'aspLog("id=" & id)
+	aspLog("len=" & len(id))
 	'Wscript.Echo(err.Number)
-	if (len(id) = 0) Then 
-		
+	if (len(id) = 0) Then
+
 		aspLog(Replace(oJSON.data("error")("message"),"'"," "))
-		set makeStripeAPICall = Nothing		
+		set makeStripeAPICall = Nothing
 	Else
-		
+
 		set makeStripeAPICall = oJSON
 	End If
-	
-	
-	
+
+
+
     'If err.Number <> 0 Then : showError() : End If
 
     'aspLog(objXmlHttpMain.responseText)
@@ -214,7 +214,7 @@ public Function createToken(month, year, cvc, number)
     'Stdout.WriteLine result
     'Stdout.WriteLine oJSON.data("error")("message")
 
-    If (result is Nothing) Then 
+    If (result is Nothing) Then
 		createToken="KO"
 	else
 		createToken = result.data("id")
@@ -224,19 +224,19 @@ End Function
 public Function createPaymentMethods(typeCard, month, year, cvc, number)
     Dim cardDetails,typeDetails, requestBody,result
 
-	aspLog("month=" & month)	
-	aspLog("year=" & year)	
-	aspLog("cvc=" & cvc)	
-	aspLog("number=" & number)	
-	
+	aspLog("month=" & month)
+	aspLog("year=" & year)
+	aspLog("cvc=" & cvc)
+	aspLog("number=" & number)
+
     typeDetails = "type="& typeCard
     cardDetails = "&card[exp_month]="& month &"&card[exp_year]="& year &"&card[number]="& number &"&card[cvc]="& cvc
     requestBody = typeDetails & cardDetails
-	
-	
+
+
     set result = makeStripeAPICall(stripeURLPaymentMethods,requestBody,"")
 
-    If (result is Nothing) Then 
+    If (result is Nothing) Then
 		createPaymentMethods="KO"
 	else
 		createPaymentMethods = result.data("id")
@@ -251,7 +251,7 @@ public Function chargeCardWithToken(token, cost,curr,orderId)
 
     'set chargeCardWithToken = makeStripeAPICall(stripeURLCharge,requestBody)
 	set result = makeStripeAPICall(StripeURLCharge,requestBody,"")
-	
+
 	If (result is Nothing) Then
 		chargeCardWithToken="KO"
 	else
@@ -261,42 +261,42 @@ End Function
 
 public Function paymentIntent(methodId, cost,curr,orderId,paymentId)
     Dim requestBody,metaDataDetails
-    
+
 	metaDataDetails = "&metadata[orderId]="& orderId
     requestBody = "return_url=" & return_url &"&confirm=true&" &"confirmation_method=automatic&" &"currency="& curr &"&amount="& cost &"&payment_method="& methodId & metaDataDetails
-	
+
     set result = makeStripeAPICall(stripeURLPaymentIntent,requestBody,paymentId)
-	
+
 	aspLog(result.data("metadata")("orderId"))
-	
+
 	aspLog(result.data("id"))
-	
+
 	If (result is Nothing) Then
 		aspLog("KO")
 		paymentIntent="KO"
-	else		
-		If (result.data("status") = "requires_action" or result.data("status") = "requires_source_action") Then		
+	else
+		If (result.data("status") = "requires_action" or result.data("status") = "requires_source_action") Then
 			aspLog(result.data("next_action")("redirect_to_url")("url"))
 			response.redirect(URLDecode(result.data("next_action")("redirect_to_url")("url")))
-		else		
+		else
 			paymentIntent = result.data("metadata")("orderId")
 		End If
 	End If
-		
+
 End Function
 
 public Function retrievePaymentIntent(id)
     Dim requestBody,metaDataDetails
-    
+
 	'metaDataDetails = "&metadata[orderId]="& orderId
     'requestBody = "confirm=true" &"confirmation_method=manual" &"currency="& curr &"&amount="& cost &"&payment_method="& methodId & metaDataDetails
 
-	
+
     'set chargeCardWithToken = makeStripeAPICall(stripeURLCharge,requestBody)
 	set result = makeStripeAPICallGET(stripeURLPaymentIntent & "/" & id)
-	
+
 	aspLog(result.data("id"))
-	
+
 	If (result is Nothing) Then
 		retrievePaymentIntent="KO"
 	else
@@ -322,7 +322,3 @@ End Function
 End Class
 
 %>
-
-
-
-

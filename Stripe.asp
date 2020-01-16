@@ -11,9 +11,7 @@ aspLog("Payment Intent = " & Request.QueryString("payment_intent"))
 Set stripe = New cStripeFunctions
 'stripe.ApiKey = "sk_test_gy4Z9LsaI1Tt2kBo4KCgYsKk"
 'stripe.ApiKey = "sk_test_hBlKI17SjkRsanqUQEZBT0Qe"
-
-'>>>>>mettele il codice ApiKey LIVE prima di pubblicarlo!!!!!<<<<<
-stripe.ApiKey = ""
+stripe.ApiKey = "sk_live_TI73VpEZ4ITzmQFZkNDZs8nT"
 
 
 if (Request.QueryString("payment_intent") = "") then
@@ -33,7 +31,7 @@ if (Request.QueryString("payment_intent") = "") then
 
 	Dim result,paymentId
 
-	paymentId=stripe.createWindowsGUID()
+	paymentId=orderId + Replace(Replace(totale_da_pagare,",",""), ".", "") + cvc
 
 	aspLog("paymentId=" & paymentId)	
 	'''------------- Vecchio metodo ---------------- '''
@@ -49,7 +47,7 @@ if (Request.QueryString("payment_intent") = "") then
 		'''------------- Vecchio metodo ---------------- '''
 		'result = stripe.chargeCardWithToken(result, totale_da_pagare, "eur", orderId)
 		''' ------------- Nuovo metodo ----------------- '''
-		result = stripe.paymentIntent(result, totale_da_pagare, "eur", orderId,paymentId)
+		result = stripe.paymentIntent(result, Replace(Replace(totale_da_pagare,",",""),".",""), "eur", orderId,paymentId)
 	End If
 
 else

@@ -684,6 +684,13 @@ End If
 		}
 		//-->
 		</script>
+		<script type="text/javascript">
+			function disableButton(btn){
+				document.getElementById(btn.id).disabled = true;
+				//alert("Button has been disabled.");
+				document.getElementById(btn.id).value = "  Pagamento Inviato  ";
+			}
+		</script>
 		<!--#include virtual="/inc_funzioni_head.asp"-->
 </head>
 
@@ -860,7 +867,7 @@ End If
 								<br><br>
 							</p>
 							<div class="col-md-8">
-								<form action="stripe.asp" method="post" id="payment-form" class="form-horizontal">
+								<form action="stripe.asp" method="post" id="payment-form" class="form-horizontal" onSubmit="disableButton(this)">
 									<input type="hidden" name="orderId" id="orderId" value="<%=IdOrdine%>" />
 									<input type="hidden" name="paymentId" id="paymentId" value="<%=guid%>" />
 									<%
@@ -893,7 +900,7 @@ End If
 													</div>
 													<div class="form-group clearfix">
 															<div class="col-sm-12">
-																	<input type="submit" name="METHOD" value=" &raquo; PAGA adesso con Carta di Credito! " class="btn btn-danger pull-right">
+																	<input type="submit" name="METHOD" value=" &raquo; PAGA adesso con Carta di Credito! " class="btn btn-danger pull-right" id="btn1">
 															</div>
 													</div>
 											</div>
