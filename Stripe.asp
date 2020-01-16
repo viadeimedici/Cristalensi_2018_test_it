@@ -11,7 +11,10 @@ aspLog("Payment Intent = " & Request.QueryString("payment_intent"))
 Set stripe = New cStripeFunctions
 'stripe.ApiKey = "sk_test_gy4Z9LsaI1Tt2kBo4KCgYsKk"
 'stripe.ApiKey = "sk_test_hBlKI17SjkRsanqUQEZBT0Qe"
-stripe.ApiKey = "sk_live_TI73VpEZ4ITzmQFZkNDZs8nT"
+
+'**************** DEVE ESSERE RIMESSA LA CHIAVE LIVE PER PUBBLICARLO *****************
+stripe.ApiKey = ""
+'**************** DEVE ESSERE RIMESSA LA CHIAVE LIVE PER PUBBLICARLO *****************
 
 
 if (Request.QueryString("payment_intent") = "") then
@@ -33,13 +36,13 @@ if (Request.QueryString("payment_intent") = "") then
 
 	paymentId=orderId + Replace(Replace(totale_da_pagare,",",""), ".", "") + cvc
 
-	aspLog("paymentId=" & paymentId)	
+	aspLog("paymentId=" & paymentId)
 	'''------------- Vecchio metodo ---------------- '''
 	'result = stripe.createToken(month, year, cvc, number)
 
 	''' ------------- Nuovo metodo ----------------- '''
 	result = stripe.createPaymentMethods("card", month, year, cvc, number)
-	
+
 	aspLog(result)
 
 	if (result<>"KO") then
@@ -52,7 +55,7 @@ if (Request.QueryString("payment_intent") = "") then
 
 else
 	result = stripe.retrievePaymentIntent(Request.QueryString("payment_intent"))
-	
+
 End If
 
 aspLog(result)
