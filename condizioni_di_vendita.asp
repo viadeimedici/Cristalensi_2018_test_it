@@ -106,19 +106,14 @@
                     </p>
                     <p><a name="pagamento"></a>
                           <em><strong>Modalit&agrave; di pagamento:</strong></em><br />
-                          il pagamento dell'ordine totale (quindi comprensivo di spese di spedizione e di pagamento) potr&agrave; essere effettuato con Bonifico bancario, in contrassegno alla consegna (solo con contanti), con carta PostePay o con le pi&ugrave; diffuse carte di credito, carte prepagate e PostePay attraverso il sistema sicuro di pagamento online di Paypal, anche senza obbligo di iscrizione alla piattaforma di pagamento.<br />
+                          il pagamento dell'ordine totale (quindi comprensivo di spese di spedizione e di pagamento) potr&agrave; essere effettuato con Bonifico bancario, in contrassegno alla consegna (solo con contanti), con carta PostePay o con le pi&ugrave; diffuse carte di credito, carte prepagate e PostePay.<br />
                           <br />
-                          Per il pagamento con <em><strong>Bonifico bancario</strong></em>, <em><strong>PostePay</strong></em> e <em><strong>PayPal</strong></em> non sar&agrave; addebitato <em><strong>nessun costo</strong></em> oppure saranno presenti sconti, e la merce sar&agrave; inviata solo quando sar&agrave; certificato il pagamento. <br />
-                          <br />
-                          Per il pagamento online ci affidiamo al <span class="sfondo-giallo"><em><strong>sistema sicuro di Paypal</strong></em></span> che permette di pagare con un'ampia scelta di sistemi: dalle carte di credito pi&ugrave; diffuse, alle carte prepagate e ricaricabili.<br />
-                    Ecco l'ampia scelta:
-                    <p>
-                    <p>
-                    <a href="#" onClick="javascript:window.open('https://www.paypal.com/it/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside','olcwhatispaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=400, height=350');"><img src="https://www.cristalensi.it/images/logo_paypal_carte.jpg" style="width: 319px; float: none" border="0" alt="Che cos'&egrave; PayPal"></a>
+                          Per il pagamento con <em><strong>Bonifico bancario</strong></em> e <em><strong>PostePay</strong></em> non sar&agrave; addebitato <em><strong>nessun costo</strong></em> oppure saranno presenti sconti, e la merce sar&agrave; inviata solo quando sar&agrave; certificato il pagamento. <br />
                     </p>
                     <p>
                     Ricordiamo che per il <strong><em>pagamento in contrassegno</em></strong> il corriere consegner&agrave; la merce se il pagamento sar&agrave;<strong> in contanti</strong>, non saranno accettati assegni o altre formule di pagamento.<br />
-                    Per il pagamento in contrassegno sar&agrave; aggiunto un costo di 6&euro; sul totale della merce acquistata.
+                    Per il pagamento in contrassegno sar&agrave; aggiunto un costo di 6&euro; sul totale della merce acquistata.<br />
+                    
                     </p>
                     <p><a name="fatturazione"></a>
                     <em><strong>Fatturazione e documentazione fiscale:</strong></em> <br />
@@ -154,7 +149,7 @@
                     Se Lei recede dal presente contratto, Le saranno rimborsati i costi di acquisto dei prodotti con i relativi sconti come da ordine effettuato.<br />
                     Non saranno rimborsati i costi di spedizione e di pagamento se previsti e specificati nell'ordine in quanto servizi di cui il consumatore ha usufruito.<br />
                     Il rimborso avverr&agrave; dopo una settimana dal ricevimento e successiva verifica dell'integrit&agrave; dei prodotti ricevuti. Detti rimborsi saranno effettuati utilizzando lo stesso mezzo di pagamento da Lei usato per la transazione iniziale, salvo che Lei non abbia espressamente convenuto altrimenti.<br />
-                    
+
                     <em>I costi diretti della restituzione dei beni saranno a Suo carico.</em><br />
                     Cristalensi non &egrave; in alcun modo responsabile per furti, smarrimenti o danneggiamenti delle spedizioni di reso.<br />
                     In caso di danneggiamenti durante il trasporto di reso, la richiesta di recesso sar&agrave; annullata: Cristalensi le invier&agrave; una comunicazione per consentirle di inoltrare reclamo nei confronti del corriere e chiedere il rimborso.<br />

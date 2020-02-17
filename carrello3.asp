@@ -464,7 +464,7 @@
 																if TipoCosto="" then TipoCosto=3
 
 																'condizione specifica per pagamento in contrassegno'
-																if not (PkIdPagamento=3 and ss("TotaleCarrello")>500) then
+																'if not (PkIdPagamento=3 and ss("TotaleCarrello")>500) then
 																%>
 																<tr>
                                     <td data-th="Product" class="cart-product">
@@ -481,7 +481,7 @@
                                     <td data-th="Subtotal"><%if PkIdPagamento=PkIdPagamentoScelto then%><%if TipoCosto=4 or TipoCosto=5 then%>-<%end if%><%=FormatNumber(CostoPagamentoTotale,2)%>&#8364;<%else%>-<%end if%></td>
                                 </tr>
 																<%
-																end if
+																'end if
 
 																trasp_rs.movenext
 																loop
