@@ -568,7 +568,7 @@
 								<li class="list-group-item"><strong>PAGAMENTI SICURI E PROTETTI</strong></li>
 								<li class="list-group-item"><i class="fa fa-check"></i> <em>Bonifico:</em><div style="float: right;"><em><strong>-2%</strong></em></div></li>
 								<li class="list-group-item"><i class="fa fa-check"></i> <em>Carte di credito, Prepagate e PostePay:</em><div style="float: right;"><em><strong>0&euro;</strong></em></div></li>
-								<li class="list-group-item"><i class="fa fa-check"></i> <em>Contrassegno (ordine inferiore a 500&euro;):</em><div style="float: right;"><em><strong>6&euro;</strong></em></div></li>
+								<li class="list-group-item"><i class="fa fa-check"></i> <em>Contrassegno in contanti:</em><div style="float: right;"><em><strong>6&euro;</strong></em></div></li>
 							</ul>
 						</div>
 						<div class="panel panel-default payment-list">
