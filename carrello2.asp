@@ -489,33 +489,33 @@
                     </div>
                     <div class="col-md-12">
 						<%if TipoTrasportoScelto>0 and TipoTrasportoScelto<>2 then%>
-							<p class="description">E' necessario indicare esattamente un indirizzo dove recapitare i prodotti ordinati oltre ad un numero di telefono per essere eventualmente contattati dal corriere.</p>
+							<p class="description">E' necessario indicare esattamente un indirizzo dove recapitare i prodotti ordinati oltre ad un numero di telefono per essere eventualmente contattati dal corriere. <b> (*) OBBLIGATORIO</b></p>
 							<div class="form-group clearfix">
-                                <label for="nominativo_sp" class="col-sm-4 control-label">Nome e Cognome oppure Azienda</label>
+                                <label for="nominativo_sp" class="col-sm-4 control-label">Nome e Cognome oppure Azienda (*)</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="nominativo_sp" id="nominativo_sp" value="<%=nominativo_sp%>" maxlength="100">
                                 </div>
                             </div>
 							<div class="form-group clearfix">
-                                <label for="telefono_sp" class="col-sm-4 control-label">Telefono</label>
+                                <label for="telefono_sp" class="col-sm-4 control-label">Telefono (*)</label>
                                 <div class="col-sm-8">
                                     <input type="number" class="form-control" name="telefono_sp" id="telefono_sp" value="<%=telefono_sp%>" maxlength="50">
                                 </div>
                             </div>
                             <div class="form-group clearfix">
-                                <label for="indirizzo_sp" class="col-sm-4 control-label">Indirizzo</label>
+                                <label for="indirizzo_sp" class="col-sm-4 control-label">Indirizzo (*)</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="indirizzo_sp" id="indirizzo_sp" value="<%=indirizzo_sp%>" maxlength="100">
                                 </div>
                             </div>
                             <div class="form-group clearfix">
-                                <label for="citta_sp" class="col-sm-4 control-label">Citt&agrave;</label>
+                                <label for="citta_sp" class="col-sm-4 control-label">Citt&agrave; (*)</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="citta_sp" id="citta_sp" value="<%=citta_sp%>" maxlength="50">
                                 </div>
                             </div>
                             <div class="form-group clearfix">
-                                <label for="cap_sp" class="col-sm-4 control-label">CAP</label>
+                                <label for="cap_sp" class="col-sm-4 control-label">CAP (*)</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="cap_sp" id="cap_sp" value="<%=cap_sp%>" maxlength="5">
                                 </div>
@@ -548,7 +548,7 @@
                                 </div>
                             </div>
 														<div class="form-group clearfix">
-																<label for="nazione_sp" class="col-sm-4 control-label">Nazione</label>
+																<label for="nazione_sp" class="col-sm-4 control-label">Nazione (*)</label>
 																<div class="col-sm-8">
 
 																		<%if TipoTrasportoScelto<4 then%>

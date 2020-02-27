@@ -113,7 +113,7 @@
                     <p>
                     Ricordiamo che per il <strong><em>pagamento in contrassegno</em></strong> il corriere consegner&agrave; la merce se il pagamento sar&agrave;<strong> in contanti</strong>, non saranno accettati assegni o altre formule di pagamento.<br />
                     Per il pagamento in contrassegno sar&agrave; aggiunto un costo di 6&euro; sul totale della merce acquistata.<br />
-                    
+
                     </p>
                     <p><a name="fatturazione"></a>
                     <em><strong>Fatturazione e documentazione fiscale:</strong></em> <br />
@@ -140,19 +140,25 @@
                     Lei ha il diritto di recedere dal contratto, senza indicarne le ragioni, entro 14 giorni.<br />
                     Il periodo di recesso scade dopo 14 giorni dal giorno in cui Lei o un terzo, diverso dal vettore e da Lei designato, acquisisce il possesso fisico dei beni.<br />
                     Il diritto di recesso non &egrave; applicabile a prodotti ordinati e modificati appositamente su specifica richiesta del cliente con varianti personalizzate.<br />
-                    Il diritto di recesso non &egrave; applicabile a lampadine in quanto materiale di consumo.<br /><br />
+                    <br />
+                    Il diritto di recesso di cui agli articoli da 52 a 58 per i contratti a distanza e i contratti negoziati fuori dei locali commerciali è escluso relativamente a (si citano i paragrafi pi&ugrave; attinenti):<br />
+                    b) la fornitura di beni o servizi il cui prezzo è legato a fluttuazioni nel mercato finanziario che il professionista non è in grado di controllare e che possono verificarsi durante il periodo di recesso;
+                    c) la fornitura di beni confezionati su misura o chiaramente personalizzati;
+                    d) la fornitura di beni che rischiano di deteriorarsi o scadere rapidamente;
+                    f) la fornitura di beni che, dopo la consegna, risultano, per loro natura, inscindibilmente mescolati con altri beni;
+                    
 
                     <em>Come esercitare il diritto di recesso</em><br />
                     Per esercitare il diritto di recesso, Lei &egrave; tenuto a informarci ( <a href="https://www.cristalensi.it/contatti.asp">contatti e mappa</a> ) della sua decisione di recedere dal presente contratto tramite una dichiarazione esplicita (ad esempio lettera inviata per posta o email), possibilmente contattandoci prima via telefono.<br />
                     <em>Per rispettare il termine di recesso, &egrave; sufficiente che Lei invii la comunicazione relativa all'esercizio del diritto di recesso prima della scadenza del periodo di recesso.</em><br />
+
                     <br /><em>Rimborso</em><br />
                     Se Lei recede dal presente contratto, Le saranno rimborsati i costi di acquisto dei prodotti con i relativi sconti come da ordine effettuato.<br />
                     Non saranno rimborsati i costi di spedizione e di pagamento se previsti e specificati nell'ordine in quanto servizi di cui il consumatore ha usufruito.<br />
                     Il rimborso avverr&agrave; dopo una settimana dal ricevimento e successiva verifica dell'integrit&agrave; dei prodotti ricevuti. Detti rimborsi saranno effettuati utilizzando lo stesso mezzo di pagamento da Lei usato per la transazione iniziale, salvo che Lei non abbia espressamente convenuto altrimenti.<br />
 
                     <em>I costi diretti della restituzione dei beni saranno a Suo carico.</em><br />
-                    Cristalensi non &egrave; in alcun modo responsabile per furti, smarrimenti o danneggiamenti delle spedizioni di reso.<br />
-                    In caso di danneggiamenti durante il trasporto di reso, la richiesta di recesso sar&agrave; annullata: Cristalensi le invier&agrave; una comunicazione per consentirle di inoltrare reclamo nei confronti del corriere e chiedere il rimborso.<br />
+
                     Cristalensi offre un servizio di restituzione ad un costo, variabile in base al volume dei prodotti, stimato da un minimo di 15&euro; a un massimo di 30&euro; con un nostro corriere di fiducia.<br />
                     In alternativa &egrave; possibile spedirli con un proprio corriere consigliando una spedizione assicurata.<br >
                     Lei &egrave; responsabile della diminuizione del valore dei beni risultante da una manipolazione del bene diversa da quella necessaria per stabilire la natura, le caratteristiche e il funzionamento dei beni.
@@ -161,11 +167,10 @@
                     <br />
                     <strong>Decadenza del diritto di recesso.</strong><br />
                     Il diritto di recesso decade totalmente qualora il prodotto restituito non sia integro, ovvero:<br />
-                    mancanza dell'imballo originale o danneggiamento dello stesso;<br />
-                    assenza di elementi integranti del prodotto (accessori, cavi, manuali d'istruzione etc) e di tutto ci&ograve; che &egrave; stato fornito anche a titolo di omaggio;<br />
+                    mancanza dell'imballo originale;<br />
+                    assenza di elementi integranti del prodotto (accessori, cavi, manuali d'istruzione etc);<br />
                     danneggiamento del prodotto per cause diverse dal trasporto;<br />
-                    danneggiamento del prodotto per cause derivanti dal trasporto e dovute ad imperizia nell'imballaggio del prodotto; per imperizia si intende l'errato impiego dell'imballaggio originale;<br />
-                    qualora in seguito al ricevimento della merce sia stato richiesto l'invio di materiale in sostituzione (ad esempio se il prodotto &egrave; arrivato danneggiato);<br />
+                    danneggiamento del prodotto dovute ad imperizia nell'imballaggio del prodotto;<br />
                     i prodotti non siano stati montati e installati anche parzialmente.
                     <br /><a name="rotture"></a>
                     <br />

@@ -835,32 +835,32 @@ end if
 												<input type="text" name="campoXYZ" value="" style="width:1px; height:1px; font-size:1px;" />
 												</div>
                             <div class="form-group">
-                                <label for="nome" class="col-sm-4 control-label">Nome</label>
+                                <label for="nome" class="col-sm-4 control-label">Nome (*)</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" id="nome" name="nome" value="<% if pkid > 0 then %><%=nome%><%else%><%if mode=3 then%><%=nome%><%end if%><%end if%>">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="nominativo" class="col-sm-4 control-label">Cognome</label>
+                                <label for="nominativo" class="col-sm-4 control-label">Cognome (*)</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" id="nominativo" name="nominativo" value="<% if pkid > 0 then %><%=nominativo%><%else%><%if mode=3 then%><%=nominativo%><%end if%><%end if%>">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="email" class="col-sm-4 control-label">Email</label>
+                                <label for="email" class="col-sm-4 control-label">Email (*)</label>
                                 <div class="col-sm-8">
                                     <input type="email" class="form-control" id="email" name="email" value="<% if pkid > 0 then %><%=email%><%else%><%if mode=3 then%><%=email%><%end if%><%end if%>">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="conferma" class="col-sm-4 control-label">Conferma email</label>
+                                <label for="conferma" class="col-sm-4 control-label">Conferma Email (*)</label>
                                 <div class="col-sm-8">
                                     <input type="email" class="form-control" id="conferma" name="conferma" value="<% if pkid > 0 then %><%=email%><%else%><%if mode=3 then%><%=email%><%end if%><%end if%>">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="password" class="col-sm-4 control-label">Password</label>
+                                <label for="password" class="col-sm-4 control-label">Password (*)</label>
                                 <div class="col-sm-8">
                                     <input type="password" class="form-control" id="password" name="password" value="<% if pkid > 0 then %><%=password%><%else%><%if mode=3 then%><%=password%><%end if%><%end if%>">
                                 </div>
