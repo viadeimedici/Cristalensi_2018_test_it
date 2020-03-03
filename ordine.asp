@@ -88,6 +88,37 @@
 
 		rs.close
 
+		Set em_rs = Server.CreateObject("ADODB.Recordset")
+		sql = "SELECT PkId, Dominio, FkOrdine, FkProdotto, PrezzoProdotto, Quantita, TotaleRiga, Titolo, CodiceArticolo, Colore, Lampadina FROM RigheOrdine WHERE FkOrdine="&idOrdine&" and Dominio='"&dominio&"'"
+		em_rs.Open sql, conn, 1, 1
+		if em_rs.recordcount>0 then
+			HTML2 = HTML2 & "<tr>"
+			HTML2 = HTML2 & "<td>"
+			HTML2 = HTML2 & "<font face=Verdana size=2 color=#000000><strong>ARTICOLI ORDINATI</strong></font><br>"
+			HTML2 = HTML2 & "</td>"
+			HTML2 = HTML2 & "</tr>"
+			Do while not em_rs.EOF
+			qta_em=em_rs("quantita")
+			ca_em=em_rs("codicearticolo")
+			titolo_em=em_rs("titolo")
+			col_em=em_rs("colore")
+			lamp_em=em_rs("lampadina")
+
+			HTML2 = HTML2 & "<tr>"
+			HTML2 = HTML2 & "<td><font face=Verdana size=2 color=#000000>"
+			'HTML2 = HTML2 & "["&qta_em&"pz.]&nbsp;-&nbsp;<em>"&ca_em&"</em>&nbsp;-&nbsp;"&titolo_em&"<br>"&if Len(col_em)>0 or Len(lamp_em)>0 then&"("&col_em&"&nbsp;"&lamp_em&")"
+			HTML2 = HTML2 & "["&qta_em&"pz.]&nbsp;-&nbsp;<em>"&ca_em&"</em>&nbsp;-&nbsp;"&titolo_em&"<br>"
+			if Len(col_em)>0 or Len(lamp_em)>0 then
+				HTML2 = HTML2 & "("&col_em&"&nbsp;"&lamp_em&")<br>"
+			end if
+			HTML2 = HTML2 & "</font></td>"
+			HTML2 = HTML2 & "</tr>"
+			em_rs.MoveNext
+			loop
+		end if
+		em_rs.close
+
+
 			HTML1 = ""
 			HTML1 = HTML1 & "<html>"
 			HTML1 = HTML1 & "<head>"
@@ -98,15 +129,23 @@
 			HTML1 = HTML1 & "<table width='553' border='0' cellspacing='0' cellpadding='0'>"
 			HTML1 = HTML1 & "<tr>"
 			HTML1 = HTML1 & "<td>"
-			HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000>Grazie "&nominativo_email&" per aver scelto i nostri prodotti!<br>Questa &egrave; un email di conferma per il completamento dell'ordine n&deg; "&idordine&".<br><br><b>TOTALE ORDINE: <u>"&FormatNumber(TotaleGenerale,2)&"&#8364;</u></b><br><br> Per completare l'ordine &egrave; necessario effettuare il bonifico con i seguenti dati:<br><u>BANCA DI CREDITO COOPERATIVO DI CAMBIANO AG. MONTELUPO FIORENTINO</u><br>IBAN: <u>IT33E0842537960000030277941</u><br>Codice BIC/SWIFT: <u>CRACIT33</u><br>Nella causale indicare: Ordine da sito internet n&deg; "&idordine&"<br><br>Beneficiario: Cristalensi Snc di Lensi Massimiliano & C. (P.Iva e C.Fiscale 05305820481)<br>Via arti e mestieri, 1 - 50056 Montelupo F.no (FI)<br><br><br>Il nostro staff avr&agrave; cura di spedirti la merce appena la banca avr&agrave; notificato il pagamento del bonifico oppure, per velocizzare la spedizione, &egrave; possibile inviarci per email la ricevuta dell'avvenuto pagamento con bonifico (in caso di bonifico fatto con home banking spesso viene fornita dalla banca una ricevuta, oppure &egrave; possibile scannerizzare la ricevuta rilasciata dalla banca).</font><br>"
-			HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000><br><br>Cordiali Saluti, lo staff di Cristalensi</font>"
+			HTML1 = HTML1 & "<font face=Verdana size=2 color=#000000>Grazie "&nominativo_email&" per aver scelto i nostri prodotti!<br>Questa &egrave; un email di conferma per il completamento dell'ordine n&deg; "&idordine&".<br><br><b>TOTALE ORDINE: <u>"&FormatNumber(TotaleGenerale,2)&"&#8364;</u></b><br><br></font>"
+			HTML1 = HTML1 & "</td>"
+			HTML1 = HTML1 & "</tr>"
+			HTML1 = HTML1 & HTML2
+			HTML1 = HTML1 & "<tr>"
+			HTML1 = HTML1 & "<td>"
+			HTML1 = HTML1 & "<br><br><font face=Verdana size=2 color=#000000>Per completare l'ordine &egrave; necessario effettuare il bonifico con i seguenti dati:<br><u>BANCA DI CREDITO COOPERATIVO DI CAMBIANO AG. MONTELUPO FIORENTINO</u><br>IBAN: <u>IT33E0842537960000030277941</u><br>Codice BIC/SWIFT: <u>CRACIT33</u><br>Nella causale indicare: Ordine da sito internet n&deg; "&idordine&"<br><br>Beneficiario:<br>Cristalensi Snc di Lensi Massimiliano & C. (P.Iva e C.Fiscale 05305820481)<br>Via arti e mestieri, 1 - 50056 Montelupo F.no (FI)<br><br><br>Il nostro staff avr&agrave; cura di spedirti la merce appena la banca avr&agrave; notificato il pagamento del bonifico oppure, per velocizzare la spedizione, &egrave; possibile inviarci per email la ricevuta dell'avvenuto pagamento con bonifico (in caso di bonifico fatto con home banking spesso viene fornita dalla banca una ricevuta, oppure &egrave; possibile scannerizzare la ricevuta rilasciata dalla banca).</font><br>"
+
+			HTML1 = HTML1 & "<font face=Verdana size=2 color=#000000><br><br>Cordiali Saluti, lo staff di Cristalensi</font>"
 			HTML1 = HTML1 & "</td>"
 			HTML1 = HTML1 & "</tr>"
 			HTML1 = HTML1 & "<tr>"
 			HTML1 = HTML1 & "<td>"
-			HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000><br><br>Cristalensi Snc di Lensi Massimiliano & C. - C.F. e Iscr. Reg. Impr. di Firenze: IT05305820481 - R.E.A. FI 536760<br>50056 Montelupo Fiorentino (FI) - Via arti e mestieri, 1<br>Tel.: 0571.911163 - E-mail: info@cristalensi.it</font>"
+			HTML1 = HTML1 & "<font face=Verdana size=2 color=#000000><br><br>Cristalensi Snc di Lensi Massimiliano & C. - C.F. e Iscr. Reg. Impr. di Firenze: IT05305820481 - R.E.A. FI 536760<br>50056 Montelupo Fiorentino (FI) - Via arti e mestieri, 1<br>Tel.: 0571.911163 - E-mail: info@cristalensi.it</font>"
 			HTML1 = HTML1 & "</td>"
 			HTML1 = HTML1 & "</tr>"
+
 			HTML1 = HTML1 & "</table>"
 			HTML1 = HTML1 & "</body>"
 			HTML1 = HTML1 & "</html>"
@@ -267,6 +306,36 @@
 
 		rs.close
 
+		Set em_rs = Server.CreateObject("ADODB.Recordset")
+		sql = "SELECT PkId, Dominio, FkOrdine, FkProdotto, PrezzoProdotto, Quantita, TotaleRiga, Titolo, CodiceArticolo, Colore, Lampadina FROM RigheOrdine WHERE FkOrdine="&idOrdine&" and Dominio='"&dominio&"'"
+		em_rs.Open sql, conn, 1, 1
+		if em_rs.recordcount>0 then
+			HTML2 = HTML2 & "<tr>"
+			HTML2 = HTML2 & "<td>"
+			HTML2 = HTML2 & "<font face=Verdana size=2 color=#000000><strong>ARTICOLI ORDINATI</strong></font><br>"
+			HTML2 = HTML2 & "</td>"
+			HTML2 = HTML2 & "</tr>"
+			Do while not em_rs.EOF
+			qta_em=em_rs("quantita")
+			ca_em=em_rs("codicearticolo")
+			titolo_em=em_rs("titolo")
+			col_em=em_rs("colore")
+			lamp_em=em_rs("lampadina")
+
+			HTML2 = HTML2 & "<tr>"
+			HTML2 = HTML2 & "<td><font face=Verdana size=2 color=#000000>"
+			'HTML2 = HTML2 & "["&qta_em&"pz.]&nbsp;-&nbsp;<em>"&ca_em&"</em>&nbsp;-&nbsp;"&titolo_em&"<br>"&if Len(col_em)>0 or Len(lamp_em)>0 then&"("&col_em&"&nbsp;"&lamp_em&")"
+			HTML2 = HTML2 & "["&qta_em&"pz.]&nbsp;-&nbsp;<em>"&ca_em&"</em>&nbsp;-&nbsp;"&titolo_em&"<br>"
+			if Len(col_em)>0 or Len(lamp_em)>0 then
+				HTML2 = HTML2 & "("&col_em&"&nbsp;"&lamp_em&")<br>"
+			end if
+			HTML2 = HTML2 & "</font></td>"
+			HTML2 = HTML2 & "</tr>"
+			em_rs.MoveNext
+			loop
+		end if
+		em_rs.close
+
 			HTML1 = ""
 			HTML1 = HTML1 & "<html>"
 			HTML1 = HTML1 & "<head>"
@@ -277,13 +346,19 @@
 			HTML1 = HTML1 & "<table width='553' border='0' cellspacing='0' cellpadding='0'>"
 			HTML1 = HTML1 & "<tr>"
 			HTML1 = HTML1 & "<td>"
-			HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000>Grazie "&nominativo_email&" per aver scelto i nostri prodotti!<br>Questa &egrave; un email di conferma per il completamento dell'ordine n&deg; "&idordine&".<br><br><br>Il nostro staff avr&agrave; cura di spedirti la merce appena sar&agrave; disponibile nel nostro magazino.<br>Ti ricordiamo che per il pagamento in contrassegno, il corriere consegner&agrave; la merce solo se verr&agrave; pagata in contanti, non accetter&agrave; altri metodi di pagamento (anche gli assegni non saranno accettati).</font><br>"
-			HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000><br><br>Cordiali Saluti, lo staff di Cristalensi</font>"
+			HTML1 = HTML1 & "<font face=Verdana size=2 color=#000000>Grazie "&nominativo_email&" per aver scelto i nostri prodotti!<br>Questa &egrave; un email di conferma per il completamento dell'ordine n&deg; "&idordine&".<br></font><br>"
+			HTML1 = HTML1 & "</td>"
+			HTML1 = HTML1 & "</tr>"
+			HTML1 = HTML1 & HTML2
+			HTML1 = HTML1 & "<tr>"
+			HTML1 = HTML1 & "<td>"
+			HTML1 = HTML1 & "<font face=Verdana size=2 color=#000000>Il nostro staff avr&agrave; cura di spedirti la merce appena sar&agrave; disponibile nel nostro magazino.<br>Ti ricordiamo che per il pagamento in contrassegno, il corriere consegner&agrave; la merce solo se verr&agrave; pagata in contanti, non accetter&agrave; altri metodi di pagamento (anche gli assegni non saranno accettati).</font><br>"
+			HTML1 = HTML1 & "<font face=Verdana size=2 color=#000000><br><br>Cordiali Saluti, lo staff di Cristalensi</font>"
 			HTML1 = HTML1 & "</td>"
 			HTML1 = HTML1 & "</tr>"
 			HTML1 = HTML1 & "<tr>"
 			HTML1 = HTML1 & "<td>"
-			HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000><br><br>Cristalensi Snc di Lensi Massimiliano & C. - C.F. e Iscr. Reg. Impr. di Firenze: IT05305820481 - R.E.A. FI 536760<br>50056 Montelupo Fiorentino (FI) - Via arti e mestieri, 1<br>Tel.: 0571.911163 - E-mail: info@cristalensi.it</font>"
+			HTML1 = HTML1 & "<font face=Verdana size=2 color=#000000><br><br>Cristalensi Snc di Lensi Massimiliano & C. - C.F. e Iscr. Reg. Impr. di Firenze: IT05305820481 - R.E.A. FI 536760<br>50056 Montelupo Fiorentino (FI) - Via arti e mestieri, 1<br>Tel.: 0571.911163 - E-mail: info@cristalensi.it</font>"
 			HTML1 = HTML1 & "</td>"
 			HTML1 = HTML1 & "</tr>"
 			HTML1 = HTML1 & "</table>"

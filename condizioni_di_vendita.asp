@@ -136,17 +136,17 @@
                     Le vendite di prodotti via Internet sono disciplinate dal <strong>DECRETO LEGISLATIVO 21 Febbraio 2014, n. 21 (CODICE DEL CONSUMO)</strong> che regola la materia dei contratti a distanza, da intendersi per tali le vendite effettuate al di fuori dei locali commerciali. La normativa &egrave; in vigore dal 26 Marzo 2014.<br />
                     <br />Norme citate direttamente dal decreto:<br />
                     se il Cliente &egrave; un consumatore (ossia una persona fisica che acquista la merce per scopi non riferibili alla propria attivit&agrave; professionale, ovvero non effettua l'acquisto indicando nel modulo d'ordine un riferimento di Partita IVA), ha diritto a recedere dal contratto di acquisto per qualsiasi motivo, senza alcuna penalit&agrave; e fatto salvo quanto indicato successivamente.<br />
-                    Il diritto di recesso non si applica, dunque, nel caso di acquisti effettuati da aziende e professionisti fatturati con Partita IVA.<br />
-                    Lei ha il diritto di recedere dal contratto, senza indicarne le ragioni, entro 14 giorni.<br />
+                    <em>Il diritto di recesso non si applica, dunque, nel caso di acquisti effettuati da aziende e professionisti fatturati con Partita IVA.</em><br />
+                    Lei ha il diritto di recedere dal contratto, senza indicarne le ragioni, <strong>entro 14 giorni</strong>.<br />
                     Il periodo di recesso scade dopo 14 giorni dal giorno in cui Lei o un terzo, diverso dal vettore e da Lei designato, acquisisce il possesso fisico dei beni.<br />
-                    Il diritto di recesso non &egrave; applicabile a prodotti ordinati e modificati appositamente su specifica richiesta del cliente con varianti personalizzate.<br />
+                    <em>Il diritto di recesso non &egrave; applicabile a prodotti ordinati e modificati appositamente su specifica richiesta del cliente con varianti personalizzate.</em><br />
                     <br />
-                    Il diritto di recesso di cui agli articoli da 52 a 58 per i contratti a distanza e i contratti negoziati fuori dei locali commerciali è escluso relativamente a (si citano i paragrafi pi&ugrave; attinenti):<br />
-                    b) la fornitura di beni o servizi il cui prezzo è legato a fluttuazioni nel mercato finanziario che il professionista non è in grado di controllare e che possono verificarsi durante il periodo di recesso;
+                    Il diritto di recesso di cui agli articoli da 52 a 58 per i contratti a distanza e i contratti negoziati fuori dei locali commerciali &egrave; escluso relativamente a (si citano i paragrafi pi&ugrave; attinenti):<br />
+                    b) la fornitura di beni o servizi il cui prezzo &egrave; legato a fluttuazioni nel mercato finanziario che il professionista non &egrave; in grado di controllare e che possono verificarsi durante il periodo di recesso;
                     c) la fornitura di beni confezionati su misura o chiaramente personalizzati;
                     d) la fornitura di beni che rischiano di deteriorarsi o scadere rapidamente;
                     f) la fornitura di beni che, dopo la consegna, risultano, per loro natura, inscindibilmente mescolati con altri beni;
-                    
+
 
                     <em>Come esercitare il diritto di recesso</em><br />
                     Per esercitare il diritto di recesso, Lei &egrave; tenuto a informarci ( <a href="https://www.cristalensi.it/contatti.asp">contatti e mappa</a> ) della sua decisione di recedere dal presente contratto tramite una dichiarazione esplicita (ad esempio lettera inviata per posta o email), possibilmente contattandoci prima via telefono.<br />
@@ -165,13 +165,11 @@
 
                     <br />
                     <br />
-                    <strong>Decadenza del diritto di recesso.</strong><br />
-                    Il diritto di recesso decade totalmente qualora il prodotto restituito non sia integro, ovvero:<br />
-                    mancanza dell'imballo originale;<br />
-                    assenza di elementi integranti del prodotto (accessori, cavi, manuali d'istruzione etc);<br />
-                    danneggiamento del prodotto per cause diverse dal trasporto;<br />
-                    danneggiamento del prodotto dovute ad imperizia nell'imballaggio del prodotto;<br />
-                    i prodotti non siano stati montati e installati anche parzialmente.
+                    <em>Ulteriori approfondimenti del diritto di recesso.</em><br />
+                    Il diritto di recesso pu&ograve; essere sempre esercitato entro i termini legali anche nel caso di prodotto con segni d'uso, gi&agrave; installato,
+                    senza imballo originale oppure in assenza di elementi integranti del prodotto (accessori, cavi, manuali d'istruzione etc.),
+                    tuttavia in questi casi il venditore potrebbe riservarsi, nell'ambito del rimborso, un diritto al trattenimento di una somma pari alla diminuizione del valore del bene.
+
                     <br /><a name="rotture"></a>
                     <br />
                     <strong>Rotture derivanti dal trasporto</strong><br /><em>Le spedizioni sono tutte assicurate.</em><br /><strong>
