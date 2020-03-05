@@ -864,6 +864,16 @@ End If
 										<br>
 										<br>
 								</p>
+
+								<div id="trustedShopsCheckout" style="display: none;">
+								<span id="tsCheckoutOrderNr"><%=idordine%></span>
+								<span id="tsCheckoutBuyerEmail"><%=email%></span>
+								<span id="tsCheckoutOrderAmount"><%=FormatNumber(TotaleGenerale,2)%></span>
+								<span id="tsCheckoutOrderCurrency">Euro</span>
+								<span id="tsCheckoutOrderPaymentType">Pagamento con bonifico bancario</span>
+								<span id="tsCheckoutOrderEstDeliveryDate"><%=Left(DataAggiornamento, 10)%></span>
+								</div>
+
 						<%end if%>
 						<%if FkPagamento=4 then%>
 								<p class="description">

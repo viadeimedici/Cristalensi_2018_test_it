@@ -106,7 +106,15 @@
     end if
     ip=Request.ServerVariables("REMOTE_ADDR")
 
-    if email<>"" and invioemail="si" and ip<>"194.226.137.235" then
+    test_spam=request("test_spam")
+    if test_spam="" then
+      invioemail="si"
+    Else
+      invioemail="no"
+    end if
+
+
+    if email<>"" and invioemail="si" then
 
   		data=date()
 
@@ -331,7 +339,7 @@
           <div class="form-group">
               <label for="nome" class="col-sm-4 control-label">Nome e Cognome</label>
               <div class="col-sm-8">
-                  <input type="text" class="form-control" id="nome" name="nome">
+                  <input type="text" class="form-control" id="nome" name="nome"><input type="text" style="display: none;" name="test_spam" value="" />
               </div>
           </div>
           <div class="form-group">
@@ -580,6 +588,7 @@
       <p class="description">Per richiedere informazioni e preventivi del prodotto riempi il seguente modulo, oppure contattaci direttamente.</p>
       <form class="form-horizontal" name="requestprev" id="requestprev" onSubmit="return verifica_request_prev();">
       <input type="hidden" name="ric" value="2" />
+
           <div class="form-group">
               <label for="nome" class="col-sm-4 control-label">Nome e Cognome</label>
               <div class="col-sm-8">
