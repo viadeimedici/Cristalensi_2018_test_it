@@ -10,8 +10,10 @@ sql = "SELECT * FROM Ordini WHERE Dominio LIKE '"&dominio&"' AND pkid="&idOrdine
 ss.Open sql, conn, 3, 3
 
 if ss.recordcount>0 then
+  TotaleGenerale=ss("TotaleGenerale")
   ss("stato")=9
-  ss("DataAggiornamento")=now()
+  DataAggiornamento=now()
+  ss("DataAggiornamento")=DataAggiornamento
   ss("IpOrdine")=Request.ServerVariables("REMOTE_ADDR")
   ss.update
 end if
@@ -336,6 +338,16 @@ end if
 											<br>
 									</p>
 							</div>
+
+              <!--dati per TrustedShops-->
+              <div id="trustedShopsCheckout" style="display: none;">
+              <span id="tsCheckoutOrderNr"><%=idordine%></span>
+              <span id="tsCheckoutBuyerEmail"><%=email%></span>
+              <span id="tsCheckoutOrderAmount"><%=FormatNumber(TotaleGenerale,2)%></span>
+              <span id="tsCheckoutOrderCurrency">Euro</span>
+              <span id="tsCheckoutOrderPaymentType">Pagamento con carta di credito</span>
+              <span id="tsCheckoutOrderEstDeliveryDate"><%=Left(DataAggiornamento, 10)%></span>
+              </div>
 
         </div>
     </div>

@@ -94,7 +94,9 @@
     nome=request("nome")
     telefono=request("telefono")
     richiesta=request("richiesta")
-    if InStr(richiesta, "http")>0 or InStr(richiesta, "www")>0 or InStr(richiesta, "href")>0 or InStr(nome, "http")>0 or InStr(nome, "www")>0 or InStr(nome, "href")>0 then
+    test_spam=request("test_spam")
+
+    if InStr(richiesta, "http")>0 or InStr(richiesta, "www")>0 or InStr(richiesta, "href")>0 or InStr(nome, "http")>0 or InStr(nome, "www")>0 or InStr(nome, "href")>0 or Len(test_spam)>0 then
       invioemail="no"
     Else
       invioemail="si"
@@ -105,13 +107,6 @@
       end if
     end if
     ip=Request.ServerVariables("REMOTE_ADDR")
-
-    test_spam=request("test_spam")
-    if test_spam="" then
-      invioemail="si"
-    Else
-      invioemail="no"
-    end if
 
 
     if email<>"" and invioemail="si" then

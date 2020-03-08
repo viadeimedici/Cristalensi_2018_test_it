@@ -865,6 +865,7 @@ End If
 										<br>
 								</p>
 
+								<!--dati per TrustedShops-->
 								<div id="trustedShopsCheckout" style="display: none;">
 								<span id="tsCheckoutOrderNr"><%=idordine%></span>
 								<span id="tsCheckoutBuyerEmail"><%=email%></span>
@@ -895,6 +896,17 @@ End If
 										<br>
 										<br>
 								</p>
+
+								<!--dati per TrustedShops-->
+								<div id="trustedShopsCheckout" style="display: none;">
+								<span id="tsCheckoutOrderNr"><%=idordine%></span>
+								<span id="tsCheckoutBuyerEmail"><%=email%></span>
+								<span id="tsCheckoutOrderAmount"><%=FormatNumber(TotaleGenerale,2)%></span>
+								<span id="tsCheckoutOrderCurrency">Euro</span>
+								<span id="tsCheckoutOrderPaymentType">Pagamento con PostePay</span>
+								<span id="tsCheckoutOrderEstDeliveryDate"><%=Left(DataAggiornamento, 10)%></span>
+								</div>
+
 						<%end if%>
 						<%if FkPagamento=3 then%>
 								<p class="description">
@@ -911,6 +923,17 @@ End If
 								<br>
 								<br>
 								</p>
+
+								<!--dati per TrustedShops-->
+								<div id="trustedShopsCheckout" style="display: none;">
+								<span id="tsCheckoutOrderNr"><%=idordine%></span>
+								<span id="tsCheckoutBuyerEmail"><%=email%></span>
+								<span id="tsCheckoutOrderAmount"><%=FormatNumber(TotaleGenerale,2)%></span>
+								<span id="tsCheckoutOrderCurrency">Euro</span>
+								<span id="tsCheckoutOrderPaymentType">Pagamento con in contrassegno</span>
+								<span id="tsCheckoutOrderEstDeliveryDate"><%=Left(DataAggiornamento, 10)%></span>
+								</div>
+
 						<%end if%>
 						<%if FkPagamento=2 then%>
 							<p class="description">

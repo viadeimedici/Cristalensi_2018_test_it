@@ -572,7 +572,7 @@
 						<%if ss.recordcount>0 then%>
             <div class="col-md-12">
                 <div class="bg-primary">
-                    <p style="font-size: 1.2em; text-align: right; padding: 10px 15px; color: #000;">Totale carrello: <b>
+                    <p style="font-size: 1.2em; text-align: right; padding: 10px 15px; color: #000;">Totale ordine: <b>
 										<%if ss("TotaleGenerale")<>0 then%>
 											<%=FormatNumber(ss("TotaleGenerale"),2)%>
 										<%else%>
