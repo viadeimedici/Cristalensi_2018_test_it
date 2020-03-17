@@ -199,7 +199,7 @@ testo_footer_8="Nel settore dell’illuminazione e dell’arredamento uno spazio
                     spedizionegratis=0
                     if prezzoarticolo>250 then spedizionegratis=1
   							%>
-                <div class="col-xs-12 col-sm-4 col-md-3">
+                <div class="col-xs-6 col-sm-4 col-md-3">
                   <article class="col-item">
                       <%if spedizionegratis=1 then%><div class="options">SPEDIZIONE<br />GRATUITA</div><%end if%>
                       <div class="photo">
@@ -301,7 +301,7 @@ testo_footer_8="Nel settore dell’illuminazione e dell’arredamento uno spazio
                     spedizionegratis=0
                     if prezzoarticolo>250 then spedizionegratis=1
                 %>
-                <div class="col-xs-12 col-sm-4 col-md-3">
+                <div class="col-xs-6 col-sm-4 col-md-3">
                   <article class="col-item">
                         <%if spedizionegratis=1 then%><div class="options">SPEDIZIONE<br />GRATUITA</div><%end if%>
                       <div class="photo">
