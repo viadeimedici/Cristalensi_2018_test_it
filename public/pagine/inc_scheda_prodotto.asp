@@ -226,6 +226,17 @@ end if
 			<div class="col-md-2 col-md-pull-10">
 				<a class="btn btn-warning btn-sm btn-block" href="javascript:history.back()"><i class="fa fa-chevron-left"></i> torna indietro</a>
 			</div>
+			<div class="row" style="margin: 20px 0px;">
+					<div class="col-md-12 clearfix">
+							<h4 class="subtitle"><div class="dot"></div><span>Aggiornamenti</span></h4>
+					</di>
+					<div class="col-md-12 clearfix" style="background-color:#f5f5f5;">
+							<div class="scheda-descrizione" style="padding: 20px 10px;">In base alle nuove disposizioni del Decreto del 22 Marzo del Presidente del Consiglio dei Ministri sulla tutela della salute in seguito al diffondersi del Coronavirus, nel rispetto di clienti, dipendenti, collaboratori e titolari, abbiamo deciso di <b>sospendere fino al 3 Aprile le consegne</b> ritendo che la sicurezza di tutti sia il bene piu' prezioso.
+<br /><b>Ordini</b>, <b>domande</b> e <b>quesiti</b> potranno essere comunque fatti e <b>tutti avrete una risposta</b>, i contatti sono tutti gestiti dal personale e <b>disponibili</b>: potrete <b>telefonare</b> al numero 0571.911163 e <b>scriverci</b> via <b>Whatsapp</b> (3388064487), via <b>Email</b> (info@cristalensi.it) oppure attraverso i punti di <b>Richiesta informazioni</b> nelle pagine.<br />
+Dovremo avere tutti pazienza, rispettare le distanze e limitare i contatti, aspettando il momento giusto per tornare a fare acquisti in tutta sicurezza.<br />
+<em>Vi aspettiamo online, non esitate a contattarci!</em></div>
+					</div>
+			</di>
 		</div>
         <div class="top-buffer hidden-md hidden-lg"></div>
         <div class="" itemscope itemtype="http://schema.org/Product">
