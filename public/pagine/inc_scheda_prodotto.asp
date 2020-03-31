@@ -566,6 +566,18 @@ Dovremo avere tutti pazienza, rispettare le distanze e limitare i contatti, aspe
 				</div>
 				<div class="clearfix"></div>
 				<div class="row">
+					<%if FkProduttore=59 then%>
+					<div class="col-lg-12 col-md-12 col-sm-4 col-xsl-4 col-xs-12">
+						<div class="banner_2 banner_a">
+							<a data-fancybox data-src="#hidden-content" href="javascript:;"><img src="/images/sconto_extra_2.png"></a>
+						</div>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-4 col-xsl-4 col-xs-12">
+						<div class="banner_2 banner_b">
+							<img src="/images/spedizione_gratuita.png">
+						</div>
+					</div>
+					<%else%>
 					<div class="col-lg-12 col-md-12 col-sm-4 col-xsl-4 col-xs-12">
 						<div class="banner_2 banner_a">
 							<img src="/images/sconto_extra.png">
@@ -582,6 +594,7 @@ Dovremo avere tutti pazienza, rispettare le distanze e limitare i contatti, aspe
 							<img src="/images/sconto_bonifico.png">
 						</div>
 					</div>
+					<%end if%>
 				</div>
 				<!--#include virtual="/inc_box_contatti.asp"-->
 
