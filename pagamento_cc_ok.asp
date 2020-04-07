@@ -15,6 +15,7 @@ if ss.recordcount>0 then
   DataAggiornamento=now()
   ss("DataAggiornamento")=DataAggiornamento
   ss("IpOrdine")=Request.ServerVariables("REMOTE_ADDR")
+  TotaleGenerale=ss("TotaleGenerale")
   ss.update
 end if
 
@@ -30,6 +31,37 @@ if idsession>0 then
 
   rs.close
 
+  Set em_rs = Server.CreateObject("ADODB.Recordset")
+  sql = "SELECT PkId, Dominio, FkOrdine, FkProdotto, PrezzoProdotto, Quantita, TotaleRiga, Titolo, CodiceArticolo, Colore, Lampadina FROM RigheOrdine WHERE FkOrdine="&idOrdine&" and Dominio='"&dominio&"'"
+  em_rs.Open sql, conn, 1, 1
+  if em_rs.recordcount>0 then
+    HTML2 = HTML2 & "<tr>"
+    HTML2 = HTML2 & "<td>"
+    HTML2 = HTML2 & "<font face=Verdana size=2 color=#000000><strong>ARTICOLI ORDINATI</strong></font><br>"
+    HTML2 = HTML2 & "</td>"
+    HTML2 = HTML2 & "</tr>"
+    Do while not em_rs.EOF
+    qta_em=em_rs("quantita")
+    ca_em=em_rs("codicearticolo")
+    titolo_em=em_rs("titolo")
+    col_em=em_rs("colore")
+    lamp_em=em_rs("lampadina")
+
+    HTML2 = HTML2 & "<tr>"
+    HTML2 = HTML2 & "<td><font face=Verdana size=2 color=#000000>"
+    'HTML2 = HTML2 & "["&qta_em&"pz.]&nbsp;-&nbsp;<em>"&ca_em&"</em>&nbsp;-&nbsp;"&titolo_em&"<br>"&if Len(col_em)>0 or Len(lamp_em)>0 then&"("&col_em&"&nbsp;"&lamp_em&")"
+    HTML2 = HTML2 & "["&qta_em&"pz.]&nbsp;-&nbsp;<em>"&ca_em&"</em>&nbsp;-&nbsp;"&titolo_em&"<br>"
+    if Len(col_em)>0 or Len(lamp_em)>0 then
+      HTML2 = HTML2 & "("&col_em&"&nbsp;"&lamp_em&")<br>"
+    end if
+    HTML2 = HTML2 & "</font></td>"
+    HTML2 = HTML2 & "</tr>"
+    em_rs.MoveNext
+    loop
+  end if
+  em_rs.close
+
+
   HTML1 = ""
   HTML1 = HTML1 & "<html>"
   HTML1 = HTML1 & "<head>"
@@ -40,7 +72,13 @@ if idsession>0 then
   HTML1 = HTML1 & "<table width='553' border='0' cellspacing='0' cellpadding='0'>"
   HTML1 = HTML1 & "<tr>"
   HTML1 = HTML1 & "<td>"
-  HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000>Grazie "&nominativo_email&" per aver scelto i nostri prodotti!<br>Questa &egrave; un email di conferma per il completamento dell'ordine n&deg; "&idordine&".<br> Il nostro staff avr&agrave; cura di spedirti la merce appena l'amministrazione avr&agrave; notificato il pagamento.</font>"
+  HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000>Grazie "&nominativo_email&" per aver scelto i nostri prodotti!<br>Questa &egrave; un email di conferma per il completamento dell'ordine n&deg; "&idordine&".<br><br><b>TOTALE ORDINE: <u>"&FormatNumber(TotaleGenerale,2)&"&#8364;</u></b><br><br></font>"
+  HTML1 = HTML1 & "</td>"
+  HTML1 = HTML1 & "</tr>"
+  HTML1 = HTML1 & HTML2
+  HTML1 = HTML1 & "<tr>"
+  HTML1 = HTML1 & "<td>"
+  HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000>Il nostro staff avr&agrave; cura di spedirti la merce appena l'amministrazione avr&agrave; notificato il pagamento.</font>"
   HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000><br><br>Cordiali Saluti, lo staff di Cristalensi</font>"
   HTML1 = HTML1 & "</td>"
   HTML1 = HTML1 & "</tr>"
@@ -110,6 +148,7 @@ if idsession>0 then
   HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000>Dati sensibili e determinanti del nuovo ordine:<br>Nominativo: <b>"&nominativo_email&"</b><br>Email: <b>"&email&"</b><br>Codice cliente: <b>"&FkCliente&"</b><br>Codice ordine: <b>"&idordine&"</b></font><br>"
   HTML1 = HTML1 & "</td>"
   HTML1 = HTML1 & "</tr>"
+  HTML1 = HTML1 & HTML2
   HTML1 = HTML1 & "</table>"
   HTML1 = HTML1 & "</body>"
   HTML1 = HTML1 & "</html>"
@@ -170,6 +209,7 @@ if idsession>0 then
   HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000>Dati sensibili e determinanti del nuovo ordine:<br>Nominativo: <b>"&nominativo_email&"</b><br>Email: <b>"&email&"</b><br>Codice cliente: <b>"&FkCliente&"</b><br>Codice ordine: <b>"&idordine&"</b></font><br>"
   HTML1 = HTML1 & "</td>"
   HTML1 = HTML1 & "</tr>"
+  HTML1 = HTML1 & HTML2
   HTML1 = HTML1 & "</table>"
   HTML1 = HTML1 & "</body>"
   HTML1 = HTML1 & "</html>"

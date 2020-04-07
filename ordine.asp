@@ -207,6 +207,7 @@
 			HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000>Dati sensibili e determinanti del nuovo ordine:<br>Nominativo: <b>"&nominativo_email&"</b><br>Email: <b>"&email&"</b><br>Codice cliente: <b>"&idsession&"</b><br>Codice ordine: <b>"&idordine&"</b></font><br>"
 			HTML1 = HTML1 & "</td>"
 			HTML1 = HTML1 & "</tr>"
+			HTML1 = HTML1 & HTML2
 			HTML1 = HTML1 & "</table>"
 			HTML1 = HTML1 & "</body>"
 			HTML1 = HTML1 & "</html>"
@@ -422,6 +423,7 @@
 			HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000>Dati sensibili e determinanti del nuovo ordine:<br>Nominativo: <b>"&nominativo_email&"</b><br>Email: <b>"&email&"</b><br>Codice cliente: <b>"&idsession&"</b><br>Codice ordine: <b>"&idordine&"</b></font><br>"
 			HTML1 = HTML1 & "</td>"
 			HTML1 = HTML1 & "</tr>"
+			HTML1 = HTML1 & HTML2
 			HTML1 = HTML1 & "</table>"
 			HTML1 = HTML1 & "</body>"
 			HTML1 = HTML1 & "</html>"
@@ -602,6 +604,7 @@
 			HTML1 = HTML1 & "<font face=Verdana size=3 color=#000000>Dati sensibili e determinanti del nuovo ordine:<br>Nominativo: <b>"&nominativo_email&"</b><br>Email: <b>"&email&"</b><br>Codice cliente: <b>"&idsession&"</b><br>Codice ordine: <b>"&idordine&"</b></font><br>"
 			HTML1 = HTML1 & "</td>"
 			HTML1 = HTML1 & "</tr>"
+			HTML1 = HTML1 & HTML2
 			HTML1 = HTML1 & "</table>"
 			HTML1 = HTML1 & "</body>"
 			HTML1 = HTML1 & "</html>"
