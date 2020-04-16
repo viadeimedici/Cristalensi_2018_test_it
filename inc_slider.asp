@@ -17,7 +17,7 @@
     <div class="col-md-4">
         <img src="/images/banner-laterali.png" alt="Promozioni Vendita Lampadari online" />
         <!--<div class="banner preventivi overflowContainer">
-            <h3 class="title">Super Promo Autunno/Inverno</h3>
+            <h3 class="title">Super Promo Primavera/Estate</h3>
             <p class="text"><strong><em>Sconti Extra in Carrello</em></strong><br />-2% Oltre 300&nbsp&euro;<br />-3% Oltre 600&nbsp&euro;<br />-4% Oltre 900&nbsp&euro;</strong></p>
         </div>
         <div class="banner pagamenti overflowContainer">

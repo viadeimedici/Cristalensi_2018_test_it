@@ -73,9 +73,9 @@ testo_footer_8="Nel settore dell’illuminazione e dell’arredamento uno spazio
                     <h4 class="subtitle"><div class="dot"></div><span>Aggiornamenti</span></h4>
                 </di>
                 <div class="col-md-12 clearfix" style="background-color:#f5f5f5;">
-                    <div class="scheda-descrizione" style="padding: 20px 10px;">In base alle nuove disposizioni del Decreto del 22 Marzo del Presidente del Consiglio dei Ministri sulla tutela della salute in seguito al diffondersi del Coronavirus, nel rispetto di clienti, dipendenti, collaboratori e titolari, abbiamo deciso di <b>sospendere fino al 3 Aprile le consegne</b> ritendo che la sicurezza di tutti sia il bene piu' prezioso.
-  <br /><b>Ordini</b>, <b>domande</b> e <b>quesiti</b> potranno essere comunque fatti e <b>tutti avrete una risposta</b>, i contatti sono tutti gestiti dal personale e <b>disponibili</b>: potrete <b>telefonare</b> al numero 0571.911163 e <b>scriverci</b> via <b>Whatsapp</b> (3388064487), via <b>Email</b> (info@cristalensi.it) oppure attraverso i punti di <b>Richiesta informazioni</b> nelle pagine.<br />
-  Dovremo avere tutti pazienza, rispettare le distanze e limitare i contatti, aspettando il momento giusto per tornare a fare acquisti in tutta sicurezza.<br />
+                    <div class="scheda-descrizione" style="padding: 20px 10px;">
+Il nostro shop online &egrave; tornato <b>operativo al 100%</b> rispettando tutte le norme sulla sicurezza per dipendenti, clienti e fornitori.<br/>Ancora per&ograve; la situazione non &egrave; tornata del tutto regolare perch&egrave; alcuni produttori stanno avendo alcuni problemi e i tempi di consegna indicati nelle schede dei prodotti sono indicativi e non certi.<br />Per avere tempi certi contattateci, <b>avrete una risposta veloce</b>: potrete <b>telefonare</b> al numero 0571.911163 e <b>scriverci</b> via <b>Whatsapp</b> (3388064487), via <b>Email</b> (info@cristalensi.it) oppure attraverso i punti di <b>Richiesta informazioni</b> nelle pagine.<br />
+  Dovremo avere tutti pazienza, rispettare le distanze e limitare ancora i contatti, aspettando il momento giusto per tornare a fare acquisti in tutta sicurezza.<br />
   <em>Vi aspettiamo online, non esitate a contattarci!</em></div>
                 </div>
             </di>
