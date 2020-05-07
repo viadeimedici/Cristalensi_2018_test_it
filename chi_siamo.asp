@@ -95,6 +95,92 @@
                 <div class="col-xs-6 col-sm-3 col-md-2 ">
                     <article class="col-item">
                         <div class="photo">
+                            <a href="/images/chi-siamo/grandi/17.jpg" data-fancybox="group" data-caption="Caption #1" class="prod-img-replace" style="background-image: url(/images/chi-siamo/piccole/17.jpg)" title="Negozio illuminazione - Entrata e parcheggio"><img alt="Negozio illuminazione - Entrata e parcheggio" src="images/blank.png"></a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-md-2 ">
+                    <article class="col-item">
+                        <div class="photo">
+                            <a href="/images/chi-siamo/grandi/18.jpg" data-fancybox="group" data-caption="Caption #1" class="prod-img-replace" style="background-image: url(/images/chi-siamo/piccole/18.jpg)" title="Negozio illuminazione - Staff"><img alt="Negozio illuminazione - Staff" src="images/blank.png"></a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-md-2 ">
+                    <article class="col-item">
+                        <div class="photo">
+                            <a href="/images/chi-siamo/grandi/19.jpg" data-fancybox="group" data-caption="Caption #1" class="prod-img-replace" style="background-image: url(/images/chi-siamo/piccole/19.jpg)" title="Negozio lampadari - Panoramica"><img alt="Negozio lampadari - Panoramica" src="images/blank.png"></a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-md-2 ">
+                    <article class="col-item">
+                        <div class="photo">
+                            <a href="/images/chi-siamo/grandi/20.jpg" data-fancybox="group" data-caption="Caption #1" class="prod-img-replace" style="background-image: url(/images/chi-siamo/piccole/20.jpg)" title="Negozio lampadari Firenze - Panoramica"><img alt="Negozio lampadari Firenze - Panoramica" src="images/blank.png"></a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-md-2 ">
+                    <article class="col-item">
+                        <div class="photo">
+                            <a href="/images/chi-siamo/grandi/21.jpg" data-fancybox="group" data-caption="Caption #1" class="prod-img-replace" style="background-image: url(/images/chi-siamo/piccole/21.jpg)" title="Negozio lampade rustiche"><img alt="Negozio lampade rustiche" src="images/blank.png"></a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-md-2 ">
+                    <article class="col-item">
+                        <div class="photo">
+                            <a href="/images/chi-siamo/grandi/22.jpg" data-fancybox="group" data-caption="Caption #1" class="prod-img-replace" style="background-image: url(/images/chi-siamo/piccole/22.jpg)" title="Negozio lampadari in cristallo"><img alt="Negozio lampadari in cristallo" src="images/blank.png"></a>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-xs-6 col-sm-3 col-md-2 ">
+                    <article class="col-item">
+                        <div class="photo">
+                            <a href="/images/chi-siamo/grandi/23.jpg" data-fancybox="group" data-caption="Caption #1" class="prod-img-replace" style="background-image: url(/images/chi-siamo/piccole/23.jpg)" title="Negozio illuminazione - Entrata e parcheggio"><img alt="Negozio illuminazione - Entrata e parcheggio" src="images/blank.png"></a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-md-2 ">
+                    <article class="col-item">
+                        <div class="photo">
+                            <a href="/images/chi-siamo/grandi/24.jpg" data-fancybox="group" data-caption="Caption #1" class="prod-img-replace" style="background-image: url(/images/chi-siamo/piccole/24.jpg)" title="Negozio illuminazione - Staff"><img alt="Negozio illuminazione - Staff" src="images/blank.png"></a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-md-2 ">
+                    <article class="col-item">
+                        <div class="photo">
+                            <a href="/images/chi-siamo/grandi/25.jpg" data-fancybox="group" data-caption="Caption #1" class="prod-img-replace" style="background-image: url(/images/chi-siamo/piccole/25.jpg)" title="Negozio lampadari - Panoramica"><img alt="Negozio lampadari - Panoramica" src="images/blank.png"></a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-md-2 ">
+                    <article class="col-item">
+                        <div class="photo">
+                            <a href="/images/chi-siamo/grandi/26.jpg" data-fancybox="group" data-caption="Caption #1" class="prod-img-replace" style="background-image: url(/images/chi-siamo/piccole/26.jpg)" title="Negozio lampadari Firenze - Panoramica"><img alt="Negozio lampadari Firenze - Panoramica" src="images/blank.png"></a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-md-2 ">
+                    <article class="col-item">
+                        <div class="photo">
+                            <a href="/images/chi-siamo/grandi/27.jpg" data-fancybox="group" data-caption="Caption #1" class="prod-img-replace" style="background-image: url(/images/chi-siamo/piccole/27.jpg)" title="Negozio lampade rustiche"><img alt="Negozio lampade rustiche" src="images/blank.png"></a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-md-2 ">
+                    <article class="col-item">
+                        <div class="photo">
+                            <a href="/images/chi-siamo/grandi/28.jpg" data-fancybox="group" data-caption="Caption #1" class="prod-img-replace" style="background-image: url(/images/chi-siamo/piccole/28.jpg)" title="Negozio lampadari in cristallo"><img alt="Negozio lampadari in cristallo" src="images/blank.png"></a>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-xs-6 col-sm-3 col-md-2 ">
+                    <article class="col-item">
+                        <div class="photo">
                             <a href="/images/chi-siamo/grandi/5.jpg" data-fancybox="group" data-caption="Caption #1" class="prod-img-replace" style="background-image: url(/images/chi-siamo/piccole/5.jpg)" title="Negozio illuminazione - Entrata e parcheggio"><img alt="Negozio illuminazione - Entrata e parcheggio" src="images/blank.png"></a>
                         </div>
                     </article>
