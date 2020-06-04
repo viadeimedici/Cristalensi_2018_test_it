@@ -6,7 +6,98 @@
 
 	IdOrdine=session("ordine_shop")
 	if IdOrdine="" then IdOrdine=0
-	if idOrdine=0 then response.redirect("carrello1.asp")
+
+	IdOrdine_temp=session("ordine_shop_temp")
+	if IdOrdine_temp="" then IdOrdine_temp=0
+
+	if idOrdine=0 then
+		if IdOrdine_temp>0 then
+			'faccio il passaggio da ord. temp a ord. def.
+			Set ss = Server.CreateObject("ADODB.Recordset")
+			sql = "SELECT * FROM OrdiniTemporanei WHERE Dominio LIKE '"&dominio&"' AND PkId="&IdOrdine_temp
+			ss.Open sql, conn, 1, 1
+			if ss.recordcount>0 then
+				'creo un ordine def. nuovo
+				Set os1 = Server.CreateObject("ADODB.Recordset")
+				sql = "SELECT Top 1 PkId, PkId_Contatore FROM Ordini Order by PkId_Contatore Desc"
+				os1.Open sql, conn, 1, 1
+				IdOrdine_ultimo=os1("PkId")
+				IdOrdine_ultimo=CLng(IdOrdine_ultimo)
+				IdOrdine=IdOrdine_ultimo+1
+				os1.close
+
+				Set os1 = Server.CreateObject("ADODB.Recordset")
+				sql = "SELECT * FROM Ordini"
+				os1.Open sql, conn, 3, 3
+
+				os1.addnew
+				os1("PkId")=IdOrdine
+				os1("FkCliente")=idsession
+				os1("stato")=ss("stato")
+				os1("TotaleCarrello")=ss("TotaleCarrello")
+				os1("TotaleGenerale")=ss("TotaleGenerale")
+				os1("Sconto")=ss("Sconto")
+				os1("DataOrdine")=now()
+				os1("DataAggiornamento")=now()
+				os1("IpOrdine")=Request.ServerVariables("REMOTE_ADDR")
+				os1("Dominio")=dominio 'aggiunto per passaggio 2019'
+				os1.update
+
+				os1.close
+
+				Set rs = Server.CreateObject("ADODB.Recordset")
+				sql = "SELECT * FROM RigheOrdineTemporaneo WHERE FkOrdineTemporaneo="&idOrdine_temp&" AND Dominio LIKE '"&dominio&"'"
+				end if
+				rs.Open sql, conn, 1, 1
+				if rs.recordcount>0 then
+				Do while not rs.EOF
+					Set riga_rs = Server.CreateObject("ADODB.Recordset")
+					sql = "SELECT Top 1 PkId, PkId_Contatore FROM RigheOrdine Order by Pkid_Contatore Desc"
+					riga_rs.Open sql, conn, 1, 1
+					PkId_riga_ultimo=riga_rs("PkId")
+					PkId_riga_ultimo=CLng(PkId_riga_ultimo)
+					PkId_riga=PkId_riga_ultimo+1
+					riga_rs.close
+
+					Set riga_rs = Server.CreateObject("ADODB.Recordset")
+					sql = "SELECT * FROM RigheOrdine"
+					riga_rs.Open sql, conn, 3, 3
+
+					riga_rs.addnew
+					riga_rs("PkId")=PkId_riga
+					riga_rs("Dominio")=dominio 'aggiunto per passaggio 2019'
+					riga_rs("FkOrdine")=IdOrdine
+					riga_rs("FkCliente")=idsession
+					riga_rs("FkProdotto")=rs("FkProdotto")
+					riga_rs("PrezzoProdotto")=rs("PrezzoProdotto")
+					riga_rs("Quantita")=rs("Quantita")
+					riga_rs("TotaleRiga")=rs("TotaleRiga")
+					riga_rs("colore")=rs("colore")
+					riga_rs("lampadina")=rs("lampadina")
+					riga_rs("CodiceArticolo")=rs("CodiceArticolo")
+					riga_rs("Titolo")=rs("Titolo")
+					riga_rs("Scontabile")=rs("Scontabile")
+					riga_rs("Data")=now()
+					riga_rs.update
+
+					riga_rs.close
+				rs.movenext
+				loop
+				end if
+				rs.close
+
+			end if
+			ss.close
+
+			'****************devo eliminare l'ordine temporaneo*****************
+
+			'Creo una sessione con l'id dell'ordine
+			Session("ordine_shop")=IdOrdine
+			Session("ordine_shop_temp")=0
+		else
+			response.redirect("carrello1.asp")
+		end if
+	end if
 
 	'inserisco le eventuali note dal carrello1
 	if fromURL="carrello1.asp" then

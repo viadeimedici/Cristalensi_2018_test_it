@@ -6,6 +6,9 @@
 	mode=request("mode")
 	if mode="" then mode=0
 
+	Dominio_admin=request("Dominio")
+	if Len(Dominio_admin)>0 then Dominio=Dominio_admin
+
 		Set ss = Server.CreateObject("ADODB.Recordset")
 		sql = "SELECT * FROM Ordini WHERE Dominio LIKE '"&dominio&"' AND pkid="&idOrdine
 		ss.Open sql, conn, 3, 3
