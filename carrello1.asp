@@ -2,6 +2,7 @@
 <%
 'Call Visualizzazione("",0,"carrello1.asp")
 
+
 	mode=request("mode")
 	if mode="" then mode=0
 
@@ -14,6 +15,8 @@
 
 	id=request("id")
 	if id="" then id=0
+
+	
 
 		if ((IdOrdine=0 and IdOrdine_temp=0) and (id<>0)) then
 			if idsession>0 then
@@ -49,18 +52,24 @@
 				Session("ordine_shop_temp")=0
 			else
 				'creo un ordine temporaneo
+				
+				Set os1 = Server.CreateObject("ADODB.Recordset")
+				sql = "SELECT Top 1 PkId_Contatore FROM OrdiniTemporanei Order by PkId_Contatore Desc"
+				os1.Open sql, conn, 1, 1
+				IdOrdine_ultimo=os1("PkId_Contatore")
+				IdOrdine_ultimo=CLng(IdOrdine_ultimo)
+				IdOrdine_t=IdOrdine_ultimo+1
+				os1.close
 
 				Set os1 = Server.CreateObject("ADODB.Recordset")
 				sql = "SELECT * FROM OrdiniTemporanei"
 				os1.Open sql, conn, 3, 3
 
 				os1.addnew
-				'os1("PkId")=IdOrdine
-				'os1("FkCliente")=idsession
+				os1("PkId_Contatore")=IdOrdine_t
 				os1("stato")=0
 				os1("TotaleCarrello")=0
 				os1("TotaleGenerale")=0
-				'os1("DataOrdine")=now()
 				os1("DataAggiornamento")=now()
 				os1("IpOrdine")=Request.ServerVariables("REMOTE_ADDR")
 				os1("Dominio")=dominio 'aggiunto per passaggio 2019'
@@ -79,6 +88,9 @@
 				'Creo una sessione con l'id dell'ordine
 				Session("ordine_shop_temp")=IdOrdine_ultimo
 				Session("ordine_shop")=0
+				
+				response.write("arrivato 4")
+				response.end
 			end if
 
 		end if
