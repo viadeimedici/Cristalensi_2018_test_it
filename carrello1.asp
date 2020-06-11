@@ -9,14 +9,15 @@
 	'se la session è già aperta sfrutto il pkid dell'ordine, altrimenti ne apro una
 	IdOrdine=session("ordine_shop")
 	if IdOrdine="" then IdOrdine=0
+	'response.write("IdOrdine:"&IdOrdine&"<br>")
 
 	IdOrdine_temp=session("ordine_shop_temp")
 	if IdOrdine_temp="" then IdOrdine_temp=0
+	'response.write("IdOrdine_temp:"&IdOrdine_temp&"<br>")
 
 	id=request("id")
 	if id="" then id=0
 
-	
 
 		if ((IdOrdine=0 and IdOrdine_temp=0) and (id<>0)) then
 			if idsession>0 then
@@ -52,21 +53,21 @@
 				Session("ordine_shop_temp")=0
 			else
 				'creo un ordine temporaneo
-				
-				Set os1 = Server.CreateObject("ADODB.Recordset")
-				sql = "SELECT Top 1 PkId_Contatore FROM OrdiniTemporanei Order by PkId_Contatore Desc"
-				os1.Open sql, conn, 1, 1
-				IdOrdine_ultimo=os1("PkId_Contatore")
-				IdOrdine_ultimo=CLng(IdOrdine_ultimo)
-				IdOrdine_t=IdOrdine_ultimo+1
-				os1.close
+
+				'Set os1 = Server.CreateObject("ADODB.Recordset")
+				'sql = "SELECT Top 1 PkId_Contatore FROM OrdiniTemporanei Order by PkId_Contatore Desc"
+				'os1.Open sql, conn, 1, 1
+				'IdOrdine_ultimo=os1("PkId_Contatore")
+				'IdOrdine_ultimo=CLng(IdOrdine_ultimo)
+				'IdOrdine_t=IdOrdine_ultimo+1
+				'os1.close
 
 				Set os1 = Server.CreateObject("ADODB.Recordset")
 				sql = "SELECT * FROM OrdiniTemporanei"
 				os1.Open sql, conn, 3, 3
 
 				os1.addnew
-				os1("PkId_Contatore")=IdOrdine_t
+				'os1("PkId_Contatore")=IdOrdine_t
 				os1("stato")=0
 				os1("TotaleCarrello")=0
 				os1("TotaleGenerale")=0
@@ -79,23 +80,25 @@
 
 
 				Set os1 = Server.CreateObject("ADODB.Recordset")
-				sql = "SELECT Top 1 PkId_Contatore FROM OrdiniTemporanei Order by PkId_Contatore Desc"
+				sql = "SELECT Top 1 * FROM OrdiniTemporanei Order by PkId_Contatore Desc"
 				os1.Open sql, conn, 1, 1
 				IdOrdine_ultimo=os1("PkId_Contatore")
 				IdOrdine_ultimo=CLng(IdOrdine_ultimo)
+				IdOrdine_temp=IdOrdine_ultimo
 				os1.close
 
 				'Creo una sessione con l'id dell'ordine
 				Session("ordine_shop_temp")=IdOrdine_ultimo
 				Session("ordine_shop")=0
-				
-				response.write("arrivato 4")
-				response.end
+
+				'response.write("arrivato:"&IdOrdine_ultimo)
+				'response.end
 			end if
 
 		end if
 
 		IdOrdine=CLng(IdOrdine)
+		IdOrdine_temp=CLng(IdOrdine_temp)
 
 	'modifica del carrello: eliminazione o modifica di un articolo nel carrello
 		'if mode=2 then
@@ -113,7 +116,7 @@
 					if idsession>0 then
 						sql = "SELECT * FROM RigheOrdine WHERE Dominio LIKE '"&dominio&"' AND PkId="&riga 'aggiunto per passaggio 2019'
 					else
-						sql = "SELECT * FROM RigheOrdineTemporaneo WHERE Dominio LIKE '"&dominio&"' AND PkId="&riga 'correggo l'ordine temporaneo
+						sql = "SELECT * FROM RigheOrdineTemporaneo WHERE Dominio LIKE '"&dominio&"' AND PkId_Contatore="&riga 'correggo l'ordine temporaneo
 					end if
 					ts.Open sql, conn, 3, 3
 						ts.delete
@@ -135,7 +138,7 @@
 					if idsession>0 then
 						sql = "SELECT * FROM RigheOrdine WHERE Dominio LIKE '"&dominio&"' AND PkId="&riga 'aggiunto per passaggio 2019'
 					else
-						sql = "SELECT * FROM RigheOrdineTemporaneo WHERE Dominio LIKE '"&dominio&"' AND PkId="&riga 'correggo l'ordine temporaneo
+						sql = "SELECT * FROM RigheOrdineTemporaneo WHERE Dominio LIKE '"&dominio&"' AND PkId_Contatore="&riga 'correggo l'ordine temporaneo
 					end if
 
 					ts.Open sql, conn, 3, 3
@@ -248,7 +251,6 @@
 					'riga_rs("PkId")=PkId_riga
 					riga_rs("Dominio")=dominio 'aggiunto per passaggio 2019'
 					riga_rs("FkOrdineTemporaneo")=IdOrdine_temp
-					riga_rs("FkCliente")=0
 					riga_rs("FkProdotto")=id
 					riga_rs("PrezzoProdotto")=PrezzoProdotto
 					riga_rs("Quantita")=Quantita
@@ -303,7 +305,7 @@
 
 				'Aggiorno la tabella dell'ordine con la somma calcolata prima
 				Set ss = Server.CreateObject("ADODB.Recordset")
-				sql = "SELECT * FROM OrdiniTemporanei WHERE Dominio LIKE '"&dominio&"' AND PkId="&IdOrdine_temp
+				sql = "SELECT * FROM OrdiniTemporanei WHERE Dominio LIKE '"&dominio&"' AND PkId_Contatore="&IdOrdine_temp
 				'response.write("sql2:"&sql)
 				ss.Open sql, conn, 3, 3
 				if ss.recordcount>0 then
@@ -336,7 +338,6 @@
 					'ss("DataOrdine")=now()
 					ss("DataAggiornamento")=now()
 					ss("Stato")=0
-					ss("FkCliente")=0
 					ss("IpOrdine")=Request.ServerVariables("REMOTE_ADDR")
 					ss.update
 				end if
@@ -459,7 +460,7 @@
 		if idsession>0 then
 			sql = "SELECT PkId, Dominio, FkOrdine, FkProdotto, PrezzoProdotto, Quantita, TotaleRiga, Titolo, CodiceArticolo, Colore, Lampadina FROM RigheOrdine WHERE FkOrdine="&idOrdine&" AND Dominio LIKE '"&dominio&"'"
 		else
-			sql = "SELECT PkId, Dominio, FkOrdineTemporaneo, FkProdotto, PrezzoProdotto, Quantita, TotaleRiga, Titolo, CodiceArticolo, Colore, Lampadina FROM RigheOrdineTemporaneo WHERE FkOrdineTemporaneo="&idOrdine_temp&" AND Dominio LIKE '"&dominio&"'"
+			sql = "SELECT PkId_Contatore as PkId, Dominio, FkOrdineTemporaneo, FkProdotto, PrezzoProdotto, Quantita, TotaleRiga, Titolo, CodiceArticolo, Colore, Lampadina FROM RigheOrdineTemporaneo WHERE FkOrdineTemporaneo="&idOrdine_temp&" AND Dominio LIKE '"&dominio&"'"
 		end if
 		rs.Open sql, conn, 1, 1
 		num_prodotti_carrello=rs.recordcount
@@ -468,7 +469,7 @@
 		if idsession>0 then
 			sql = "SELECT * FROM Ordini where pkid="&idOrdine&" AND Dominio LIKE '"&dominio&"'"
 		else
-			sql = "SELECT * FROM OrdiniTemporanei where pkid="&idOrdine&" AND Dominio LIKE '"&dominio&"'"
+			sql = "SELECT * FROM OrdiniTemporanei where PkId_Contatore="&idOrdine_temp&" AND Dominio LIKE '"&dominio&"'"
 		end if
 		ss.Open sql, conn, 1, 1
 	%>

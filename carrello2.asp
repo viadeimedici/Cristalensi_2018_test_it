@@ -14,7 +14,7 @@
 		if IdOrdine_temp>0 then
 			'faccio il passaggio da ord. temp a ord. def.
 			Set ss = Server.CreateObject("ADODB.Recordset")
-			sql = "SELECT * FROM OrdiniTemporanei WHERE Dominio LIKE '"&dominio&"' AND PkId="&IdOrdine_temp
+			sql = "SELECT * FROM OrdiniTemporanei WHERE Dominio LIKE '"&dominio&"' AND PkId_Contatore="&IdOrdine_temp
 			ss.Open sql, conn, 1, 1
 			if ss.recordcount>0 then
 				'creo un ordine def. nuovo
@@ -47,7 +47,6 @@
 
 				Set rs = Server.CreateObject("ADODB.Recordset")
 				sql = "SELECT * FROM RigheOrdineTemporaneo WHERE FkOrdineTemporaneo="&idOrdine_temp&" AND Dominio LIKE '"&dominio&"'"
-				end if
 				rs.Open sql, conn, 1, 1
 				if rs.recordcount>0 then
 				Do while not rs.EOF
