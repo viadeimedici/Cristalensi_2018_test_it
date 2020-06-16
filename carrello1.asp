@@ -242,35 +242,36 @@
 					'PkId_riga_ultimo=CLng(PkId_riga_ultimo)
 					'PkId_riga=PkId_riga_ultimo+1
 					'riga_rs.close
+					if IdOrdine_temp>0 then
+						Set riga_rs = Server.CreateObject("ADODB.Recordset")
+						sql = "SELECT * FROM RigheOrdineTemporaneo"
+						riga_rs.Open sql, conn, 3, 3
 
-					Set riga_rs = Server.CreateObject("ADODB.Recordset")
-					sql = "SELECT * FROM RigheOrdineTemporaneo"
-					riga_rs.Open sql, conn, 3, 3
+						riga_rs.addnew
+						'riga_rs("PkId")=PkId_riga
+						riga_rs("Dominio")=dominio 'aggiunto per passaggio 2019'
+						riga_rs("FkOrdineTemporaneo")=IdOrdine_temp
+						riga_rs("FkProdotto")=id
+						riga_rs("PrezzoProdotto")=PrezzoProdotto
+						riga_rs("Quantita")=Quantita
+						TotaleRiga=PrezzoProdotto*Quantita
+						riga_rs("TotaleRiga")=TotaleRiga
+						riga_rs("colore")=Colore
+						riga_rs("lampadina")=Lampadina
+						riga_rs("CodiceArticolo")=CodiceArticolo
+						riga_rs("Titolo")=TitoloProdotto
+						if FkProduttore=59 then
+							'non si applicano sconti
+							riga_rs("Scontabile")=0
+						Else
+							'si applicano sconti
+							riga_rs("Scontabile")=1
+						end if
+						riga_rs("Data")=now()
+						riga_rs.update
 
-					riga_rs.addnew
-					'riga_rs("PkId")=PkId_riga
-					riga_rs("Dominio")=dominio 'aggiunto per passaggio 2019'
-					riga_rs("FkOrdineTemporaneo")=IdOrdine_temp
-					riga_rs("FkProdotto")=id
-					riga_rs("PrezzoProdotto")=PrezzoProdotto
-					riga_rs("Quantita")=Quantita
-					TotaleRiga=PrezzoProdotto*Quantita
-					riga_rs("TotaleRiga")=TotaleRiga
-					riga_rs("colore")=Colore
-					riga_rs("lampadina")=Lampadina
-					riga_rs("CodiceArticolo")=CodiceArticolo
-					riga_rs("Titolo")=TitoloProdotto
-					if FkProduttore=59 then
-						'non si applicano sconti
-						riga_rs("Scontabile")=0
-					Else
-						'si applicano sconti
-						riga_rs("Scontabile")=1
+						riga_rs.close
 					end if
-					riga_rs("Data")=now()
-					riga_rs.update
-
-					riga_rs.close
 				end if
 
 
@@ -343,61 +344,63 @@
 				end if
 				ss.close
 		else
-				Set rs2 = Server.CreateObject("ADODB.Recordset")
-				sql = "SELECT FkOrdine, Dominio, SUM(TotaleRiga) AS TotaleCarrello FROM RigheOrdine WHERE FkOrdine="&IdOrdine&" AND Dominio LIKE '"&dominio&"' AND Scontabile=1 GROUP BY FkOrdine, Dominio"
-				rs2.Open sql, conn, 3, 3
-						TotaleCarrello_Scontabile_Si=rs2("TotaleCarrello")
-					if TotaleCarrello_Scontabile_Si="" or isnull(TotaleCarrello_Scontabile_Si) then TotaleCarrello_Scontabile_Si=0
-				rs2.close
+				if IdOrdine>0 then
+					Set rs2 = Server.CreateObject("ADODB.Recordset")
+					sql = "SELECT FkOrdine, Dominio, SUM(TotaleRiga) AS TotaleCarrello FROM RigheOrdine WHERE FkOrdine="&IdOrdine&" AND Dominio LIKE '"&dominio&"' AND Scontabile=1 GROUP BY FkOrdine, Dominio"
+					rs2.Open sql, conn, 3, 3
+							TotaleCarrello_Scontabile_Si=rs2("TotaleCarrello")
+						if TotaleCarrello_Scontabile_Si="" or isnull(TotaleCarrello_Scontabile_Si) then TotaleCarrello_Scontabile_Si=0
+					rs2.close
 
-				Set rs2 = Server.CreateObject("ADODB.Recordset")
-				sql = "SELECT FkOrdine, Dominio, SUM(TotaleRiga) AS TotaleCarrello FROM RigheOrdine WHERE FkOrdine="&IdOrdine&" AND Dominio LIKE '"&dominio&"' AND Scontabile=0 GROUP BY FkOrdine, Dominio"
-				rs2.Open sql, conn, 3, 3
-						TotaleCarrello_Scontabile_No=rs2("TotaleCarrello")
-					if TotaleCarrello_Scontabile_No="" or isnull(TotaleCarrello_Scontabile_No) then TotaleCarrello_Scontabile_No=0
-				rs2.close
+					Set rs2 = Server.CreateObject("ADODB.Recordset")
+					sql = "SELECT FkOrdine, Dominio, SUM(TotaleRiga) AS TotaleCarrello FROM RigheOrdine WHERE FkOrdine="&IdOrdine&" AND Dominio LIKE '"&dominio&"' AND Scontabile=0 GROUP BY FkOrdine, Dominio"
+					rs2.Open sql, conn, 3, 3
+							TotaleCarrello_Scontabile_No=rs2("TotaleCarrello")
+						if TotaleCarrello_Scontabile_No="" or isnull(TotaleCarrello_Scontabile_No) then TotaleCarrello_Scontabile_No=0
+					rs2.close
 
 
-				'Aggiorno la tabella dell'ordine con la somma calcolata prima
-				Set ss = Server.CreateObject("ADODB.Recordset")
-				sql = "SELECT * FROM Ordini WHERE Dominio LIKE '"&dominio&"' AND PkId="&IdOrdine
-				'response.write("sql2:"&sql)
-				ss.Open sql, conn, 3, 3
-				if ss.recordcount>0 then
-					TotaleCarrello=TotaleCarrello_Scontabile_Si+TotaleCarrello_Scontabile_No
-					ss("TotaleCarrello")=TotaleCarrello
+					'Aggiorno la tabella dell'ordine con la somma calcolata prima
+					Set ss = Server.CreateObject("ADODB.Recordset")
+					sql = "SELECT * FROM Ordini WHERE Dominio LIKE '"&dominio&"' AND PkId="&IdOrdine
+					'response.write("sql2:"&sql)
+					ss.Open sql, conn, 3, 3
+					if ss.recordcount>0 then
+						TotaleCarrello=TotaleCarrello_Scontabile_Si+TotaleCarrello_Scontabile_No
+						ss("TotaleCarrello")=TotaleCarrello
 
-					if TotaleCarrello_Scontabile_Si>0 then
-						if TotaleCarrello_Scontabile_Si<301 then
+						if TotaleCarrello_Scontabile_Si>0 then
+							if TotaleCarrello_Scontabile_Si<301 then
+								Sconto=0
+								TotaleGenerale=TotaleCarrello_Scontabile_Si+TotaleCarrello_Scontabile_No
+							end if
+							if TotaleCarrello_Scontabile_Si>300 and TotaleCarrello_Scontabile_Si<601 then
+								Sconto=((TotaleCarrello_Scontabile_Si*2)/100)
+								TotaleGenerale=(TotaleCarrello_Scontabile_Si-Sconto)+TotaleCarrello_Scontabile_No
+							end if
+							if TotaleCarrello_Scontabile_Si>600 and TotaleCarrello_Scontabile_Si<901 then
+								Sconto=((TotaleCarrello_Scontabile_Si*3)/100)
+								TotaleGenerale=(TotaleCarrello_Scontabile_Si-Sconto)+TotaleCarrello_Scontabile_No
+							end if
+							if TotaleCarrello_Scontabile_Si>900 then
+								Sconto=((TotaleCarrello_Scontabile_Si*4)/100)
+								TotaleGenerale=(TotaleCarrello_Scontabile_Si-Sconto)+TotaleCarrello_Scontabile_No
+							end if
+						Else
 							Sconto=0
-							TotaleGenerale=TotaleCarrello_Scontabile_Si+TotaleCarrello_Scontabile_No
+							TotaleGenerale=TotaleCarrello
 						end if
-						if TotaleCarrello_Scontabile_Si>300 and TotaleCarrello_Scontabile_Si<601 then
-							Sconto=((TotaleCarrello_Scontabile_Si*2)/100)
-							TotaleGenerale=(TotaleCarrello_Scontabile_Si-Sconto)+TotaleCarrello_Scontabile_No
-						end if
-						if TotaleCarrello_Scontabile_Si>600 and TotaleCarrello_Scontabile_Si<901 then
-							Sconto=((TotaleCarrello_Scontabile_Si*3)/100)
-							TotaleGenerale=(TotaleCarrello_Scontabile_Si-Sconto)+TotaleCarrello_Scontabile_No
-						end if
-						if TotaleCarrello_Scontabile_Si>900 then
-							Sconto=((TotaleCarrello_Scontabile_Si*4)/100)
-							TotaleGenerale=(TotaleCarrello_Scontabile_Si-Sconto)+TotaleCarrello_Scontabile_No
-						end if
-					Else
-						Sconto=0
-						TotaleGenerale=TotaleCarrello
+						ss("Sconto")=Sconto
+						ss("TotaleGenerale")=TotaleGenerale
+						'ss("DataOrdine")=now()
+						ss("DataAggiornamento")=now()
+						ss("Stato")=0
+						ss("FkCliente")=idsession
+						ss("IpOrdine")=Request.ServerVariables("REMOTE_ADDR")
+						ss.update
 					end if
-					ss("Sconto")=Sconto
-					ss("TotaleGenerale")=TotaleGenerale
-					'ss("DataOrdine")=now()
-					ss("DataAggiornamento")=now()
-					ss("Stato")=0
-					ss("FkCliente")=idsession
-					ss("IpOrdine")=Request.ServerVariables("REMOTE_ADDR")
-					ss.update
+					ss.close
 				end if
-				ss.close
 		end if
 %>
 <!DOCTYPE html>
