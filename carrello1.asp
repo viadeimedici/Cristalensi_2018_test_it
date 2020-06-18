@@ -71,6 +71,7 @@
 				os1("stato")=0
 				os1("TotaleCarrello")=0
 				os1("TotaleGenerale")=0
+				os1("Sconto")=0
 				os1("DataAggiornamento")=now()
 				os1("IpOrdine")=Request.ServerVariables("REMOTE_ADDR")
 				os1("Dominio")=dominio 'aggiunto per passaggio 2019'

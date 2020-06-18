@@ -82,11 +82,12 @@
 					riga_rs.close
 				rs.movenext
 				loop
-				end if
 				rs.close
+				end if
+				ss.close
 
 			end if
-			ss.close
+
 
 			'****************devo eliminare l'ordine temporaneo*****************
 
@@ -127,6 +128,7 @@
 
 	TotaleCarrello=os1("TotaleCarrello")
 	Sconto=os1("Sconto")
+	if isNull(Sconto) then Sconto=0
 	TipoTrasportoScelto_Esistente=os1("FkSpedizione")
 	if TipoTrasportoScelto_Esistente="" then TipoTrasportoScelto_Esistente=0
 	if TipoTrasportoScelto=0 and TipoTrasportoScelto_Esistente>0 then
