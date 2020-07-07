@@ -27,6 +27,7 @@ if id>0 then
 		if fkproduttore="" then fkproduttore=0
 		NomePagina=prod_rs("NomePagina")
 
+		Consegna=prod_rs("Consegna")
 
 		offerta=prod_rs("offerta")
 		if offerta="" then offerta=0
@@ -40,7 +41,9 @@ if id>0 then
 			if pr_rs.recordcount>0 then
 				produttore=pr_rs("titolo")
 				url_produttore="/produttori-illuminazione/"&ConvertiTitoloInUrlProduttore(produttore, fkproduttore)
-				Consegna=pr_rs("Consegna")
+				if Consegna="" or IsNull(Consegna) then
+					Consegna=pr_rs("Consegna")
+				end if
 			end if
 			pr_rs.close
 		end if
