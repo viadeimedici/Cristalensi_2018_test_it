@@ -690,7 +690,7 @@ end if
             </div>
         </div>
 				<%if prov=1 then%>
-        <div class="col-sm-12">
+        <div class="col-sm-12 hidden-xs">
             <div class="row bs-wizard">
                 <div class="col-sm-5 bs-wizard-step complete">
                     <div class="text-center bs-wizard-stepnum">1</div>

@@ -526,7 +526,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-12">
+        <div class="">
             <div class="col-md-8">
                 <div class="row">
                     <div class="title">

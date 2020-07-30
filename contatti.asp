@@ -55,7 +55,7 @@
                       <span itemprop="name"><b>Cristalensi Snc</b> Di Lensi Massimiliano & C.</span><br />
                       C.F. e Iscr. Reg. Impr. di Firenze IT05305820481 - R.E.A. Firenze 536760<br /><br />
                       <span itemprop="address" itemtype="http://schema.org/PostalAddress">
-                      <strong>Sede e Showroom</strong>: <span itemprop="postalCode">50056</span> <span itemprop="addressLocality">Montelupo F.no (FI)</span> - <span itemprop="streetAddress">Via arti e mestieri, 1</span><br /><br />
+                      <strong>Sede e Showroom</strong>: <span itemprop="postalCode">50056</span> <span itemprop="addressLocality">Montelupo F.no (FI)</span> - <span itemprop="streetAddress">Via arti e mestieri, 1</span> - <a href="https://g.page/Cristalensi?gm" target="_blank">Google Maps</a><br /><br />
                       </span>
                       <strong>Telefono</strong>: <a href="tel:0571911163"><span itemprop="telephone">0571.911163</span></a><br /><br />
 
