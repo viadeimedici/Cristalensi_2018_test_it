@@ -64,10 +64,14 @@ testo_footer_8="Nel settore dell’illuminazione e dell’arredamento uno spazio
     <!--#include file="inc_header_1.asp"-->
     <!--#include file="inc_header_2.asp"-->
     <div class="container content">
+
         <div class="col-md-12">
             <!--#include file="inc_slider.asp"-->
-            <h1 class="slogan" style="margin-top:20px;">Cristalensi, vendita lampadari.</h1>
+
+            <div class="row" style="margin-top:20px;">
+            <h1 class="slogan">Cristalensi, vendita lampadari.</h1>
             <h2 class="slogan hidden-xs">Illuminazione per interni e illuminazione da esterno</h2>
+            </div>
             <div class="row top-buffer">
                 <div class="col-xl-12 clearfix">
                     <h4 class="subtitle"><div class="dot"></div><span>Cosa stai cercando?</span></h4>
