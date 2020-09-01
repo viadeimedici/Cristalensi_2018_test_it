@@ -191,7 +191,7 @@ testo_footer_8="Nel settore dell’illuminazione e dell’arredamento uno spazio
 
   									'recupero l'immagine
   									Set img_rs = Server.CreateObject("ADODB.Recordset")
-  									sql = "SELECT * FROM Immagini WHERE Record="&id&" AND Tabella='Prodotti' Order by PkId_Contatore ASC"
+  									sql = "SELECT * FROM Immagini WHERE Record="&id&" AND Tabella='Prodotti' Order by Ordine ASC, PkId_Contatore ASC"
   									img_rs.open sql,conn, 1, 1
   									if img_rs.recordcount>0 then
   										tot_img=img_rs.recordcount
@@ -293,7 +293,7 @@ testo_footer_8="Nel settore dell’illuminazione e dell’arredamento uno spazio
                     end if
 
                     Set img_rs = Server.CreateObject("ADODB.Recordset")
-                    sql = "SELECT * FROM Immagini WHERE Record="&id&" AND Tabella='Prodotti' Order by PkId_Contatore ASC"
+                    sql = "SELECT * FROM Immagini WHERE Record="&id&" AND Tabella='Prodotti' Order by Ordine ASC, PkId_Contatore ASC"
                     img_rs.open sql,conn, 1, 1
                     if img_rs.recordcount>0 then
                       tot_img=img_rs.recordcount

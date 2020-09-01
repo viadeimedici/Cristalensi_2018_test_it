@@ -229,7 +229,7 @@ end if
 			<div class="col-md-2 col-md-pull-10">
 				<a class="btn btn-warning btn-sm btn-block" href="javascript:history.back()"><i class="fa fa-chevron-left"></i> torna indietro</a>
 			</div>
-			
+
 		</div>
         <div class="top-buffer hidden-md hidden-lg"></div>
         <div class="" itemscope itemtype="http://schema.org/Product">
@@ -253,7 +253,7 @@ end if
 													<div class="row">
 														<%
 														Set img_rs = Server.CreateObject("ADODB.Recordset")
-														sql = "SELECT * FROM Immagini WHERE Record="&id&" AND Tabella='Prodotti' Order by PkId_Contatore ASC"
+														sql = "SELECT * FROM Immagini WHERE Record="&id&" AND Tabella='Prodotti' Order by Ordine ASC, PkId_Contatore ASC"
 														img_rs.open sql,conn, 1, 1
 														if img_rs.recordcount>0 then
 
