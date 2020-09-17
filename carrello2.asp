@@ -10,6 +10,8 @@
 	IdOrdine_temp=session("ordine_shop_temp")
 	if IdOrdine_temp="" then IdOrdine_temp=0
 
+	if idsession=0 then response.Redirect("/iscrizione.asp?prov=1")
+
 	if idOrdine=0 then
 		if IdOrdine_temp>0 then
 			'faccio il passaggio da ord. temp a ord. def.
@@ -108,7 +110,7 @@
 		os1.update
 		os1.close
 	end if
-	if idsession=0 then response.Redirect("/iscrizione.asp?prov=1")
+	'if idsession=0 then response.Redirect("/iscrizione.asp?prov=1")
 
 	'italia_log=session("italia_log")
 	'if italia_log="No" then response.Redirect("carrello2extra.asp")
