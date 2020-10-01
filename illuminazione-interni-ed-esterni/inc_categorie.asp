@@ -94,76 +94,64 @@ gr_rs.close
     <div class="container content">
 
         <div class="col-xl-12">
+
+
+            <div class="col-xs-6 col-sm-4 col-md-3">
+              <article class="col-item" style="background-color: #FDF7C8;">
+                <div class="banner" style="box-shadow:inherit; margin-bottom: 0px;">
+                    <h3 class="title">Promozione EXTRA</h3>
+                    <p class="text"><strong><em>Sconti Extra in Carrello</em></strong><br />-2% Oltre 300&nbsp&euro;<br />-3% Oltre 600&nbsp&euro;<br />-4% Oltre 900&nbsp&euro;</strong></p>
+                </div>
+              </article>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3">
+              <article class="col-item" style="background-color: #FFE2BB;">
+                <div class="banner" style="box-shadow:inherit; margin-bottom: 0px;">
+                    <h3 class="title">SPEDIZIONI ASSICURATE</h3>
+                    <p class="text">Consegna <u>GRATUITA</u> in tutta Italia per ordini superiori a 250&euro;<br /><br />Per ordini fino a 250&euro;: 10&euro;</p>
+                </div>
+              </article>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3">
+              <article class="col-item" style="background-color: #C9C6FD;">
+                <div class="banner" style="box-shadow:inherit; margin-bottom: 0px;">
+                    <h3 class="title">Paga in sicurezza!</h3>
+                    <p class="text"><strong><em>PAGHI CON BONIFICO? -2%</em></strong><br />Altri pagamenti disponibili:<br />Carte di Credito, PostePay e Contrassegno in contanti.
+                    </p>
+                </div>
+              </article>
+            </div>
+
+            <div class="col-xs-6 col-sm-4 col-md-3">
+              <article class="col-item" style="background-color: #DCFDBD;">
+                <div class="banner" style="box-shadow:inherit; margin-bottom: 0px;">
+                    <h3 class="title">Assistenza qualificata</h3>
+                    <p class="text"><strong>Chiamaci</strong> per avere un consiglio oppure per eventuali dubbi:<br />troverai uno staff disponibile, competente e pronto <strong>per aiutarti</strong>!</p>
+                </div>
+              </article>
+            </div>
+
             <ol class="breadcrumb" itemtype="http://schema.org/BreadcrumbList">
                 <li itemprop="itemListElement" itemtype="http://schema.org/ListItem"><a href="/" itemprop="item" title="Cristalensi Vendita lampadari online"><span itemprop="name"><i class="fa fa-home"></i></span></a><meta itemprop="position" content="1" /></li>
                 <li itemprop="itemListElement" itemtype="http://schema.org/ListItem"><a href="/illuminazione-interni-ed-esterni/<%=Url_gr%>" itemprop="item" title="<%=Titolo_1_gr%> - <%=Titolo_2_gr%>"><span itemprop="name"><%=Titolo_1_gr%></span></a><meta itemprop="position" content="2" /></li>
                 <li itemprop="itemListElement" itemtype="http://schema.org/ListItem"><a href="/illuminazione-interni-ed-esterni/<%=Url_tip%>" itemprop="item" title="<%=Titolo_1_tip%> - <%=Titolo_2_tip%>"><span itemprop="name"><%=Titolo_1_tip%></span></a><meta itemprop="position" content="3" /></li>
                 <li class="active" itemprop="itemListElement" itemtype="http://schema.org/ListItem"><span itemprop="name"><%=Titolo_1%></span><meta itemprop="position" content="4" /></li>
             </ol>
+
             <h1 class="title"><%=Titolo_1%></h1>
-            <%if Len(Descrizione)>0 then%>
-            <div class="description">
-              <div class="readmore">
-                <%if Len(Img)>0 then%><img src="/public/<%=img%>" class="hidden-xs" style="float: left; width: 200px; height: 150px; background: #ccc; margin-right: 10px;" alt="<%=Titolo_1%><%if Len(Titolo_2)>0 then%><%=" - "&Titolo_2%><%end if%>" /><%end if%>
-                <%if Len(Titolo_2)>0 then%><h2><%=Titolo_2%></h2><%end if%>
-                <p><%=NoLettAccDescrizioni(Descrizione)%></p>
-              </div>
-            </div>
-            <%end if%>
+
             <a name="inizioelenco"></a>
         </div>
-        <div class="col-md-3">
-            <div class=" top-buffer">
-                <nav class="navbar hidden-xs">
-                    <!-- menu - normal collapsible navbar markup -->
-                    <%
-                    Set tip_rs = Server.CreateObject("ADODB.Recordset")
-                    sql = "SELECT * FROM NewCategorie WHERE FkNewTipologia="&FkNewTipologia&" ORDER BY Posizione ASC"
-                    tip_rs.open sql,conn, 1, 1
-                    if tip_rs.recordcount>0 then
-                    %>
-                    <ul class="list-unstyled side-list">
-                        <%
-                        Do While not tip_rs.EOF
-                          PkId=tip_rs("PkId")
-                          Titolo_1=tip_rs("Titolo_1")
-                          Titolo_2=tip_rs("Titolo_2")
-                          Url=tip_rs("Url")
-                          Title=tip_rs("Title")
-                          'Description=tip_rs("Description")
-                          'Descrizione=tip_rs("Descrizione")
-                        %>
-                        <li><a href="/illuminazione-interni-ed-esterni/<%=Url%>" title="<%=Titolo_2%>" <%if pkid=pkid_categoria then%>class="active"<%end if%>><%=Titolo_1%></a></li>
-                        <%
-                        tip_rs.movenext
-                        loop
-                        %>
-                    </ul>
-                    <%
-                    end if
-                    tip_rs.close
-                    %>
-                </nav>
-                <div class="banner preventivi">
-                    <h3 class="title">Promozione EXTRA</h3>
-                    <p class="text" style="padding-left: 40px;"><strong><em>Sconti Extra in Carrello</em></strong><br />-2% Oltre 300&nbsp&euro;<br />-3% Oltre 600&nbsp&euro;<br />-4% Oltre 900&nbsp&euro;</strong></p>
-                </div>
-                <div class="banner pagamenti">
-                    <h3 class="title">Paga in sicurezza!</h3>
-                    <p class="text"><strong><em>PAGHI CON BONIFICO? -2%</em></strong><br />Altri pagamenti disponibili:<br />Carte di Credito, PostePay e Contrassegno in contanti.
-                    </p>
-                </div>
-                <div class="banner consegne">
-                    <h3 class="title">SPEDIZIONI ASSICURATE</h3>
-                    <p class="text">Consegna <u>GRATUITA</u> in tutta Italia per ordini superiori a 250&euro;<br />Per ordini fino a 250&euro;: 10&euro;</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-9">
+
+
+        <div class="col-md-12">
             <div class="row top-buffer">
                 <%
                 p=request("p")
                 if p="" then p=1
+
+                qtapr=request("qtapr")
+                if qtapr="" then qtapr=40
 
                 order=request("order")
                 if order="" then order=1
@@ -178,7 +166,7 @@ gr_rs.close
                 prod_rs.open sql,conn, 1, 1
                 if prod_rs.recordcount>0 then
 
-                  prod_rs.PageSize = 30
+                  prod_rs.PageSize = qtapr
                   if prod_rs.recordcount > 0 then
                     prod_rs.AbSolutePage = p
                     maxPage = prod_rs.PageCount
@@ -199,13 +187,19 @@ gr_rs.close
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <p class="navbar-text">prezzo</p>
                                 <ul class="nav navbar-nav">
-                                    <li <%if order=3 then%>class="active"<%end if%>><a style="border: solid 1px #e7e7e7; border-top: none; border-bottom: none;" href="/illuminazione-interni-ed-esterni/<%=toUrl%>?order=3"><i class="glyphicon glyphicon-eur"></i> - </a></li>
-                                    <li <%if order=4 then%>class="active"<%end if%>><a style="border: solid 1px #e7e7e7; border-top: none; border-bottom: none;" href="/illuminazione-interni-ed-esterni/<%=toUrl%>?order=4"><i class="glyphicon glyphicon-eur"></i> + </a></li>
+                                    <li <%if order=3 then%>class="active"<%end if%>><a style="border: solid 1px #e7e7e7; border-top: none; border-bottom: none;" href="/illuminazione-interni-ed-esterni/<%=toUrl%>?order=3&qtapr=<%=qtapr%>"><i class="glyphicon glyphicon-eur"></i> - </a></li>
+                                    <li <%if order=4 then%>class="active"<%end if%>><a style="border: solid 1px #e7e7e7; border-top: none; border-bottom: none;" href="/illuminazione-interni-ed-esterni/<%=toUrl%>?order=4&qtapr=<%=qtapr%>"><i class="glyphicon glyphicon-eur"></i> + </a></li>
                                 </ul>
                                 <p class="navbar-text">ordine alfabetico</p>
                                 <ul class="nav navbar-nav">
-                                    <li <%if order=1 then%>class="active"<%end if%>><a style="border: solid 1px #e7e7e7; border-top: none; border-bottom: none;" href="/illuminazione-interni-ed-esterni/<%=toUrl%>?order=1">A/Z</a></li>
-                                    <li <%if order=2 then%>class="active"<%end if%>><a style="border: solid 1px #e7e7e7; border-top: none; border-bottom: none;" href="/illuminazione-interni-ed-esterni/<%=toUrl%>?order=2">Z/A</a></li>
+                                    <li <%if order=1 then%>class="active"<%end if%>><a style="border: solid 1px #e7e7e7; border-top: none; border-bottom: none;" href="/illuminazione-interni-ed-esterni/<%=toUrl%>?order=1&qtapr=<%=qtapr%>">A/Z</a></li>
+                                    <li <%if order=2 then%>class="active"<%end if%>><a style="border: solid 1px #e7e7e7; border-top: none; border-bottom: none;" href="/illuminazione-interni-ed-esterni/<%=toUrl%>?order=2&qtapr=<%=qtapr%>">Z/A</a></li>
+                                </ul>
+                                <p class="navbar-text">N. articoli per pagina</p>
+                                <ul class="nav navbar-nav">
+                                    <li <%if qtapr=40 then%>class="active"<%end if%>><a style="border: solid 1px #e7e7e7; border-top: none; border-bottom: none;" href="/illuminazione-interni-ed-esterni/<%=toUrl%>?qtapr=40&p=<%=p%>&cat=<%=cat%>&FkProduttore=<%=FkProduttore%>&order=<%=order%>#inizioelenco">40</a></li>
+                                    <li <%if qtapr=80 then%>class="active"<%end if%>><a style="border: solid 1px #e7e7e7; border-top: none; border-bottom: none;" href="/illuminazione-interni-ed-esterni/<%=toUrl%>?qtapr=80&p=<%=p%>&cat=<%=cat%>&FkProduttore=<%=FkProduttore%>&order=<%=order%>#inizioelenco">80</a></li>
+                                    <li <%if qtapr=120 then%>class="active"<%end if%>><a style="border: solid 1px #e7e7e7; border-top: none; border-bottom: none;" href="/illuminazione-interni-ed-esterni/<%=toUrl%>?qtapr=120&p=<%=p%>&cat=<%=cat%>&FkProduttore=<%=FkProduttore%>&order=<%=order%>#inizioelenco">120</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -264,7 +258,7 @@ gr_rs.close
                     spedizionegratis=0
                     if prezzoarticolo>250 then spedizionegratis=1
                 %>
-                <div class="col-xs-12 col-sm-4 col-md-4">
+                <div class="col-xs-6 col-sm-4 col-md-3">
                   <article class="col-item">
                       <%if spedizionegratis=1 then%><div class="options">SPEDIZIONE<br />GRATUITA</div><%end if%>
                       <div class="photo">
@@ -315,21 +309,25 @@ gr_rs.close
                 <div class="col-lg-12">
                     <nav aria-label="Page navigation center-block">
                         <ul class="pagination">
+                          <li class="active"><a href="#"> N. articoli per pag.</a></li>
+                            <li <%if qtapr=40 then%>class="active"<%end if%>><a href="/illuminazione-interni-ed-esterni/<%=toUrl%>?qtapr=40&p=<%=p%>&cat=<%=cat%>&FkProduttore=<%=FkProduttore%>&order=<%=order%>#inizioelenco">40</a></li>
+                            <li <%if qtapr=80 then%>class="active"<%end if%>><a href="/illuminazione-interni-ed-esterni/<%=toUrl%>?qtapr=80&p=<%=p%>&cat=<%=cat%>&FkProduttore=<%=FkProduttore%>&order=<%=order%>#inizioelenco">80</a></li>
+                            <li <%if qtapr=120 then%>class="active"<%end if%>><a href="/illuminazione-interni-ed-esterni/<%=toUrl%>?qtapr=120&p=<%=p%>&cat=<%=cat%>&FkProduttore=<%=FkProduttore%>&order=<%=order%>#inizioelenco">120</a></li>
                             <li class="active"><a href="#" aria-label="Previous">Pagina <%=p%> di <%=prod_rs.PageCount%></a></li>
 
                             <%if p > 2 then%>
-                            <li><a href="/illuminazione-interni-ed-esterni/<%=toUrl%>?p=1&cat=<%=cat%>&FkProduttore=<%=FkProduttore%>&order=<%=order%>#inizioelenco">Prima pagina</a></li>
+                            <li><a href="/illuminazione-interni-ed-esterni/<%=toUrl%>?p=1&qtapr=<%=qtapr%>&cat=<%=cat%>&FkProduttore=<%=FkProduttore%>&order=<%=order%>#inizioelenco">Prima pagina</a></li>
                             <%end if%>
                             <% if p > 1 then %>
                             <li>
-                                <a href="/illuminazione-interni-ed-esterni/<%=toUrl%>?p=<%=p-1%>&cat=<%=cat%>&FkProduttore=<%=FkProduttore%>&order=<%=order%>#inizioelenco" aria-label="Previous">
+                                <a href="/illuminazione-interni-ed-esterni/<%=toUrl%>?p=<%=p-1%>&qtapr=<%=qtapr%>&cat=<%=cat%>&FkProduttore=<%=FkProduttore%>&order=<%=order%>#inizioelenco" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
                             <%end if%>
                             <% for page = p+1 to p+4 %>
                             <%if not page>maxPage then%>
-                            <li><a href="/illuminazione-interni-ed-esterni/<%=toUrl%>?p=<%=Page%>&cat=<%=cat%>&FkProduttore=<%=FkProduttore%>&order=<%=order%>#inizioelenco"><%=page%></a></li>
+                            <li><a href="/illuminazione-interni-ed-esterni/<%=toUrl%>?p=<%=Page%>&qtapr=<%=qtapr%>&cat=<%=cat%>&FkProduttore=<%=FkProduttore%>&order=<%=order%>#inizioelenco"><%=page%></a></li>
                             <%end if%>
                             <% if page >= prod_rs.PageCount then
                                page = p+4
@@ -338,16 +336,16 @@ gr_rs.close
                             %>
                             <% if cInt(p) < maxPage then %>
                             <li>
-                                <a href="/illuminazione-interni-ed-esterni/<%=toUrl%>?p=<%=p+1%>&cat=<%=cat%>&FkProduttore=<%=FkProduttore%>&order=<%=order%>#inizioelenco" aria-label="Next">
+                                <a href="/illuminazione-interni-ed-esterni/<%=toUrl%>?p=<%=p+1%>&qtapr=<%=qtapr%>&cat=<%=cat%>&FkProduttore=<%=FkProduttore%>&order=<%=order%>#inizioelenco" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
                             <%end if%>
                             <%if maxPage>5 and cInt(p)<>prod_rs.PageCount then%>
-                            <li><a href="/illuminazione-interni-ed-esterni/<%=toUrl%>?p=<%=prod_rs.PageCount%>&cat=<%=cat%>&FkProduttore=<%=FkProduttore%>&order=<%=order%>#inizioelenco">Ultima pagina</a></li>
+                            <li><a href="/illuminazione-interni-ed-esterni/<%=toUrl%>?p=<%=prod_rs.PageCount%>&qtapr=<%=qtapr%>&cat=<%=cat%>&FkProduttore=<%=FkProduttore%>&order=<%=order%>#inizioelenco">Ultima pagina</a></li>
                             <%end if%>
-                            <li class="active"><a href="#"> Vai alla pagina</a>
-                            <select class="selectpicker show-menu-arrow show-tick" data-size="7" data-width="63px" data-dropAuto="true" name="p" id="p" data-size="5" onChange="CambiaPagina();">
+                            <li class="active"><a href="#"> Vai alla pagina</a></li>
+                            <li><select class="selectpicker show-menu-arrow show-tick" data-size="7" data-width="63px" data-dropAuto="true" name="p" id="p" onChange="CambiaPagina();">
           									<%
           									For i=1 To prod_rs.PageCount
           									%>
@@ -357,6 +355,8 @@ gr_rs.close
           									%>
           									</select>
                             </li>
+
+
                         </ul>
                     </nav>
                 </div>
@@ -367,6 +367,51 @@ gr_rs.close
             end if
             prod_rs.close
             %>
+        </div>
+
+        <div class="col-md-12">
+
+          <div class="description">
+            <%if Len(Descrizione)>0 then%>
+            <div class="readmore">
+              <%if Len(Img)>0 then%><img src="/public/<%=img%>" class="hidden-xs" style="float: left; width: 200px; height: 150px; background: #ccc; margin-right: 10px;" alt="<%=Titolo_1%><%if Len(Titolo_2)>0 then%><%=" - "&Titolo_2%><%end if%>" /><%end if%>
+              <%if Len(Titolo_2)>0 then%><h2>Approfondisci <%=Titolo_2%></h2><%end if%>
+              <p><%=NoLettAccDescrizioni(Descrizione)%></p>
+            </div>
+            <%end if%>
+
+            <%
+            Set tip_rs = Server.CreateObject("ADODB.Recordset")
+            sql = "SELECT * FROM NewCategorie WHERE FkNewTipologia="&FkNewTipologia&" ORDER BY Posizione ASC"
+            tip_rs.open sql,conn, 1, 1
+            if tip_rs.recordcount>0 then
+            %>
+            <h2 style="padding-top: 20px;">Se non hai trovato il prodotto desiderato nella categoria <%=Titolo_1%>, prova in queste altre categorie:</h2>
+            <ul class="pagination">
+            <%
+            Do While not tip_rs.EOF
+              PkId=tip_rs("PkId")
+              Titolo_1=tip_rs("Titolo_1")
+              Titolo_2=tip_rs("Titolo_2")
+              Url=tip_rs("Url")
+              Title=tip_rs("Title")
+              'Description=tip_rs("Description")
+              'Descrizione=tip_rs("Descrizione")
+            %>
+            <li><a href="/illuminazione-interni-ed-esterni/<%=Url%>" title="<%=Titolo_2%>" class="btn btn-default" style="margin-top: 10px;margin-right: 20px;"><%=Titolo_1%></a></li>
+            <%
+            tip_rs.movenext
+            loop
+            %>
+            <%
+            end if
+            tip_rs.close
+            %>
+
+            </ul>
+          </div>
+
+
         </div>
     </div>
     <!--#include virtual="/inc_footer.asp"-->

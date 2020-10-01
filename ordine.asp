@@ -1015,7 +1015,7 @@ End If
 													<div class="form-group clearfix">
 															<label for="cod_fisc" class="col-sm-6 control-label">CVC</label>
 															<div class="col-sm-6">
-																	<input type="text" class="form-control" name="card-cvc" id="card-cvc" value="" size="5" maxlength="3" style="width: 80px; text-align: left;">
+																	<input type="text" class="form-control" name="card-cvc" id="card-cvc" value="" size="5" maxlength="4" style="width: 80px; text-align: left;">
 															</div>
 													</div>
 													<div class="form-group clearfix">
